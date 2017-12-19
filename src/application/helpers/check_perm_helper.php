@@ -13,7 +13,7 @@ if ( ! function_exists('check_perm'))
                 break;
             case 'Admin':
                     // check to see if the user is admin
-                    if( ! $CI->user_model->check_user_type($id, 'Admin'))
+                    if( ! $CI->user->check_user_type($id, 'Admin'))
                     {
                         $CI->session->set_flashdata('error_msg',array('You do not have the correct permissions to access that page.'));
                         log_message('error', $CI->session->userdata('username'). ' has attempted to access the admin page but was redirected.');
@@ -23,6 +23,8 @@ if ( ! function_exists('check_perm'))
                     {
                         return TRUE;
                     }
+                break;
+            case 'Employee':
                 break;
             default:
                 break;

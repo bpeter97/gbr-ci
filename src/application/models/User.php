@@ -37,7 +37,7 @@ class User extends CI_Model
         
         if( ! $id === NULL )
         {
-            $this->set_user_data($this->get_user_info($id));
+            $this->set_user_data($id);
         }
     }
 
@@ -56,8 +56,17 @@ class User extends CI_Model
         }
     }
 
-    public function set_user_data($user)
+    public function set_user_data($id)
     {
+        if(is_int($id))
+        {
+            $user = $this->get_user_info($id);
+        }
+        else
+        {
+            $user = $id;
+        }
+
         // Use setters to setup this objects properties using the object passed in.
         if(is_array($user))
         {
@@ -184,18 +193,98 @@ class User extends CI_Model
         }  
     }
 
+    public function get_limited_users($limit, $start)
+    {
+        
+        if( $user_array = $this->db->get_where('users', $limit, $start)->result_array() )
+        {
+            $users = array();
+            
+                foreach($user_array as $u)
+                {
+                    $user = new User();
+                    $user->set_user_data($u);
+                    array_push($users, $user);
+                }
+        
+            return $users;
+        }
+        else
+        {
+            // Log the database error.
+            log_message('error', $this->db->error());
+
+            return FALSE;
+        } 
+        
+    }
+
+    /**
+     * check_user_type
+     * 
+     * Returns true or false depending on parameters entered.
+     *
+     * @param int $id
+     * @param string $type
+     * @return bool
+     */
+    public function check_user_type($id, $type)
+    {
+        $this->set_user_data($id);
+        if($this->get_type() == $type)
+        {
+            return TRUE;
+        } 
+        else
+        {
+            return FALSE;
+        }
+    }
+
     public function create()
     {
+        // Insert this object into the database.
+        if($this->db->insert('users', array(
+                'username'      =>  $this->get_username(),
+                'password'      =>  $this->get_password(),
+                'first_name'    =>  $this->get_first_name(),
+                'last_name'     =>  $this->get_last_name(),
+                'phone'         =>  $this->get_phone(),
+                'title'         =>  $this->get_title(),
+                'type'          =>  $this->get_type()
+                )))
+        {
+            // Return the newly inserted ID.
+            return $this->db->insert_id();
+        }
+        else
+        {
+            // Log the error
+            log_message('error', $this->db->error());
 
+            // Return false
+            return FALSE;
+        }
     }
 
     public function update()
     {
-
+        // Update the user based on this objects ID.
+        return $this->db->update('users', $this, ['id' => $this->get_id()]);
     }
 
-    public function delete()
+    public function delete($id = NULL)
     {
-
+        // Delete the user by using an ID.
+        if($id === NULL)
+        {
+            // Delete the user by using object's id property.
+            return $this->db->delete('users', ['id'=>$this->get_id()]);
+        } 
+        else 
+        {
+            // Delete the user by using parameter id.
+            return $this->db->delete('users', ['id'=>$id]);
+        }
     }
 }
