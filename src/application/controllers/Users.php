@@ -3,11 +3,15 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Home Controller Class
+ * Users Controller Class
  * 
- * @method index() Loads the home veiw of the product.
+ * @method index() Loads the master list veiw of the product.
+ * @method edit() Loads the edit user page.
+ * @method delete() Used to delete user and return message.
+ * @method create() Loads the create user page.
+ * 
  */
-class Home extends CI_Controller 
+class Users extends CI_Controller 
 {
 
     public function __construct()
@@ -60,6 +64,11 @@ class Home extends CI_Controller
         $this->load->view('layout/main', $data);
     }
 
+    /**
+     * edit function
+     *
+     * @return void
+     */
     public function edit($id)
     {
         //TODO Need to add validation here for the update form.
@@ -100,15 +109,32 @@ class Home extends CI_Controller
         
     }
 
+    /**
+     * delete function
+     *
+     * @return void
+     */
     public function delete($id)
     {
         $this->user->set_user_data($id);
-        $this->user->delete();
-        
-        $this->session->set_flashdata('success_msg','You have successfully deleted the user.');
-        redirect('users/index');
+
+        if( $this->user->delete() )
+        {
+            $this->session->set_flashdata('success_msg','You have successfully deleted the user.');
+            redirect('users/index');
+        }
+        else
+        {
+            $this->session->set_flashdata('error_msg', 'There was an error creating the user, the error has been logged.');
+            redirect('users/index');
+        }
     }
 
+    /**
+     * create function
+     *
+     * @return void
+     */
     public function create()
     {
         //TODO Need to add validation here for the create form.

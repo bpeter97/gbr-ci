@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Home Controller Class
  * 
- * @method index() Loads the home veiw of the product.
+ * @method index() Loads the home veiw.
  */
 class Home extends CI_Controller 
 {
@@ -21,7 +21,7 @@ class Home extends CI_Controller
         // Check to see if user is logged in.
         if( ! $this->session->logged_in )
         {
-            redirect('users/login');
+            redirect('home/login');
         }
         else
         {
