@@ -252,15 +252,15 @@ class Event extends CI_Model
 
     public function delete($id = NULL)
     {
-        // Delete the modification by using an ID.
+        // Delete the events by using an ID.
         if($id === NULL)
         {
-            // Delete the modification by using object's id property.
+            // Delete the events by using object's id property.
             return $this->db->delete('events', ['id'=>$this->get_id()]);
         } 
         else 
         {
-            // Delete the modification by using parameter id.
+            // Delete the events by using parameter id.
             return $this->db->delete('events', ['id'=>$id]);
         }
     }
