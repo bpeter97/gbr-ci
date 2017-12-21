@@ -158,29 +158,88 @@ class Product extends CI_Model
         }
     }
 
-    public function delete_requested_product()
+    // Not ordered product because it may be a quoted product therefore it's a requested product.
+    public function delete_requested_product($id, $type)
     {
-
+        if( $type == 'order' )
+        {
+            return $this->db->delete('product_orders',['order_id'=>$id]);
+        }
+        elseif( $type == 'quote' )
+        {
+            return $this->db->delete('product_orders',['quote_id'=>$id]);
+        }
+        else 
+        {
+            return FALSE;
+        }
     }
 
-    public function search()
+    // TODO: Verify that the products returned do not need to be objects?
+    public function search($string)
     {
+        // Return an array of the products that match the search.
+        return $this->db->select('*')
+                        ->from('modifications')
+                        ->like('mod_name', $string)
+                        ->like('mod_short_name', $string)
+                        ->get()
+                        ->result_array();
 
     }
 
     public function update()
     {
-
+        // Update this product object in the database.
+        return $this->db->update('modifications', $this, ['id' => $this->get_id()]);
     }
 
-    public function delete()
+    public function delete($id = NULL)
     {
-
+        // Delete the modification by using an ID.
+        if($id === NULL)
+        {
+            // Delete the modification by using object's id property.
+            return $this->db->delete('modifications', ['id'=>$this->get_id()]);
+        } 
+        else 
+        {
+            // Delete the modification by using parameter id.
+            return $this->db->delete('modifications', ['id'=>$id]);
+        }
     }
 
     public function create()
     {
+        // insert the object into the database
+        if($this->db->insert('modifications', array(
+            'mod_name'      =>  $this->get_mod_name(),
+            'mod_cost'      =>  $this->get_mod_cost(),
+            'mod_short_name'=>  $this->get_mod_short_name(),
+            'monthly'       =>  $this->get_monthly(),
+            'item_type'     =>  $this->get_item_type(),
+            'rental_type'   =>  $this->get_rental_type(),
+            'order_id'      =>  $this->get_order_id(),
+            'product_qty'   =>  $this->get_product_quantity(),
+            'product_cost'  =>  $this->get_product_cost(),
+            'product_type'  =>  $this->get_product_type()
+            ))) 
+        {
 
+            // Return the ID
+            return $this->db->insert_id();
+
+        } 
+        else 
+        {
+
+            // log error
+            db_elogger($this->db->error());   
+
+            // return FALSE
+            return FALSE;
+
+        }
     }
 
     public function get_rental_array()
