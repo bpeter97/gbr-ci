@@ -46,7 +46,7 @@ class Product extends CI_Model
         
         if( ! $id === NULL )
         {
-            $this->set_user_data($id);
+            $this->set_product_data($id);
         }
     }
 
