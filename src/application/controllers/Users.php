@@ -71,7 +71,7 @@ class Users extends CI_Controller
      */
     public function edit($id)
     {
-        //TODO Need to add validation here for the update form.
+        //TODO: Need to add validation here for the update form.
 
         if( ! $this->form_validation->run() )
         {
@@ -137,7 +137,7 @@ class Users extends CI_Controller
      */
     public function create()
     {
-        //TODO Need to add validation here for the create form.
+        //TODO: Need to add validation here for the create form.
 
         if( ! $this->form_validation->run() )
         {

@@ -4,29 +4,29 @@ if ( ! defined('BASEPATH') ) exit('No direct script access allowed');
 
 class Event extends CI_Model
 {
-    private $_id,
-            $_title,
-            $_color,
-            $_start,
-            $_end,
-            $_order_id,
-            $_order;
+    private $id,
+            $title,
+            $color,
+            $start,
+            $end,
+            $order_id,
+            $order;
 
-    public function get_id() { return $this->_id; }
-    public function get_title() { return $this->_title; }
-    public function get_color() { return $this->_color; }
-    public function get_start() { return $this->_start; }
-    public function get_end() { return $this->_end; }
-    public function get_order_id() { return $this->_order_id; }
-    public function get_order() { return $this->_order; }
+    public function get_id() { return $this->id; }
+    public function get_title() { return $this->title; }
+    public function get_color() { return $this->color; }
+    public function get_start() { return $this->start; }
+    public function get_end() { return $this->end; }
+    public function get_order_id() { return $this->order_id; }
+    public function get_order() { return $this->order; }
 
-    public function set_id($id) { $this->_id = $id; return $this; }
-    public function set_title($title) { $this->_title = $title; return $this; }
-    public function set_color($color) { $this->_color = $color; return $this; }
-    public function set_start($datetime) { $this->_start = $datetime; return $this; }
-    public function set_end($datetime) { $this->_end = $datetime; return $this; }
-    public function set_order_id($id) { $this->_order_id = $id; return $this; }
-    public function set_order($obj) { $this->_order = $obj; return $this; }	
+    public function set_id($id) { $this->id = $id; return $this; }
+    public function set_title($title) { $this->title = $title; return $this; }
+    public function set_color($color) { $this->color = $color; return $this; }
+    public function set_start($datetime) { $this->start = $datetime; return $this; }
+    public function set_end($datetime) { $this->end = $datetime; return $this; }
+    public function set_order_id($id) { $this->order_id = $id; return $this; }
+    public function set_order($obj) { $this->order = $obj; return $this; }	
 
     public function __construct($id = NULL)
     {

@@ -4,32 +4,32 @@ if ( ! defined('BASEPATH') ) exit('No direct script access allowed');
 
 class User extends CI_Model
 {
-    private $_id,
-            $_username,
-            $_password,
-            $_first_name,
-            $_last_name,
-            $_phone,
-            $_title,
-            $_type;
+    private $id,
+            $username,
+            $password,
+            $first_name,
+            $last_name,
+            $phone,
+            $title,
+            $type;
 
-    public function get_id() { return $this->_id; }
-    public function get_username() { return $this->_username; }
-    public function get_password() { return $this->_password; }
-    public function get_first_name() { return $this->_first_name; }
-    public function get_last_name() { return $this->_last_name; }
-    public function get_phone() { return $this->_phone; }
-    public function get_title() { return $this->_title; }
-    public function get_type() { return $this->_type; }
+    public function get_id() { return $this->id; }
+    public function get_username() { return $this->username; }
+    public function get_password() { return $this->password; }
+    public function get_first_name() { return $this->first_name; }
+    public function get_last_name() { return $this->last_name; }
+    public function get_phone() { return $this->phone; }
+    public function get_title() { return $this->title; }
+    public function get_type() { return $this->type; }
 
-    public function set_id($id) { $this->_id = $id; return $this; }
-    public function set_username($name) { $this->_username = $name; return $this; }
-    public function set_password($pass) { $this->_password = $pass; return $this; }
-    public function set_first_name($name) { $this->_first_name = $name; return $this; }
-    public function set_last_name($name) { $this->_last_name = $name; return $this; }
-    public function set_phone($phone) { $this->_phone = $phone; return $this; }
-    public function set_title($title) { $this->_title = $title; return $this; }
-    public function set_type($type) { $this->_type = $type; return $this; }
+    public function set_id($id) { $this->id = $id; return $this; }
+    public function set_username($name) { $this->username = $name; return $this; }
+    public function set_password($pass) { $this->password = $pass; return $this; }
+    public function set_first_name($name) { $this->first_name = $name; return $this; }
+    public function set_last_name($name) { $this->last_name = $name; return $this; }
+    public function set_phone($phone) { $this->phone = $phone; return $this; }
+    public function set_title($title) { $this->title = $title; return $this; }
+    public function set_type($type) { $this->type = $type; return $this; }
 
     public function __construct($id = NULL)
     {

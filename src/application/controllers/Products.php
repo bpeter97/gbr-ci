@@ -54,7 +54,7 @@ class Products extends CI_Controller
 
     public function edit($id)
     {
-        //TODO create some form validation here!
+        //TODO: create some form validation here!
 
         // If the form fails to validate or doesn't validate, send to edit page.
         if( ! $this->form_validation->run() )
@@ -73,7 +73,7 @@ class Products extends CI_Controller
                 'mod_short_name'=>  $this->input->post('mod_short_name'),
                 'monthly'       =>  $this->input->post('monthly'),
                 'item_type'     =>  $this->input->post('item_type'),
-                'rental_type'   =>  $this->input->post('rental_type');
+                'rental_type'   =>  $this->input->post('rental_type')
             );
 
             if( $this->product->set_product_data($data)->update() )
@@ -105,7 +105,7 @@ class Products extends CI_Controller
 
     public function create()
     {
-        //TODO create some form validation here!
+        //TODO: create some form validation here!
 
         // If the form fails to validate or doesn't validate, send to create page.
         if( ! $this->form_validation->run() )

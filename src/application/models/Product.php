@@ -4,21 +4,21 @@ if ( ! defined('BASEPATH') ) exit('No direct script access allowed');
 
 class Product extends CI_Model
 {
-    private $_id,
-            $_mod_name,
-            $_mod_cost,
-            $_mod_short_name,
-            $_monthly,
-            $_item_type,
-            $_rental_type,
-            $_order_id,
-            $_product_qty,
-            $_product_cost,
-            $_product_type;
+    private $id,
+            $mod_name,
+            $mod_cost,
+            $mod_short_name,
+            $monthly,
+            $item_type,
+            $rental_type,
+            $order_id,
+            $product_qty,
+            $product_cost,
+            $product_type;
 
-    public function get_id() { return $this->_id; }
-    public function get_mod_name() { return $this->_mod_name; }
-    public function get_mod_cost() { return $this->_mod_cost; }
+    public function get_id() { return $this->id; }
+    public function get_mod_name() { return $this->mod_name; }
+    public function get_mod_cost() { return $this->mod_cost; }
     public function get_mod_short_name() { return $this->mod_short_name; }
     public function get_monthly() { return $this->monthly; }
     public function get_item_type() { return $this->item_type; }
@@ -28,7 +28,7 @@ class Product extends CI_Model
     public function get_product_cost() { return $this->product_cost; }
     public function get_product_type() { return $this->product_type; }
     
-    public function set_id($id) { $this->_id = $id; return $this; }
+    public function set_id($id) { $this->id = $id; return $this; }
     public function set_mod_name($name) { $this->mod_name = $name; return $this; }
     public function set_mod_cost($cost) { $this->mod_cost = $cost; return $this; }
     public function set_mod_short_name($name) { $this->mod_short_name = $name; return $this; }
@@ -156,6 +156,23 @@ class Product extends CI_Model
         {
             $product_array = $this->db->get('modifications')->result_array();
         }
+
+        if($product_array)
+        {
+            $products = array();
+
+            foreach($product_array as $prod)
+            {
+                $product = new Product($prod['id']);
+                array_push($products, $product);
+            }
+
+            return $products;
+        }
+        else
+        {
+            throw new Exception('There was no products returned.');
+        }
     }
 
     // Not ordered product because it may be a quoted product therefore it's a requested product.
@@ -185,7 +202,6 @@ class Product extends CI_Model
                         ->like('mod_short_name', $string)
                         ->get()
                         ->result_array();
-
     }
 
     public function update()
