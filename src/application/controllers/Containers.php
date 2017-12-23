@@ -18,9 +18,6 @@ class Containers extends CI_Controller
 
     public function index()
     {
-        // Load the libraries
-        $this->load->library('pagination');
-
         $config = array(
             'base_url'      => 'containers/index/',
             'total_rows'    => $this->container->count_containers(),
@@ -42,9 +39,6 @@ class Containers extends CI_Controller
     // previously called rentalcontainers()
     public function rentals()
     {
-        // Load the libraries
-        $this->load->library('pagination');
-
         $config = array(
             'base_url'      => 'containers/rentals/',
             'total_rows'    => $this->container->count_containers(['rental_resale' => 'Rental']),
@@ -66,9 +60,6 @@ class Containers extends CI_Controller
     // previously called resalecontainers()
     public function resales()
     {
-        // Load the libraries
-        $this->load->library('pagination');
-
         $config = array(
             'base_url'      => 'containers/resales/',
             'total_rows'    => $this->container->count_containers(['rental_resale' => 'Resale']),
@@ -90,9 +81,6 @@ class Containers extends CI_Controller
     // previously called currentrentals()
     public function rented()
     {
-        // Load the libraries
-        $this->load->library('pagination');
-
         $config = array(
             'base_url'      => 'containers/rented/',
             'total_rows'    => $this->container->count_containers(['is_rented' => 'TRUE']),

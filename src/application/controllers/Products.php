@@ -31,9 +31,6 @@ class Products extends CI_Controller
 
     public function index()
     {
-        // Load the libraries
-        $this->load->library('pagination');
-
         $config = array(
             'base_url'      => 'products/index/',
             'total_rows'    => $this->product->count_products(),

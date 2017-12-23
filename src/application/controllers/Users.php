@@ -43,9 +43,6 @@ class Users extends CI_Controller
      */
     public function index()
     {
-        // Load the libraries
-        $this->load->library('pagination');
-
         $config = array(
             'base_url'      => '/users/index/',
             'total_rows'    => $this->User->count_users(),

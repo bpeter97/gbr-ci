@@ -306,7 +306,7 @@ class Container extends CI_Model
         }
         else
         {
-            throw new Exception('There was no products returned.');
+            throw new Exception('There was no containers returned.');
         }
     }
 
