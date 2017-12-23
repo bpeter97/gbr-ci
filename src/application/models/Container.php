@@ -102,47 +102,47 @@ class Container extends CI_Model
 
         if( is_array($data) )
         {
-            $this->set_id($id)
-                 ->set_release_number($num)
-                 ->set_size($size)
-                 ->set_serial_number($num)
-                 ->set_number($num)
-                 ->set_shelves($bool)
-                 ->set_paint($bool)
-                 ->set_onbox_numbers($bool)
-                 ->set_signs($bool)
-                 ->set_rental_resale($rental_resale)
-                 ->set_is_rented($bool)
-                 ->set_address($address)
-                 ->set_latitude($lat)
-                 ->set_longitude($lon)
-                 ->set_type($type)
-                 ->set_flag($bool)
-                 ->set_flag_reason($reason)
-                 ->set_size_code($code)
-                 ->set_short_name($name);
+            $this->set_id($data['id'])
+                 ->set_release_number($data['num'])
+                 ->set_size($data['size'])
+                 ->set_serial_number($data['num'])
+                 ->set_number($data['num'])
+                 ->set_shelves($data['bool'])
+                 ->set_paint($data['bool'])
+                 ->set_onbox_numbers($data['bool'])
+                 ->set_signs($data['bool'])
+                 ->set_rental_resale($data['rental_resale'])
+                 ->set_is_rented($data['bool'])
+                 ->set_address($data['address'])
+                 ->set_latitude($data['lat'])
+                 ->set_longitude($data['lon'])
+                 ->set_type($data['type'])
+                 ->set_flag($data['bool'])
+                 ->set_flag_reason($data['reason'])
+                 ->set_size_code($data['code'])
+                 ->set_short_name($data['name']);
         }
         elseif( is_object($data) )
         {
-            $this->set_id($id)
-                 ->set_release_number($num)
-                 ->set_size($size)
-                 ->set_serial_number($num)
-                 ->set_number($num)
-                 ->set_shelves($bool)
-                 ->set_paint($bool)
-                 ->set_onbox_numbers($bool)
-                 ->set_signs($bool)
-                 ->set_rental_resale($rental_resale)
-                 ->set_is_rented($bool)
-                 ->set_address($address)
-                 ->set_latitude($lat)
-                 ->set_longitude($lon)
-                 ->set_type($type)
-                 ->set_flag($bool)
-                 ->set_flag_reason($reason)
-                 ->set_size_code($code)
-                 ->set_short_name($name);
+            $this->set_id($data->id)
+                 ->set_release_number($data->num)
+                 ->set_size($data->size)
+                 ->set_serial_number($data->num)
+                 ->set_number($data->num)
+                 ->set_shelves($data->bool)
+                 ->set_paint($data->bool)
+                 ->set_onbox_numbers($data->bool)
+                 ->set_signs($data->bool)
+                 ->set_rental_resale($data->rental_resale)
+                 ->set_is_rented($data->bool)
+                 ->set_address($data->address)
+                 ->set_latitude($data->lat)
+                 ->set_longitude($data->lon)
+                 ->set_type($data->type)
+                 ->set_flag($data->bool)
+                 ->set_flag_reason($data->reason)
+                 ->set_size_code($data->code)
+                 ->set_short_name($data->name);
         }
         else
         {
@@ -166,14 +166,21 @@ class Container extends CI_Model
         return $this->db->update('containers', $this, ['id'=>$this->get_id()]);
     }
 
-    public function delete()
+    public function delete($id = NULL)
     {
-        return $this->db->delete('containers', ['id'=>$this->get_id()]);
+        if( ! $id === NULL )
+        {
+            return $this->db->delete('containers', ['id'=>$this->get_id()]);
+        }
+        else
+        {
+            return $this->db->delete('containers', ['id'=>$id]);
+        }
     }
 
     public function create()
     {
-        return $this->db->insert('containers', array(
+        if( $this->db->insert('containers', array(
                     'release_number' => $this->get_release_number(), 
                     'size'           => $this->get_size(),
                     'serial_number'  => $this->get_serial_number(),
@@ -192,7 +199,14 @@ class Container extends CI_Model
                     'flag_reason'    => $this->get_flag_reason(),
                     'size_code'      => $this->get_size_code(),
                     'short_name'     => $this->get_short_name()
-        ));
+        )))
+        {
+            return $this->db->insert_id();
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 
     public function deliver($address, $is_rented)
@@ -306,13 +320,12 @@ class Container extends CI_Model
     {
         if($check == 1)
         {
-			$checkvalue = "Yes";
+			return "Yes";
         }
         else
         {
-			$checkvalue = "No";
+			return "No";
 		}
-		return $checkvalue;
     }
 
     // TODO: Removed post data.
@@ -336,5 +349,26 @@ class Container extends CI_Model
                 ->like('type', $string)
                 ->get()
                 ->result_array();
+    }
+
+    public function find_size_and_short_name()
+    {
+        
+        if( $res = $this->db->distinct()->select('size, container_size_code, container_short_name')->from('containers')->get()->result_array() )
+        {       
+            foreach ($res as $r){
+                if($this->get_size() == $r['container_size']){
+                    $this->set_size_code($r['container_size_code']);
+                    $this->set_short_name($r['container_short_name']);
+                }
+            }
+        }
+        else
+        {
+            // Log the database error.
+            log_message('error', $this->db->error());
+
+            throw new Exception('Could not find the proper size code or short name.');
+        }  
     }
 }

@@ -44,7 +44,7 @@ class Products extends CI_Controller
         $this->pagination->initialize($config);
 
         $data = array(
-            'products'         => $this->product->get_products(NULL, $config['per_page'], $this->uri->segment(3))
+            'products' => $this->product->get_products(NULL, $config['per_page'], $this->uri->segment(3))
         );
 
         // Load the main view.
