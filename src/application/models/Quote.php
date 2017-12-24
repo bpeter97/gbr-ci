@@ -289,7 +289,6 @@ class Quote extends CI_Model
             {
                 return TRUE;
             }
-
 		}
     }
 
