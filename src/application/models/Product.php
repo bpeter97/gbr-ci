@@ -130,7 +130,7 @@ class Product extends CI_Model
 
     // previously called getProducts
     // $where must be an array. If $limit is used, there must be an offset set as $start.
-    public function get_products($where = NULL, $limit = NULL, $start = NULL)
+    public function get_products($where = NULL, $limit = NULL, $start = NULL, $or = NULL)
     {
         // If limit is not null then check where
         if( ! $limit === NULL )
@@ -138,7 +138,36 @@ class Product extends CI_Model
             // If where is not null do limit with where
             if( ! $where === NULL )
             {
-                $product_array = $this->db->get_where('modifications', $where, $limit, $start)->result_array();
+                if( $or == TRUE )
+                {
+                    // WHERE something OR something OR something
+                    $this->db->select('*')->from('modifications');
+
+                    $where = array(); // delete this
+                    $x = 0;
+                    foreach($where as $key => $id)
+                    {
+                        $data = array($key => $id);
+
+                        if($x == 0)
+                        {
+                            $this->db->where($data);
+                        }
+                        else
+                        {
+                            $this->db->or_where($data);
+                        }
+
+                        $x++;
+                    }
+
+                    $product_array = $this->db->get()->result_array();
+                }
+                else
+                {
+                    // WHERE something AND something AND something
+                    $product_array = $this->db->get_where('modifications', $where, $limit, $start)->result_array();
+                }
             }
             // else do limit with no where
             else
