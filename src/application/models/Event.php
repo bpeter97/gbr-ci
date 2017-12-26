@@ -62,12 +62,12 @@ class Event extends CI_Model
         if( ! $id === NULL )
         {
             // Return user info based on supplied ID.
-            return $this->db->get_where('events', ['order_id' => $id])->result();
+            $this->set_event_data($this->db->get_where('events', ['order_id' => $id])->result());
         }
         else
         {
             // Return user info based on user model ID.
-            return $this->db->get_where('events', ['order_id' => $this->get_id()])->result();
+            $this->set_event_data($this->db->get_where('events', ['order_id' => $this->get_id()])->result());
         }
     }
 

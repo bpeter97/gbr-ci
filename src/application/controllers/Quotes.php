@@ -155,7 +155,7 @@ class Quotes extends CI_Controller
 
             $data = array(
                 'customer'          => $this->customer->get_customer_name(),
-                'customer_id'       => $this->customer->get_customer_type(),
+                'customer_id'       => $this->customer->get_customer_id(),
                 'type'              => $this->input->post('type'),
                 'date'              => $this->input->post('date'),
                 'status'            => $this->input->post('status'),

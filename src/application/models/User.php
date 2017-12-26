@@ -100,6 +100,51 @@ class User extends CI_Model
         return $this;
     }
 
+    public function get_users($where = NULL, $limit = NULL, $start = NULL)
+    {
+        // If limit is not null then check where
+        if( ! $limit === NULL )
+        {
+            // If where is not null do limit with where
+            if( ! $where === NULL )
+            {
+                $user_array = $this->db->get_where('users', $where, $limit, $start)->result_array();
+            }
+            // else do limit with no where
+            else
+            {
+                $user_array = $this->db->get_where('users', $limit, $start)->result_array();
+            }
+        }
+        // else if where is not null do where
+        elseif( ! $where === NULL )    
+        {
+            $user_array = $this->db->get_where('users', $where)->result_array();
+        }
+        // else get all of the users
+        else
+        {
+            $user_array = $this->db->get('users')->result_array();
+        }
+
+        if($user_array)
+        {
+            $users = array();
+
+            foreach($user_array as $u)
+            {
+                $user = new User($u['id']);
+                array_push($users, $user);
+            }
+
+            return $users;
+        }
+        else
+        {
+            throw new Exception('There was no users returned.');
+        }
+    }
+
     // previously called countUsers($where = '')
     public function count_users()
     {

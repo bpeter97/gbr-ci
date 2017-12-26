@@ -292,12 +292,12 @@ class Order extends CI_Model
         }
     }
 
-    public function insert_ordered_products($quote_id = NULL)
+    public function insert_ordered_products($item_count, $quote_id = NULL)
     {
         if( ! $quote_id === NULL )
         {
             $i = 0;
-            while ($i < $this->input->post('item_count'))
+            while ($i < $item_count)
             {
                 /*
                  * Here we will decode the json and create each product and insert it into the
@@ -404,6 +404,7 @@ class Order extends CI_Model
 
     }
 
+    // TODO: Need to change $this to an array.
     public function update()
     {
         return $this->db->update('orders', $this, ['id' => $this->get_id()]);
