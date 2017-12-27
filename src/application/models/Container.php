@@ -71,7 +71,7 @@ class Container extends CI_Model
         parent::__construct();
 
         // If ID is passed in, set the data!
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             $this->set_container_data($id);
         }
@@ -79,7 +79,7 @@ class Container extends CI_Model
 
     public function get_container_data($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             return $this->db->get_where('containers', ['id' => $id])->result();
         }
@@ -163,12 +163,33 @@ class Container extends CI_Model
     {
         $this->get_lat_lon($this->get_address());
 
-        return $this->db->update('containers', $this, ['id'=>$this->get_id()]);
+        $data = array(
+            'release_number' => $this->get_release_number(), 
+            'size'           => $this->get_size(),
+            'serial_number'  => $this->get_serial_number(),
+            'number'         => $this->get_number(),
+            'shelves'        => $this->get_shelves(),
+            'paint'          => $this->get_paint(),
+            'onbox_numbers'  => $this->get_onbox_numbers(),
+            'signs'          => $this->get_signs(),
+            'rental_resale'  => $this->get_rental_resale(),
+            'is_rented'      => $this->get_is_rented(),
+            'address'        => $this->get_address(),
+            'latitude'       => $this->get_latitude(),
+            'longitude'      => $this->get_longitude(),
+            'type'           => $this->get_type(),
+            'flag'           => $this->get_flag(),
+            'flag_reason'    => $this->get_flag_reason(),
+            'size_code'      => $this->get_size_code(),
+            'short_name'     => $this->get_short_name()
+        );
+
+        return $this->db->update('containers', $data, ['id'=>$this->get_id()]);
     }
 
     public function delete($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             return $this->db->delete('containers', ['id'=>$this->get_id()]);
         }
@@ -252,7 +273,7 @@ class Container extends CI_Model
 
     public function count_containers($where = NULL)
     {
-        if( ! $where === NULL )
+        if( $where !== NULL )
         {
             return $this->db->get('containers')->num_rows();
         }
@@ -268,10 +289,10 @@ class Container extends CI_Model
     public function get_containers($where = NULL, $limit = NULL, $start = NULL)
     {
         // If limit is not null then check where
-        if( ! $limit === NULL )
+        if( $limit !== NULL )
         {
             // If where is not null do limit with where
-            if( ! $where === NULL )
+            if( $where !== NULL )
             {
                 $container_array = $this->db->get_where('containers', $where, $limit, $start)->result_array();
             }
@@ -282,7 +303,7 @@ class Container extends CI_Model
             }
         }
         // else if where is not null do where
-        elseif( ! $where === NULL )    
+        elseif( $where !== NULL )    
         {
             $container_array = $this->db->get_where('containers', $where)->result_array();
         }

@@ -62,11 +62,11 @@ class Quote extends CI_Model
     public function set_delivery_total($float) { $this->delivery_total = $float; return $this; }
     public function set_hidden($hidden) { $this->hidden = $hidden; return $this; }
 
-    public function __construct()
+    public function __construct($id = NULL)
     {
         parent::__construct();
 
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             $this->set_quote_data($id);
         }
@@ -74,7 +74,7 @@ class Quote extends CI_Model
 
     public function get_quote_data($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             return $this->db->get_where('quotes', ['id'=>$id])->result();
         }
@@ -148,7 +148,7 @@ class Quote extends CI_Model
 
     public function count_quotes($where = NULL)
     {
-        if( ! $where === NULL )
+        if( $where !== NULL )
         {
             return $this->db->get('quotes')->num_rows();
         }
@@ -163,10 +163,10 @@ class Quote extends CI_Model
     public function get_quotes($where = NULL, $limit = NULL, $start = NULL)
     {
         // If limit is not null then check where
-        if( ! $limit === NULL )
+        if( $limit !== NULL )
         {
             // If where is not null do limit with where
-            if( ! $where === NULL )
+            if( $where !== NULL )
             {
                 $quote_array = $this->db->get_where('quotes', $where, $limit, $start)->result_array();
             }
@@ -177,7 +177,7 @@ class Quote extends CI_Model
             }
         }
         // else if where is not null do where
-        elseif( ! $where === NULL )    
+        elseif( $where !== NULL )    
         {
             $quote_array = $this->db->get_where('quotes', $where)->result_array();
         }
@@ -294,13 +294,33 @@ class Quote extends CI_Model
 
     public function update()
     {
-        return $this->db->update('quotes', $this, ['id' => $this->get_id()]);
+        $data = array(
+            'customer'          => $this->get_customer(),
+            'customer_id'       => $this->get_customer_id(),
+            'date'              => $this->get_date(),
+            'status'            => $this->get_status(),
+            'type'              => $this->get_type(),
+            'job_name'          => $this->get_job_name(),
+            'job_city'          => $this->get_job_city(),
+            'job_address'       => $this->get_job_address(),
+            'job_zipcode'       => $this->get_job_zipcode(),
+            'attn'              => $this->get_attn(),
+            'tax_rate'          => $this->get_tax_rate(),
+            'cost_before_tax'   => $this->get_cost_before_tax(),
+            'total_cost'        => $this->get_total_cost(),
+            'sales_tax'         => $this->get_sales_tax(),
+            'monthly_total'     => $this->get_monthly_total(),
+            'delivery_total'    => $this->get_delivery_total(),
+            'hidden'            => $this->get_hidden()
+        );
+
+        return $this->db->update('quotes', $data, ['id' => $this->get_id()]);
     }
 
     public function delete($id = NULL)
     {
         // Delete the modification by using an ID.
-        if($id === NULL)
+        if(is_null($id))
         {
             // Delete the modification by using object's id property.
             return $this->db->delete('quotes', ['id'=>$this->get_id()]);

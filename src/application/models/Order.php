@@ -89,9 +89,8 @@ class Order extends CI_Model
 
     public function __construct($id = NULL)
     {
-        parent::__contruct();
 
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             $this->set_order_data($id);
         }
@@ -99,7 +98,7 @@ class Order extends CI_Model
 
     public function get_order_data($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             return $this->db->get_where('orders', ['id'=>$id])->result();
         }
@@ -189,7 +188,7 @@ class Order extends CI_Model
 
     public function count_orders($where = NULL)
     {
-        if( ! $where === NULL )
+        if( $where !== NULL )
         {
             return $this->db->get('orders')->num_rows();
         }
@@ -203,10 +202,10 @@ class Order extends CI_Model
     public function get_orders($where = NULL, $limit = NULL, $start = NULL)
     {
         // If limit is not null then check where
-        if( ! $limit === NULL )
+        if( $limit !== NULL )
         {
             // If where is not null do limit with where
-            if( ! $where === NULL )
+            if( $where !== NULL )
             {
                 $order_array = $this->db->get_where('orders', $where, $limit, $start)->result_array();
             }
@@ -217,7 +216,7 @@ class Order extends CI_Model
             }
         }
         // else if where is not null do where
-        elseif( ! $where === NULL )    
+        elseif( $where !== NULL )    
         {
             $order_array = $this->db->get_where('orders', $where)->result_array();
         }
@@ -294,7 +293,7 @@ class Order extends CI_Model
 
     public function insert_ordered_products($item_count, $quote_id = NULL)
     {
-        if( ! $quote_id === NULL )
+        if( $quote_id !== NULL )
         {
             $i = 0;
             while ($i < $item_count)
@@ -407,13 +406,41 @@ class Order extends CI_Model
     // TODO: Need to change $this to an array.
     public function update()
     {
-        return $this->db->update('orders', $this, ['id' => $this->get_id()]);
+        $data = array(
+            'quote_id'                  =>  $this->get_quote_id(),
+            'customer'			        =>	$this->get_customer(),
+            'customer_id'			    =>	$this->get_customer_id(),
+            'date'				        =>	$this->get_date(),
+            'time'				        =>	$this->get_time(),
+            'type'				        =>	$this->get_type(),
+            'job_name'					=>	$this->get_job_name(),
+            'job_city'					=>	$this->get_job_city(),
+            'job_address'				=>	$this->get_job_address(),
+            'job_zipcode'				=>	$this->get_job_zipcode(),
+            'ordered_by'				=>	$this->get_ordered_by(),
+            'onsite_contact'			=>	$this->get_onsite_contact(),
+            'onsite_contact_phone'		=>	$this->get_onsite_contact_phone(),
+            'tax_rate'					=>	$this->get_tax_rate(),
+            'cost_before_tax'			=>	$this->get_cost_before_tax(),
+            'total_cost'				=>	$this->get_total_cost(),
+            'monthly_total'				=>	$this->get_monthly_total(),
+            'sales_tax'					=>	$this->get_sales_tax(),
+            'delivery_total'			=>	$this->get_delivery_total(),
+            'stage'						=>	$this->get_stage(),
+            'driver'                    =>  $this->get_driver(),
+            'driver_notes'              =>  $this->get_driver_notes(),
+            'delivered'                 =>  $this->get_delivered(),
+            'date_delivered'            =>  $this->get_date_delivered(),
+            'container'                 =>  $this->get_container()
+        );
+
+        return $this->db->update('orders', $data, ['id' => $this->get_id()]);
     }
 
     public function delete($id = NULL)
     {
         // Delete the order by using an ID.
-        if($id === NULL)
+        if(is_null($id))
         {
             // Delete the order by using object's id property.
             return $this->db->delete('quotes', ['id'=>$this->get_id()]);

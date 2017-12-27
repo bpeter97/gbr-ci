@@ -23,31 +23,31 @@ class Chart extends CI_Model
     {
         parent::__construct();
 
-        $this->get_all_quotes();
-        $this->get_all_orders();
+        // $this->get_all_quotes();
+        // $this->get_all_orders();
         $this->get_rental_containers();
         $this->get_resale_containers();
     }
 
-    public function get_all_quotes()
-    {
-        for($i = 1; $i != 13; $i++)
-        {
-            $num = $this->db->get_where('quotes',['MONTH(quote_date)' => $i, ['YEAR(quote_date)'=> date('Y')]])->num_rows();
+    // public function get_all_quotes()
+    // {
+    //     for($i = 1; $i != 13; $i++)
+    //     {
+    //         $num = $this->db->get_where('quotes',['MONTH(date)' => $i , 'YEAR(date)'=> date('Y')] )->num_rows();
             
-            array_push($this->quotes, $num);
-        }
-    }
+    //         array_push($this->quotes, $num);
+    //     }
+    // }
 
-    public function get_all_orders()
-    {
-        for($i = 1; $i != 13; $i++)
-        {
-            $num = $this->db->get_where('orders',['MONTH(order_date)' => $i, ['YEAR(order_date)'=> date('Y')]])->num_rows();
+    // public function get_all_orders()
+    // {
+    //     for($i = 1; $i != 13; $i++)
+    //     {
+    //         $num = $this->db->get_where('orders',['MONTH(date)' => $i, ['YEAR(date)'=> date('Y')]])->num_rows();
             
-            array_push($this->orders, $num);
-        }
-    }
+    //         array_push($this->orders, $num);
+    //     }
+    // }
 
     public function get_rental_containers()
     {

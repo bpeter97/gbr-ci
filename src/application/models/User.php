@@ -35,7 +35,7 @@ class User extends CI_Model
     {
         parent::__construct();
         
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             $this->set_user_data($id);
         }
@@ -44,15 +44,15 @@ class User extends CI_Model
     // previously getUserInfo($id = null)
     public function get_user_info($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             // Return user info based on supplied ID.
-            return $this->db->get_where('users', ['id' => $id])->result();
+            return $this->db->get_where('users', ['id' => $id])->row();
         }
         else
         {
             // Return user info based on user model ID.
-            return $this->db->get_where('users', ['id' => $this->get_id()])->result();
+            return $this->db->get_where('users', ['id' => $this->get_id()])->row();
         }
     }
 
@@ -73,8 +73,8 @@ class User extends CI_Model
             $this->set_id($user['id'])
                  ->set_username($user['username'])
                  ->set_password($user['password'])
-                 ->set_first_name($user['firstname'])
-                 ->set_last_name($user['lastname'])
+                 ->set_first_name($user['first_name'])
+                 ->set_last_name($user['last_name'])
                  ->set_phone($user['phone'])
                  ->set_title($user['title'])
                  ->set_type($user['type']);
@@ -85,8 +85,8 @@ class User extends CI_Model
             $this->set_id($user->id)
                  ->set_username($user->username)
                  ->set_password($user->password)
-                 ->set_first_name($user->firstname)
-                 ->set_last_name($user->lastname)
+                 ->set_first_name($user->first_name)
+                 ->set_last_name($user->last_name)
                  ->set_phone($user->phone)
                  ->set_title($user->title)
                  ->set_type($user->type);
@@ -103,10 +103,10 @@ class User extends CI_Model
     public function get_users($where = NULL, $limit = NULL, $start = NULL)
     {
         // If limit is not null then check where
-        if( ! $limit === NULL )
+        if( $limit !== NULL )
         {
             // If where is not null do limit with where
-            if( ! $where === NULL )
+            if( $where !== NULL )
             {
                 $user_array = $this->db->get_where('users', $where, $limit, $start)->result_array();
             }
@@ -117,7 +117,7 @@ class User extends CI_Model
             }
         }
         // else if where is not null do where
-        elseif( ! $where === NULL )    
+        elseif( $where !== NULL )    
         {
             $user_array = $this->db->get_where('users', $where)->result_array();
         }
@@ -164,7 +164,7 @@ class User extends CI_Model
             if(password_verify($password, $result->row(2)->password))
             {
                 // Return user ID if it does.
-                return $result->row(0)->id;
+                return (int)$result->row(0)->id;
             } 
             else 
             {
@@ -288,6 +288,17 @@ class User extends CI_Model
 
     public function create()
     {
+        // Encrypt the user's password.
+        $encrypted_pass = password_hash(
+            $this->get_password(),
+            PASSWORD_DEFAULT,
+            [
+                'cost' => 10,
+            ]
+        );
+
+        $this->set_password($encrypted_pass);
+
         // Insert this object into the database.
         if($this->db->insert('users', array(
                 'username'      =>  $this->get_username(),
@@ -314,14 +325,24 @@ class User extends CI_Model
 
     public function update()
     {
+        $data = array(
+            'username'      =>  $this->get_username(),
+            'password'      =>  $this->get_password(),
+            'first_name'    =>  $this->get_first_name(),
+            'last_name'     =>  $this->get_last_name(),
+            'phone'         =>  $this->get_phone(),
+            'title'         =>  $this->get_title(),
+            'type'          =>  $this->get_type()
+        );
+
         // Update the user based on this objects ID.
-        return $this->db->update('users', $this, ['id' => $this->get_id()]);
+        return $this->db->update('users', $data, ['id' => $this->get_id()]);
     }
 
     public function delete($id = NULL)
     {
         // Delete the user by using an ID.
-        if($id === NULL)
+        if(is_null($id))
         {
             // Delete the user by using object's id property.
             return $this->db->delete('users', ['id'=>$this->get_id()]);

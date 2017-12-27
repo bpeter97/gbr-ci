@@ -57,7 +57,7 @@ class Customer extends CI_Model
     {
         parent::__construct();
 
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             $this->set_customer_data($id);
         }
@@ -66,7 +66,7 @@ class Customer extends CI_Model
 
     public function get_customer_data($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             if( is_int($id) )
             {
@@ -138,7 +138,7 @@ class Customer extends CI_Model
 
     public function count_customers()
     {
-        if( ! $where === NULL )
+        if( $where !== NULL )
         {
             return $this->db->get('customers')->num_rows();
         }
@@ -153,10 +153,10 @@ class Customer extends CI_Model
     public function get_customers($where, $limit, $start)
     {
         // If limit is not null then check where
-        if( ! $limit === NULL )
+        if( $limit !== NULL )
         {
             // If where is not null do limit with where
-            if( ! $where === NULL )
+            if( $where !== NULL )
             {
                 $customer_array = $this->db->get_where('customers', $where, $limit, $start)->result_array();
             }
@@ -167,7 +167,7 @@ class Customer extends CI_Model
             }
         }
         // else if where is not null do where
-        elseif( ! $where === NULL )    
+        elseif( $where !== NULL )    
         {
             $customer_array = $this->db->get_where('customers', $where)->result_array();
         }
@@ -193,6 +193,28 @@ class Customer extends CI_Model
         {
             throw new Exception('There was no customers returned.');
         }
+    }
+
+    public function update()
+    {
+        $data = array(
+            'name'          => $this->get_name(), 
+            'address1'      => $this->get_address1(),
+            'address2'      => $this->get_address2(),
+            'city'          => $this->get_city(),
+            'zipcode'       => $this->get_zipcode(),
+            'state'         => $this->get_state(),
+            'phone'         => $this->get_phone(),
+            'ext'           => $this->get_ext(),
+            'fax'           => $this->get_fax(),
+            'email'         => $this->get_email(),
+            'rdp'           => $this->get_rdp(),
+            'notes'         => $this->get_notes(),
+            'flag'          => $this->get_flag(),
+            'flag_reason'   => $this->get_flag_reason()
+        );
+
+        return $this->db->update('customers', $data, ['id'=>$this->get_id()]);
     }
 
     public function create()
@@ -324,7 +346,7 @@ class Customer extends CI_Model
 
     public function delete($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             return $this->db->delete('customers',['id'=>$id]);
         }

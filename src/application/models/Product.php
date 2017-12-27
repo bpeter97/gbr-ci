@@ -44,7 +44,7 @@ class Product extends CI_Model
     {
         parent::__construct();
         
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             $this->set_product_data($id);
         }
@@ -53,7 +53,7 @@ class Product extends CI_Model
     // previously called getDetails()
     public function get_product_info($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             // Return user info based on supplied ID.
             return $this->db->get_where('modifications', ['id' => $id])->result();
@@ -117,7 +117,7 @@ class Product extends CI_Model
 
     public function count_products($where = NULL)
     {
-        if( ! $where === NULL )
+        if( $where !== NULL )
         {
             return $this->db->get('modifications')->num_rows();
         }
@@ -133,10 +133,10 @@ class Product extends CI_Model
     public function get_products($where = NULL, $limit = NULL, $start = NULL, $or = NULL)
     {
         // If limit is not null then check where
-        if( ! $limit === NULL )
+        if( $limit !== NULL )
         {
             // If where is not null do limit with where
-            if( ! $where === NULL )
+            if( $where !== NULL )
             {
                 if( $or == TRUE )
                 {
@@ -176,7 +176,7 @@ class Product extends CI_Model
             }
         }
         // else if where is not null do where
-        elseif( ! $where === NULL )    
+        elseif( $where !== NULL )    
         {
             $product_array = $this->db->get_where('modifications', $where)->result_array();
         }
@@ -235,14 +235,27 @@ class Product extends CI_Model
 
     public function update()
     {
+        $data = array(
+            'mod_name'      =>  $this->get_mod_name(),
+            'mod_cost'      =>  $this->get_mod_cost(),
+            'mod_short_name'=>  $this->get_mod_short_name(),
+            'monthly'       =>  $this->get_monthly(),
+            'item_type'     =>  $this->get_item_type(),
+            'rental_type'   =>  $this->get_rental_type(),
+            'order_id'      =>  $this->get_order_id(),
+            'product_qty'   =>  $this->get_product_quantity(),
+            'product_cost'  =>  $this->get_product_cost(),
+            'product_type'  =>  $this->get_product_type()
+        );
+
         // Update this product object in the database.
-        return $this->db->update('modifications', $this, ['id' => $this->get_id()]);
+        return $this->db->update('modifications', $data, ['id' => $this->get_id()]);
     }
 
     public function delete($id = NULL)
     {
         // Delete the modification by using an ID.
-        if($id === NULL)
+        if(is_null($id))
         {
             // Delete the modification by using object's id property.
             return $this->db->delete('modifications', ['id'=>$this->get_id()]);

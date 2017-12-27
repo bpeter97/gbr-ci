@@ -32,10 +32,10 @@ class Event extends CI_Model
     {
         parent::__construct();
         
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             $this->set_event_data($id);
-            if( ! $this->get_order_id() === NULL )
+            if( $this->get_order_id() !== NULL )
             {
                 $this->get_event_order_info();
             }
@@ -45,7 +45,7 @@ class Event extends CI_Model
     // previously called getDetails()
     public function get_event_info($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             // Return user info based on supplied ID.
             return $this->db->get_where('events', ['id' => $id])->result();
@@ -59,7 +59,7 @@ class Event extends CI_Model
 
     public function get_event_by_order_id($id)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             // Return user info based on supplied ID.
             $this->set_event_data($this->db->get_where('events', ['order_id' => $id])->result());
@@ -73,7 +73,7 @@ class Event extends CI_Model
 
     public function get_event_order_info()
     {
-        if( ! $this->get_order_id() === NULL )
+        if( $this->get_order_id() !== NULL )
         {
             $this->set_order(new Order($this->get_order_id()));
         }
@@ -123,7 +123,7 @@ class Event extends CI_Model
     // This may not be needed.
     public function count_events($where = NULL)
     {
-        if( ! $where === NULL )
+        if( $where !== NULL )
         {
             return $this->db->get('events')->num_rows();
         }
@@ -138,10 +138,10 @@ class Event extends CI_Model
     public function get_events($where = NULL, $limit = NULL, $start = NULL)
     {
         // If limit is not null then check where
-        if( ! $limit === NULL )
+        if( $limit !== NULL )
         {
             // If where is not null do limit with where
-            if( ! $where === NULL )
+            if( $where !== NULL )
             {
                 $event_array = $this->db->get_where('events', $where, $limit, $start)->result_array();
             }
@@ -152,7 +152,7 @@ class Event extends CI_Model
             }
         }
         // else if where is not null do where
-        elseif( ! $where === NULL )    
+        elseif( $where !== NULL )    
         {
             $event_array = $this->db->get_where('events', $where)->result_array();
         }
@@ -166,7 +166,7 @@ class Event extends CI_Model
     // Previously called addEvent()
     public function create($id = NULL)
     {
-        if( ! $id === NULL )
+        if( $id !== NULL )
         {
             $this->set_order_id($id);
         }
@@ -246,14 +246,23 @@ class Event extends CI_Model
     // Got rid of editEvent as it equats to running $this->set_event_data($data)->update();
     public function update()
     {
+        $data = array(
+            'title'      =>  $this->get_title(),
+            'color'      =>  $this->get_color(),
+            'start'      =>  $this->get_start(),
+            'end'        =>  $this->get_end(),
+            'order_id'   =>  $this->get_order_id(),
+            'order'      =>  $this->get_order()
+        );
+
         // Update this product object in the database.
-        return $this->db->update('events', $this, ['id' => $this->get_id()]);
+        return $this->db->update('events', $data, ['id' => $this->get_id()]);
     }
 
     public function delete($id = NULL)
     {
         // Delete the events by using an ID.
-        if($id === NULL)
+        if(is_null($id))
         {
             // Delete the events by using object's id property.
             return $this->db->delete('events', ['id'=>$this->get_id()]);
