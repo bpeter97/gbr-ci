@@ -66,15 +66,16 @@ class Home extends CI_Controller
         
         if( $this->form_validation->run() )
         {
-            if( $id = $this->user->check_login($this->input->post('username'), $this->input->post('password')) )
+            $result = $this->user->check_login($this->input->post('username'), $this->input->post('password'));
+
+            if( is_int($result) )
             {
-                $this->user->set_user_data($id)->create_user_session();
+                $this->user->set_user_data($result)->create_user_session();
                 redirect('home/index');
             }
             else
             {
-                // TODO: Create better error message
-                $this->session->set_flashdata('error_msg', array($id));
+                $this->session->set_flashdata('error_msg', array($result));
                 redirect('home/login');
             }
         }

@@ -1,3 +1,7 @@
+body {
+  font-size: 0.95rem;
+  background-color: lightgrey; }
+
 #copyright .copyright-text {
   color: white;
   font-weight: bold; }
@@ -37,3 +41,27 @@
       color: white; }
   #login_page .col-sm-6.text-center img {
     margin-left: -4rem; }
+
+nav {
+  border-bottom: 2px solid darkgreen;
+  box-shadow: 0px 0px 5px #888888;
+  background-color: white; }
+  nav span.navbar-text {
+    color: darkgreen !important;
+    font-size: 1rem; }
+  nav .navbar-nav#mainNavbar .nav-item {
+    text-decoration: underline;
+    text-decoration-color: lightgrey; }
+    nav .navbar-nav#mainNavbar .nav-item:hover {
+      text-decoration-color: black; }
+    nav .navbar-nav#mainNavbar .nav-item.active {
+      text-decoration-color: black; }
+  nav .navbar-nav .nav-item {
+    padding-left: 5px;
+    padding-right: 5px; }
+  @media screen and (min-width: 768px) {
+    nav .navbar-nav #searchDropdownContainer {
+      width: 480px; } }
+
+.navbar {
+  padding: 0.2rem 1.9rem; }

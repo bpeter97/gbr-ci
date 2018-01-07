@@ -168,14 +168,13 @@ class User extends CI_Model
             } 
             else 
             {
-                // Return FALSE if it does not match!
-                return FALSE;
+                // Return error message if it does not match!
+                return "The password provided does not match!";
             }
         } 
         else 
         {
-            // Return FALSE if there was no result! (meaning username did not match!)
-            return FALSE;
+            return "The username does not exist!";
         }
     }
 
