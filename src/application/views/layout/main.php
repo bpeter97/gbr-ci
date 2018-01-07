@@ -9,7 +9,7 @@
     <meta name="description" content="GBR Management System">
     <meta name="author" content="Brian L. Peter Jr.">
 
-    <title>GBR Management System - Login</title>
+    <title>GBR Management System</title>
 
     <!-- CSS -->
     <link type="text/css" href="<?= base_url() . 'assets/css/bootstrap.css'; ?>" rel="stylesheet">

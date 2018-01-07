@@ -5,6 +5,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Containers extends CI_Controller 
 {
 
+    private $pagination_config = array(
+        'per_page'      => 49,
+        'num_links'     => 1,
+        'full_tag_open' => '<div class="btn-group" role="group" aria-label="Pagination">',
+        'full_tag_close'=> '</div>',
+        'attributes'    => array('class' => 'btn btn-gbr', 'role' => 'button'),
+        'cur_tag_open' => '<a href="" role="button" class="btn btn-gbr active">',
+        'cur_tag_close' => '</a>',
+        'last_link'     => 'Last',
+        'first_link'    => 'First'
+    );
+
     public function __construct()
     {
         parent::__construct();
@@ -18,17 +30,14 @@ class Containers extends CI_Controller
 
     public function index()
     {
-        $config = array(
-            'base_url'      => 'containers/index/',
-            'total_rows'    => $this->container->count_containers(),
-            'per_page'      => 50,
-            'num_links'     => 5
-        );
+        $this->pagination_config['base_url'] = '/containers/index/';
+        $this->pagination_config['total_rows'] = $this->container->count_containers();
 
-        $this->pagination->initialize($config);
+        $this->pagination->initialize($this->pagination_config);
 
         $data = array(
-            'containers' => $this->container->get_containers(NULL, $config['per_page'], $this->uri->segment(3))
+            'containers' => $this->container->get_containers(NULL, $this->pagination_config['per_page'], $this->uri->segment(3)),
+            'paginator'  => $this->pagination->create_links()
         );
 
         // Load the main view.
@@ -39,63 +48,54 @@ class Containers extends CI_Controller
     // previously called rentalcontainers()
     public function rentals()
     {
-        $config = array(
-            'base_url'      => 'containers/rentals/',
-            'total_rows'    => $this->container->count_containers(['rental_resale' => 'Rental']),
-            'per_page'      => 50,
-            'num_links'     => 5
-        );
+        $this->pagination_config['base_url'] = '/containers/rentals/';
+        $this->pagination_config['total_rows'] = $this->container->count_containers(['rental_resale' => 'Rental']);
 
-        $this->pagination->initialize($config);
+        $this->pagination->initialize($this->pagination_config);
 
         $data = array(
-            'containers' => $this->container->get_containers(['rental_resale' => 'Rental'], $config['per_page'], $this->uri->segment(3))
+            'containers' => $this->container->get_containers(['rental_resale' => 'Rental'], $this->pagination_config['per_page'], $this->uri->segment(3)),
+            'paginator'  => $this->pagination->create_links()
         );
 
         // Load the main view.
-        $data['main_view'] = 'containers/index';
+        $data['main_view'] = 'containers/rentals';
         $this->load->view('layout/main', $data);
     }
 
     // previously called resalecontainers()
     public function resales()
     {
-        $config = array(
-            'base_url'      => 'containers/resales/',
-            'total_rows'    => $this->container->count_containers(['rental_resale' => 'Resale']),
-            'per_page'      => 50,
-            'num_links'     => 5
-        );
+        $this->pagination_config['base_url'] = '/containers/resales/';
+        $this->pagination_config['total_rows'] = $this->container->count_containers(['rental_resale' => 'Resale']);
 
-        $this->pagination->initialize($config);
+        $this->pagination->initialize($this->pagination_config);
 
         $data = array(
-            'containers' => $this->container->get_containers(['rental_resale' => 'Resale'], $config['per_page'], $this->uri->segment(3))
+            'containers' => $this->container->get_containers(['rental_resale' => 'Resale'], $this->pagination_config['per_page'], $this->uri->segment(3)),
+            'paginator'  => $this->pagination->create_links()
         );
 
         // Load the main view.
-        $data['main_view'] = 'containers/index';
+        $data['main_view'] = 'containers/resales';
         $this->load->view('layout/main', $data);
     }
 
     // previously called currentrentals()
     public function rented()
     {
-        $config = array(
-            'base_url'      => 'containers/rented/',
-            'total_rows'    => $this->container->count_containers(['is_rented' => 'TRUE']),
-            'per_page'      => 50,
-            'num_links'     => 5
-        );
+        $this->pagination_config['base_url'] = '/containers/rented/';
+        $this->pagination_config['total_rows'] = $this->container->count_containers(['is_rented' => 'TRUE']);
 
-        $this->pagination->initialize($config);
+        $this->pagination->initialize($this->pagination_config);
 
         $data = array(
-            'containers' => $this->container->get_containers(['is_rented' => 'TRUE'], $config['per_page'], $this->uri->segment(3))
+            'containers' => $this->container->get_containers(['is_rented' => 'TRUE'], $this->pagination_config['per_page'], $this->uri->segment(3)),
+            'paginator'  => $this->pagination->create_links()
         );
 
         // Load the main view.
-        $data['main_view'] = 'containers/index';
+        $data['main_view'] = 'containers/rented';
         $this->load->view('layout/main', $data);
     }
 

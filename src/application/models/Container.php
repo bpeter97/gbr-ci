@@ -81,11 +81,11 @@ class Container extends CI_Model
     {
         if( $id !== NULL )
         {
-            return $this->db->get_where('containers', ['id' => $id])->result();
+            return $this->db->get_where('containers', ['id' => $id])->row();
         }
         else
         {
-            return $this->db->get_where('containers', ['id' => $this->get_id()])->result();
+            return $this->db->get_where('containers', ['id' => $this->get_id()])->row();
         }
     }
 
@@ -103,46 +103,46 @@ class Container extends CI_Model
         if( is_array($data) )
         {
             $this->set_id($data['id'])
-                 ->set_release_number($data['num'])
+                 ->set_release_number($data['release_number'])
                  ->set_size($data['size'])
-                 ->set_serial_number($data['num'])
-                 ->set_number($data['num'])
-                 ->set_shelves($data['bool'])
-                 ->set_paint($data['bool'])
-                 ->set_onbox_numbers($data['bool'])
-                 ->set_signs($data['bool'])
+                 ->set_serial_number($data['serial_number'])
+                 ->set_number($data['number'])
+                 ->set_shelves($data['shelves'])
+                 ->set_paint($data['paint'])
+                 ->set_onbox_numbers($data['onbox_numbers'])
+                 ->set_signs($data['signs'])
                  ->set_rental_resale($data['rental_resale'])
-                 ->set_is_rented($data['bool'])
+                 ->set_is_rented($data['is_rented'])
                  ->set_address($data['address'])
-                 ->set_latitude($data['lat'])
-                 ->set_longitude($data['lon'])
+                 ->set_latitude($data['latitude'])
+                 ->set_longitude($data['longitude'])
                  ->set_type($data['type'])
-                 ->set_flag($data['bool'])
-                 ->set_flag_reason($data['reason'])
-                 ->set_size_code($data['code'])
-                 ->set_short_name($data['name']);
+                 ->set_flag($data['flag'])
+                 ->set_flag_reason($data['flag_reason'])
+                 ->set_size_code($data['size_code'])
+                 ->set_short_name($data['short_name']);
         }
         elseif( is_object($data) )
         {
             $this->set_id($data->id)
-                 ->set_release_number($data->num)
+                 ->set_release_number($data->release_number)
                  ->set_size($data->size)
-                 ->set_serial_number($data->num)
-                 ->set_number($data->num)
-                 ->set_shelves($data->bool)
-                 ->set_paint($data->bool)
-                 ->set_onbox_numbers($data->bool)
-                 ->set_signs($data->bool)
+                 ->set_serial_number($data->serial_number)
+                 ->set_number($data->number)
+                 ->set_shelves($data->shelves)
+                 ->set_paint($data->paint)
+                 ->set_onbox_numbers($data->onbox_numbers)
+                 ->set_signs($data->signs)
                  ->set_rental_resale($data->rental_resale)
-                 ->set_is_rented($data->bool)
+                 ->set_is_rented($data->is_rented)
                  ->set_address($data->address)
-                 ->set_latitude($data->lat)
-                 ->set_longitude($data->lon)
+                 ->set_latitude($data->latitude)
+                 ->set_longitude($data->longitude)
                  ->set_type($data->type)
-                 ->set_flag($data->bool)
-                 ->set_flag_reason($data->reason)
-                 ->set_size_code($data->code)
-                 ->set_short_name($data->name);
+                 ->set_flag($data->flag)
+                 ->set_flag_reason($data->flag_reason)
+                 ->set_size_code($data->size_code)
+                 ->set_short_name($data->short_name);
         }
         else
         {
@@ -299,7 +299,7 @@ class Container extends CI_Model
             // else do limit with no where
             else
             {
-                $container_array = $this->db->get_where('containers', $limit, $start)->result_array();
+                $container_array = $this->db->get_where('containers', NULL, $limit, $start)->result_array();
             }
         }
         // else if where is not null do where
@@ -313,13 +313,17 @@ class Container extends CI_Model
             $container_array = $this->db->get('containers')->result_array();
         }
 
+        // echo '<pre>';
+        // var_dump($container_array);
+        // echo '</pre>';
+
         if($container_array)
         {
             $containers = array();
 
             foreach($container_array as $con)
             {
-                $container = new Container($con['id']);
+                $container = new Container((int)$con['id']);
                 array_push($containers, $container);
             }
 
@@ -327,7 +331,7 @@ class Container extends CI_Model
         }
         else
         {
-            throw new Exception('There was no containers returned.');
+            $this->db->error();
         }
     }
 
@@ -375,11 +379,11 @@ class Container extends CI_Model
     public function find_size_and_short_name()
     {
         
-        if( $res = $this->db->distinct()->select('size, container_size_code, container_short_name')->from('containers')->get()->result_array() )
+        if( $res = $this->db->distinct()->select('size, size_code, container_short_name')->from('containers')->get()->result_array() )
         {       
             foreach ($res as $r){
                 if($this->get_size() == $r['container_size']){
-                    $this->set_size_code($r['container_size_code']);
+                    $this->set_size_code($r['size_code']);
                     $this->set_short_name($r['container_short_name']);
                 }
             }

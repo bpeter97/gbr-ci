@@ -110,7 +110,7 @@ nav {
                 }
 
                 &.active {
-                    text-decoration-color: black;
+                    text-decoration: none;
                 }
             }
         }
@@ -131,4 +131,96 @@ nav {
 
 .navbar {
     padding: 0.2rem 1.9rem;
+}
+
+#list {
+
+    padding-top: 70px;
+
+    .card {
+
+        width:98%;
+        background-color: white;
+        border: 1px solid black;
+        box-shadow: 0px 0px 5px #888888;
+
+        .card-body {
+
+            padding: 0px;
+
+            .card-title {
+                background-color: darkgreen;
+                color: white;
+            }
+
+            .small-paginator {
+
+                .btn-group {
+
+                    padding-left: 0.5rem !important;
+                    padding-bottom: 0.8rem !important;
+
+                    .btn-gbr {
+                        padding: .25rem .5rem;
+                        font-size: .875rem;
+                        line-height: 1.5;
+                        border-radius: .2rem;
+                    }
+                }
+                
+            }
+
+            .large-paginator {
+                .btn-group {
+                    padding-left: 2.3rem !important;
+                    padding-bottom: 0.8rem !important;
+                }
+            }
+
+            .btn-gbr {
+                color: white;
+                background-color: darkgreen;
+                border: 1px solid black;
+
+                &:focus, &:hover, &.active {
+                    color: white;
+                    background-color: rgb(1, 126, 1);
+                }
+
+             }
+            
+
+            .table-responsive {
+
+                width: 96%;
+
+                table {
+                
+                    border: 2px solid rgb(233, 233, 233);
+    
+                    thead {
+                        tr {
+                            border-bottom: 3px solid lightgrey;
+                        }
+                    }
+    
+                    tr {
+                        border: 1px solid #ddd;
+    
+                        &.danger {
+                            background-color: rgb(243, 207, 207);
+                            &:hover {
+                                background-color: rgb(243, 207, 207);
+                            }
+                        }
+    
+                        &:hover {
+                            background-color: rgba(50,170,50,1);
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
 }

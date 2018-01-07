@@ -3,10 +3,10 @@
     $cog = "";
 
     $con_array = array(
-                        'resales' => base_url().'containers/resalecontainers',
-                        'current' => base_url().'containers/currentrentals',
+                        'resales' => base_url().'containers/resales',
+                        'current' => base_url().'containers/rented',
                         'index' => base_url().'containers/index',
-                        'rentals' => base_url().'containers/rentalcontainers',
+                        'rentals' => base_url().'containers/rentals',
                         'create' => base_url().'containers/create'
                         );
 
@@ -65,7 +65,7 @@
 
 ?>
 
-    <nav class="navbar navbar-expand-lg navbar-light mb-3"> <!-- add fixed-top when done -->
+    <nav class="navbar navbar-expand-lg navbar-light mb-3 fixed-top">
         <a class="navbar-brand" href="#">
             <img class="gbr_logo_image d-none d-md-block" height="25" src="<?= base_url().'assets/img/logo.png'; ?>">
             <img class="small_gbr_logo_image d-block d-md-none" height="25" src="<?= base_url().'assets/img/logosmall.png'; ?>">

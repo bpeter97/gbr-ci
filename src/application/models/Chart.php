@@ -54,7 +54,7 @@ class Chart extends CI_Model
         for($x = 0; $x < 16; $x++)
         {
             // If this does not work, put quotes around FALSE.
-            $num = $this->db->get_where('containers', ['container_size_code' => $this->con_array[$x], 'rental_resale'=> 'Rental', 'is_rented' => 'FALSE']);
+            $num = $this->db->get_where('containers', ['size_code' => $this->con_array[$x], 'rental_resale'=> 'Rental', 'is_rented' => 'FALSE']);
 
             array_push($this->rentals, $num);
         }
@@ -65,7 +65,7 @@ class Chart extends CI_Model
         for($x = 0; $x < 16; $x++)
         {
             // If this does not work, put quotes around FALSE.
-            $num = $this->db->get_where('containers', ['container_size_code' => $this->con_array[$x], 'rental_resale'=> 'Resale', 'is_rented' => 'FALSE']);
+            $num = $this->db->get_where('containers', ['size_code' => $this->con_array[$x], 'rental_resale'=> 'Resale', 'is_rented' => 'FALSE']);
 
             array_push($this->rentals, $num);
         }
