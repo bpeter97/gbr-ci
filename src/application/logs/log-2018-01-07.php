@@ -2816,3 +2816,64 @@ ERROR - 2018-01-07 07:37:14 --> Severity: Notice --> Undefined property: Contain
 ERROR - 2018-01-07 07:37:14 --> Severity: Notice --> Undefined property: Containers::$get_flag C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
 ERROR - 2018-01-07 07:37:14 --> Severity: Notice --> Undefined property: Containers::$get_flag C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
 ERROR - 2018-01-07 08:09:45 --> 404 Page Not Found: Containers/rentalcontainers
+ERROR - 2018-01-07 08:27:37 --> Severity: Notice --> Undefined variable: where C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 141
+ERROR - 2018-01-07 08:27:37 --> Severity: Notice --> Undefined variable: where C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 148
+ERROR - 2018-01-07 08:27:37 --> Severity: error --> Exception: There was no customers returned. C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 194
+ERROR - 2018-01-07 08:27:54 --> Severity: error --> Exception: There was no customers returned. C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 194
+ERROR - 2018-01-07 08:28:16 --> Severity: error --> Exception: The parameter passed in is not a name, id, object, or array. C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 135
+ERROR - 2018-01-07 08:30:38 --> Severity: error --> Exception: The parameter passed in is not a name, id, object, or array. C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 135
+ERROR - 2018-01-07 08:31:30 --> Severity: Notice --> Undefined variable: containers C:\xampp\htdocs\app\gbr_ci\src\application\views\customers\index.php 24
+ERROR - 2018-01-07 08:31:30 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\app\gbr_ci\src\application\views\customers\index.php 24
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined property: stdClass::$flag C:\xampp\htdocs\app\gbr_ci\src\application\models\Customer.php 130
+ERROR - 2018-01-07 08:32:25 --> Severity: Notice --> Undefined variable: containers C:\xampp\htdocs\app\gbr_ci\src\application\views\customers\index.php 24
+ERROR - 2018-01-07 08:32:25 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\app\gbr_ci\src\application\views\customers\index.php 24
+ERROR - 2018-01-07 08:33:15 --> Severity: Notice --> Undefined variable: containers C:\xampp\htdocs\app\gbr_ci\src\application\views\customers\index.php 24
+ERROR - 2018-01-07 08:33:15 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\app\gbr_ci\src\application\views\customers\index.php 24

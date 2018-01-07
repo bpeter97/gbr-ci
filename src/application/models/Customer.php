@@ -70,16 +70,16 @@ class Customer extends CI_Model
         {
             if( is_int($id) )
             {
-                return $this->db->get_where('customers',['id'=>$id])->result();
+                return $this->db->get_where('customers',['id'=>$id])->row();
             }
             elseif( is_string($id) )
             {
-                return $this->db->get_where('customers',['name'=>$id])->result();
+                return $this->db->get_where('customers',['name'=>$id])->row();
             }
         }
         else
         {
-            return $this->db->get_where('customers',['id'=>$this->get_id()])->result();
+            return $this->db->get_where('customers',['id'=>$this->get_id()])->row();
         }
     }
 
@@ -136,7 +136,7 @@ class Customer extends CI_Model
         }
     }
 
-    public function count_customers()
+    public function count_customers($where = NULL)
     {
         if( $where !== NULL )
         {
@@ -163,7 +163,7 @@ class Customer extends CI_Model
             // else do limit with no where
             else
             {
-                $customer_array = $this->db->get_where('customers', $limit, $start)->result_array();
+                $customer_array = $this->db->get_where('customers', NULL, $limit, $start)->result_array();
             }
         }
         // else if where is not null do where
@@ -183,7 +183,7 @@ class Customer extends CI_Model
 
             foreach($customer_array as $cust)
             {
-                $customer = new Customer($cust['id']);
+                $customer = new Customer((int)$cust['id']);
                 array_push($customers, $customer);
             }
 
@@ -191,7 +191,7 @@ class Customer extends CI_Model
         }
         else
         {
-            throw new Exception('There was no customers returned.');
+            $this->db->error();
         }
     }
 
