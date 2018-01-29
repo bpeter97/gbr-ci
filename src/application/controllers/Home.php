@@ -5,6 +5,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Home Controller Class
  * 
+ * Testing the push.
+ * 
  * @method index() Loads the home veiw.
  */
 class Home extends CI_Controller 
