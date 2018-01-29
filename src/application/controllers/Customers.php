@@ -45,15 +45,26 @@ class Customers extends CI_Controller
 
     public function create()
     {
-        // TODO: create validation for form.
+        // Form validation for the create customer form.
+        $this->form_validation->set_rules('name', 'Name', 'required|greater_than[2]');
+        $this->form_validation->set_rules('address1', 'Address', 'required|greater_than[2]');
+        $this->form_validation->set_rules('address2', 'Address2', 'differs[address1]');
+        $this->form_validation->set_rules('city', 'City', 'required|greater_than[2]');
+        $this->form_validation->set_rules('zipcode', 'Zipcode', 'required|numeric');
+        $this->form_validation->set_rules('state', 'State', 'required|greater_than[1]|');
+        $this->form_validation->set_rules('phone', 'Phone', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'valid_email');
 
+        // Check to see if validation was successful.
         if( ! $this->form_validation->run() )
         {
+            // If not, return to the create customer form with validation errors.
             $data['main_view'] = 'customers/create';
             $this->load->view('layout/main', $data);
         }
         else
         {
+            // Post the form data to an array.
             $data = array(
                 'name'      =>  $this->input->post('name'),
                 'address1'  =>  $this->input->post('address1'),
@@ -69,13 +80,16 @@ class Customers extends CI_Controller
                 'notes'     =>  $this->input->post('notes')
             );
 
+            // check if customer was successfully created in database.
             if( $new_id = $this->customer->set_customer_data($data)->create() )
             {
+                // send a success message.
                 $this->session->set_flashdata('success_msg', 'The customer was successfully created.');
                 redirect('customers/view/'. $new_id);
             }
             else
             {
+                // else send an error message.
                 $this->session->set_flashdata('error_msg', 'There was an error creating the new customer, the error was logged.');
                 redirect('customers/index');
             }
@@ -86,10 +100,20 @@ class Customers extends CI_Controller
     {
         $this->customer->set_customer_data($id);
      
-        // TODO: create validation for form.
+        // Form validation for the customer form.
+        $this->form_validation->set_rules('name', 'Name', 'required|greater_than[2]');
+        $this->form_validation->set_rules('address1', 'Address', 'required|greater_than[2]');
+        $this->form_validation->set_rules('address2', 'Address2', 'differs[address1]');
+        $this->form_validation->set_rules('city', 'City', 'required|greater_than[2]');
+        $this->form_validation->set_rules('zipcode', 'Zipcode', 'required|numeric');
+        $this->form_validation->set_rules('state', 'State', 'required|greater_than[1]|');
+        $this->form_validation->set_rules('phone', 'Phone', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'valid_email');
 
+        // check to see if validation successfully ran.
         if( ! $this->form_validation->run() )
         {
+            // If not, send user to view page with validation errors (if any).
             $data['customer'] = $this->customer;
             $data['main_view'] = 'customers/view';
 
@@ -97,6 +121,7 @@ class Customers extends CI_Controller
         }
         else
         {
+            // Else, set the data array
             $data = array(
                 'id'          => $this->customer->get_id(),
                 'name'        => $this->input->post('name'),
@@ -115,6 +140,7 @@ class Customers extends CI_Controller
                 'flag_reason' => $this->input->post('flag_reason')
             );
 
+            // Update the customer in the database.
             if( $this->customer->set_customer_data($data)->update() )
             {
                 $this->session->set_flashdata('success_msg', 'The customer was successfully updated.');
