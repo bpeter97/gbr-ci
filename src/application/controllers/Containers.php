@@ -116,15 +116,15 @@ class Containers extends CI_Controller
             $this->container->find_size_and_short_name();
 
             $data = array(
-                'rental_resale'     => $this->input->post('frmrentalresale'),
+                'rental_resale'     => $this->input->post('frmrental_resale'),
                 'size'              => $this->container->get_size(),
-                'release_number'    => $this->input->post('frmcontainerrelease'),
-                'shelves'           => $this->container->check_boxes($this->input->post('containershelves')),
-                'paint'             => $this->container->check_boxes($this->input->post('containerpainted')),
-                'onbox_numbers'     => $this->container->check_boxes($this->input->post('containergbrnumbers')),
-                'signs'             => $this->container->check_boxes($this->input->post('containersigns')),
-                'serial_number'     => $this->input->post('frmcontainerserial'),
-                'number'            => $this->input->post('frmcontainernumber'),
+                'release_number'    => $this->input->post('frmcontainer_release'),
+                'shelves'           => $this->container->check_boxes($this->input->post('container_shelves')),
+                'paint'             => $this->container->check_boxes($this->input->post('container_painted')),
+                'onbox_numbers'     => $this->container->check_boxes($this->input->post('container_gbrnumbers')),
+                'signs'             => $this->container->check_boxes($this->input->post('container_signs')),
+                'serial_number'     => $this->input->post('frmcontainer_serial'),
+                'number'            => $this->input->post('frmcontainer_number'),
                 'is_rented'         => FALSE,
                 'address'           => $this->container->get_address(),
                 'latitude'          => $this->container->get_lat(),

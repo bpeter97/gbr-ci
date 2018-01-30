@@ -9,6 +9,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 class Products extends CI_Controller 
 {
+
+    private $pagination_config = array(
+        'per_page'      => 49,
+        'num_links'     => 1,
+        'full_tag_open' => '<div class="btn-group" role="group" aria-label="Pagination">',
+        'full_tag_close'=> '</div>',
+        'attributes'    => array('class' => 'btn btn-gbr', 'role' => 'button'),
+        'cur_tag_open' => '<a href="" role="button" class="btn btn-gbr active">',
+        'cur_tag_close' => '</a>',
+        'last_link'     => 'Last',
+        'first_link'    => 'First'
+    );
+
     public function __construct()
     {
         parent::__construct();
@@ -21,7 +34,7 @@ class Products extends CI_Controller
         else
         {
             // TODO Check to see what the user types are in the database.
-            if( ! check_perm($id, 'Admin') )
+            if( ! check_perm($id, 'Admin') || ! check_perm($id, 'Web Developer') )
             {
                 $this->session->set_flashdata('error_msg','You do not have proper access to access this page.');
                 redirect('home/index');
@@ -31,18 +44,14 @@ class Products extends CI_Controller
 
     public function index()
     {
-        $config = array(
-            'base_url'      => 'products/index/',
-            'total_rows'    => $this->product->count_products(),
-            'per_page'      => 20,
-            'num_links'     => 5
-        );
 
-        $this->pagination->initialize($config);
+        $this->pagination_config['base_url'] = '/products/index/';
+        $this->pagination_config['total_rows'] = $this->product->count_products();
 
-        $data = array(
-            'products' => $this->product->get_products(NULL, $config['per_page'], $this->uri->segment(3))
-        );
+        $this->pagination->initialize($this->pagination_config);
+
+        $data['products'] = $this->product->get_products(NULL, $this->pagination_config['per_page'], $this->uri->segment(3));
+        $data['paginator'] = $this->pagination->create_links();
 
         // Load the main view.
         $data['main_view'] = 'products/index';

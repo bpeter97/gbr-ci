@@ -14,6 +14,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Users extends CI_Controller 
 {
 
+    private $pagination_config = array(
+        'per_page'      => 49,
+        'num_links'     => 1,
+        'full_tag_open' => '<div class="btn-group" role="group" aria-label="Pagination">',
+        'full_tag_close'=> '</div>',
+        'attributes'    => array('class' => 'btn btn-gbr', 'role' => 'button'),
+        'cur_tag_open' => '<a href="" role="button" class="btn btn-gbr active">',
+        'cur_tag_close' => '</a>',
+        'last_link'     => 'Last',
+        'first_link'    => 'First'
+    );
+
     public function __construct()
     {
         parent::__construct();
@@ -43,22 +55,19 @@ class Users extends CI_Controller
      */
     public function index()
     {
-        $config = array(
-            'base_url'      => '/users/index/',
-            'total_rows'    => $this->User->count_users(),
-            'per_page'      => 20,
-            'num_links'     => 5
-        );
 
-        $this->pagination->initialize($config);
+        $this->pagination_config['base_url'] = '/users/index/';
+        $this->pagination_config['total_rows'] = $this->user->count_users();
 
-        $data = array(
-            'users'         => $this->User->get_limited_users($config['per_page'], $this->uri->segment(3))
-        );
+        $this->pagination->initialize($this->pagination_config);
+
+        $data['users'] = $this->user->get_users(NULL, $this->pagination_config['per_page'], $this->uri->segment(3));
+        $data['paginator'] = $this->pagination->create_links();
 
         // Load the main view.
         $data['main_view'] = 'users/index';
         $this->load->view('layout/main', $data);
+        
     }
 
     /**
