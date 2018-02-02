@@ -34,4 +34,19 @@
     <script src="<?= base_url() . 'assets/js/popper.min.js'; ?>"></script>
     <script src="<?= base_url() . 'assets/js/bootstrap.min.js'; ?>"></script>
 
+    <!-- Date Picker / Time Picker -->
+    <script src="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.8.0/dist/combined/js/gijgo.min.js" type="text/javascript"></script>
+
+    <script>
+        $('#date').datepicker({
+            showOtherMonths: true
+        });
+    </script>
+
+    <script>
+        $('#time').timepicker({
+            showOtherMonths: true
+        });
+    </script>
+
 </body>
