@@ -3,6 +3,32 @@ body {
     background-color: lightgrey;
 }
 
+select {
+    /*for firefox*/
+    -moz-appearance: none;
+    /*for chrome*/
+    -webkit-appearance:none;
+}
+
+/*for IE10*/
+select::-ms-expand {
+   display: none;
+}
+
+.gbr-btn {
+
+    background-color: darkgreen;
+    border-color: darkgreen;
+
+    &:hover {
+
+        background-color: rgb(0, 134, 0);
+        border-color: rgb(0, 134, 0);
+
+    }
+
+}
+
 #copyright {
 
     .copyright-text {
@@ -102,7 +128,7 @@ nav {
 
         &#mainNavbar {
             .nav-item {
-                text-decoration: underline;
+
                 text-decoration-color: lightgrey;
 
                 &:hover {
@@ -223,4 +249,63 @@ nav {
             
         }
     }
+}
+
+#productsCard {
+
+    #ProductsTab {
+
+        .nav-item {
+
+            color: white;
+
+            .active {
+
+                background-color: rgb(0, 134, 0);
+                border-color: darkgreen;
+
+            }
+
+            a {
+                color: white;
+                background-color: darkgreen;
+                border-color: darkgreen;
+
+                &:hover {
+
+                    background-color: rgb(0, 134, 0);
+                    border-color: darkgreen;
+    
+                }
+            }
+
+        }
+
+    }
+
+    #ProductsTabContent {
+
+        table {
+
+            border: 1px solid rgb(201, 201, 201);
+
+            tbody {
+
+                tr {
+    
+                    &:hover {
+                        
+                        color: white;
+                        background-color: rgba(50,170,50,1);
+        
+                    }
+        
+                }
+    
+            }
+
+        }
+
+    }
+
 }

@@ -129,29 +129,29 @@ var Cart = function (order_type, rentalArray, pudArray)
 
 		for(var i = 0; i < this.items.length; i++)
 		{
-			cartTable+= '<tr><td width="250" id="prod">'+cart.items[i][0].mod_name+'</td>';
+			cartTable+= '<tr class="align-middle"><td width="250" class="align-middle" id="prod">'+cart.items[i][0].mod_name+'</td>';
 			if(this.order_type == 'rental' || this.order_type == 'Rental') {
 				console.log(cart.items[i][0].msn);
 				if($.inArray(cart.items[i][0].msn, this.rentalArray) != -1)	{
-					cartTable+= '<td width="250" id="prodCost">$0</td>';
-					cartTable+= '<td width="250" id="prodMonthlyCost">$'+cart.items[i][0].cost+'</td>';
+					cartTable+= '<td width="250" class="align-middle" id="prodCost">$0</td>';
+					cartTable+= '<td width="250" class="align-middle" id="prodMonthlyCost">$'+cart.items[i][0].cost+'</td>';
 				} else {
-					cartTable+= '<td width="250" id="prodCost">$'+round(cart.items[i][0].cost, 2)+'</td>';
-					cartTable+= '<td width="250" id="prodMonthlyCost">$0</td>';
+					cartTable+= '<td width="250" class="align-middle" id="prodCost">$'+round(cart.items[i][0].cost, 2)+'</td>';
+					cartTable+= '<td width="250" class="align-middle" id="prodMonthlyCost">$0</td>';
 				}
 			} else {
-				cartTable+= '<td width="250" id="prodCost">$'+round(cart.items[i][0].cost, 2)+'</td>';
-				cartTable+= '<td width="250" id="prodMonthlyCost">$0</td>';
+				cartTable+= '<td width="250" class="align-middle" id="prodCost">$'+round(cart.items[i][0].cost, 2)+'</td>';
+				cartTable+= '<td width="250" class="align-middle" id="prodMonthlyCost">$0</td>';
 			}
-			cartTable+= '<td width="250" id="prodCost">'+cart.items[i][1]+'</td>';
-			cartTable+= '<td width="250" id="itemTotal">$'+round(cart.items[i][0].cost*cart.items[i][1], 2)+'</td>';
-			cartTable+= '<td width="50"><button type="button" class="btn btn-gbr" onclick="cart.removeItem('+cart.items[i][2]+');"><span class="glyphicon glyphicon-trash"></span></button></td></tr>';
+			cartTable+= '<td width="250" class="align-middle" id="prodCost">'+cart.items[i][1]+'</td>';
+			cartTable+= '<td width="250" class="align-middle" id="itemTotal">$'+round(cart.items[i][0].cost*cart.items[i][1], 2)+'</td>';
+			cartTable+= '<td width="50" class="align-middle"><button type="button" class="btn btn-gbr btn-sm" onclick="cart.removeItem('+cart.items[i][2]+');"><i class="fa fa-trash" aria-hidden="true"></i></button></td></tr>';
 		}
-		cartTable+= '<tr><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250">Container Cost:</td><td width="250"><strong>$'+cart.total_before_tax+'</strong></td><td></td>';
-		cartTable+='<tr><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250">Delivery Cost:</td><td width="250"><strong>$'+cart.delivery_cost+'</strong></td><td></td>';
-		cartTable+='<tr><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250">Monthly Cost:</td><td width="250"><strong>$'+cart.monthly_total+'</strong></td><td></td>';
-		cartTable+='<tr><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250">Total tax:</td><td width="250"><strong>$'+cart.tax+'</strong></td><td></td>';
-		cartTable+='<tr><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250">Total after taxes:</td><td width="250"><strong>$'+cart.total+'</strong></td><td></td>';
+		cartTable+= '<tr class="align-middle"><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250" class="align-middle">Container Cost:</td><td width="250" class="align-middle"><strong>$'+cart.total_before_tax+'</strong></td><td></td>';
+		cartTable+='<tr class="align-middle"><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250" class="align-middle">Delivery Cost:</td><td width="250" class="align-middle"><strong>$'+cart.delivery_cost+'</strong></td><td></td>';
+		cartTable+='<tr class="align-middle"><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250" class="align-middle">Monthly Cost:</td><td width="250" class="align-middle"><strong>$'+cart.monthly_total+'</strong></td><td></td>';
+		cartTable+='<tr class="align-middle"><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250" class="align-middle">Total tax:</td><td width="250" class="align-middle"><strong>$'+cart.tax+'</strong></td><td></td>';
+		cartTable+='<tr class="align-middle"><td width="250"></td><td width="250"></td></td><td width="250"></td><td width="250" class="align-middle">Total after taxes:</td><td width="250" class="align-middle"><strong>$'+cart.total+'</strong></td><td></td>';
 		cartTable+= '</tr></tbody></table>';
 		$('#cart').html(cartTable);                  
 	}

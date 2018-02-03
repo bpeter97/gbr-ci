@@ -56,12 +56,12 @@ class Product extends CI_Model
         if( $id !== NULL )
         {
             // Return user info based on supplied ID.
-            return $this->db->get_where('modifications', ['id' => $id])->result();
+            return $this->db->get_where('modifications', ['id' => $id])->row();
         }
         else
         {
             // Return user info based on user model ID.
-            return $this->db->get_where('modifications', ['id' => $this->get_id()])->result();
+            return $this->db->get_where('modifications', ['id' => $this->get_id()])->row();
         }
     }
 
@@ -85,11 +85,7 @@ class Product extends CI_Model
                  ->set_mod_short_name($product['mod_short_name'])
                  ->set_monthly($product['monthly'])
                  ->set_item_type($product['item_type'])
-                 ->set_rental_type($product['rental_type'])
-                 ->set_order_id($product['order_id'])
-                 ->set_product_quantity($product['product_qty'])
-                 ->set_product_cost($product['product_cost'])
-                 ->set_product_type($product['product_type']);
+                 ->set_rental_type($product['rental_type']);
         } 
         elseif(is_object($product))
         {
@@ -100,11 +96,7 @@ class Product extends CI_Model
                  ->set_mod_short_name($product->mod_short_name)
                  ->set_monthly($product->monthly)
                  ->set_item_type($product->item_type)
-                 ->set_rental_type($product->rental_type)
-                 ->set_order_id($product->order_id)
-                 ->set_product_quantity($product->product_qty)
-                 ->set_product_cost($product->product_cost)
-                 ->set_product_type($product->product_type);
+                 ->set_rental_type($product->rental_type);
         }
         else
         {
@@ -143,19 +135,16 @@ class Product extends CI_Model
                     // WHERE something OR something OR something
                     $this->db->select('*')->from('modifications');
 
-                    $where = array(); // delete this
                     $x = 0;
-                    foreach($where as $key => $id)
+                    foreach($where as $array)
                     {
-                        $data = array($key => $id);
-
                         if($x == 0)
                         {
-                            $this->db->where($data);
+                            $this->db->where($array);
                         }
                         else
                         {
-                            $this->db->or_where($data);
+                            $this->db->or_where($array);
                         }
 
                         $x++;
@@ -178,7 +167,36 @@ class Product extends CI_Model
         // else if where is not null do where
         elseif( $where !== NULL )    
         {
-            $product_array = $this->db->get_where('modifications', $where)->result_array();
+            if( $or == TRUE )
+            {
+                $product_array = array();
+
+                // WHERE something OR something OR something
+                $this->db->select('*')->from('modifications');
+
+                // Run a for loop starting at 0 up to the amount of items in the array (minus one since we are starting at zero). 
+                for( $x = 0; $x <= count($where)-1; $x++ )
+                {
+                    foreach($where[$x] as $key => $value)
+                    {
+                        if($x == 0)
+                        {
+                            $this->db->where(array($key => $value));
+                        }
+                        else
+                        {
+                            $this->db->or_where(array($key => $value));
+                        }
+                    }
+                }
+                
+                $product_array = $this->db->get()->result_array();
+
+            }
+            else
+            {
+                $product_array = $this->db->get_where('modifications', $where)->result_array();
+            }
         }
         // else get all of the products
         else
@@ -192,7 +210,7 @@ class Product extends CI_Model
 
             foreach($product_array as $prod)
             {
-                $product = new Product($prod['id']);
+                $product = new Product((int)$prod['id']);
                 array_push($products, $product);
             }
 
@@ -241,11 +259,7 @@ class Product extends CI_Model
             'mod_short_name'=>  $this->get_mod_short_name(),
             'monthly'       =>  $this->get_monthly(),
             'item_type'     =>  $this->get_item_type(),
-            'rental_type'   =>  $this->get_rental_type(),
-            'order_id'      =>  $this->get_order_id(),
-            'product_qty'   =>  $this->get_product_quantity(),
-            'product_cost'  =>  $this->get_product_cost(),
-            'product_type'  =>  $this->get_product_type()
+            'rental_type'   =>  $this->get_rental_type()
         );
 
         // Update this product object in the database.
@@ -276,11 +290,7 @@ class Product extends CI_Model
             'mod_short_name'=>  $this->get_mod_short_name(),
             'monthly'       =>  $this->get_monthly(),
             'item_type'     =>  $this->get_item_type(),
-            'rental_type'   =>  $this->get_rental_type(),
-            'order_id'      =>  $this->get_order_id(),
-            'product_qty'   =>  $this->get_product_quantity(),
-            'product_cost'  =>  $this->get_product_cost(),
-            'product_type'  =>  $this->get_product_type()
+            'rental_type'   =>  $this->get_rental_type()
             ))) 
         {
 
@@ -304,7 +314,7 @@ class Product extends CI_Model
     {
         $rental_array = array();
 
-        $res = $this->db->where('modifications',['rental_type'=>'Rental'])->result_array();
+        $res = $this->db->get_where('modifications',['rental_type'=>'Rental'])->result_array();
 
         foreach($res as $mod)
         {

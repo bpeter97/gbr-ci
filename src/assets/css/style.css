@@ -2,6 +2,23 @@ body {
   font-size: 0.95rem;
   background-color: lightgrey; }
 
+select {
+  /*for firefox*/
+  -moz-appearance: none;
+  /*for chrome*/
+  -webkit-appearance: none; }
+
+/*for IE10*/
+select::-ms-expand {
+  display: none; }
+
+.gbr-btn {
+  background-color: darkgreen;
+  border-color: darkgreen; }
+  .gbr-btn:hover {
+    background-color: #008600;
+    border-color: #008600; }
+
 #copyright .copyright-text {
   color: white;
   font-weight: bold; }
@@ -50,7 +67,6 @@ nav {
     color: darkgreen !important;
     font-size: 1rem; }
   nav .navbar-nav#mainNavbar .nav-item {
-    text-decoration: underline;
     text-decoration-color: lightgrey; }
     nav .navbar-nav#mainNavbar .nav-item:hover {
       text-decoration-color: black; }
@@ -110,3 +126,22 @@ nav {
                 background-color: #f3cfcf; }
             #list .card .card-body .table-responsive table tr:hover {
               background-color: #32aa32; }
+
+#productsCard #ProductsTab .nav-item {
+  color: white; }
+  #productsCard #ProductsTab .nav-item .active {
+    background-color: #008600;
+    border-color: darkgreen; }
+  #productsCard #ProductsTab .nav-item a {
+    color: white;
+    background-color: darkgreen;
+    border-color: darkgreen; }
+    #productsCard #ProductsTab .nav-item a:hover {
+      background-color: #008600;
+      border-color: darkgreen; }
+
+#productsCard #ProductsTabContent table {
+  border: 1px solid #c9c9c9; }
+  #productsCard #ProductsTabContent table tbody tr:hover {
+    color: white;
+    background-color: #32aa32; }

@@ -1,4 +1,10 @@
 <link href="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.8.0/dist/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    cart_order_type = <?= '"'.$type.'"'; ?>;
+    rentalArray = <?= json_encode($rental_array); ?>;
+    pudArray = <?= json_encode($pud_array); ?>;
+</script>
+<script src="<?= base_url() . 'assets/js/shoppingCart.js'; ?>"></script>
 
 <section id="list">
     <div class="container-fluid">
@@ -32,14 +38,14 @@
                                 <div class="col-6">
                                     <select class="custom-select" id="customer">
                                         <option selected>Select a Customer</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <?php foreach($customers as $customer): ?>
+                                        <option value="<?= $customer->get_name(); ?>"><?= $customer->get_name(); ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                     <small class="form-text text-muted pl-1">Select a customer or create a new one.</small>
                                 </div>
                                 <div class="col-2">
-                                    <button type="button" class="btn btn-success">New</button>
+                                    <button type="button" class="btn btn-success gbr-btn">New</button>
                                 </div>
                             </div>
                             <div class="form-row pt-3">
@@ -53,15 +59,17 @@
                             </div>
                             <div class="form-row pt-3">
                                 <div class="col-4 align-self-center">
-                                    <label class="font-weight-bold" for="type">Order Type</label>
+                                    <label class="font-weight-bold" for="type_display">Order Type</label>
                                 </div>
                                 <div class="col-8">
-                                    <select class="custom-select" name="type" id="type" disabled>
-                                        <option selected>Order Type</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                    <select class="custom-select" name="type_display" id="type_display" disabled>
+                                        <?php if($type == 'sales'): ?>
+                                        <option selected>Sales</option>
+                                        <?php else: ?>
+                                        <option selected>Rental</option>
+                                        <?php endif; ?>
                                     </select>
+                                    <input type="hidden" name="type" id="type" value="<?= $type; ?>">
                                     <small class="form-text text-muted pl-1">This field is for the mod's label for lockbox, that would be LBOX.</small>
                                 </div>
                             </div>
@@ -138,7 +146,7 @@
                                 <h5 class="card-title text-center py-2">Current Cart</h5>
                                 <div id="cart"></div>
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" onclick="cart.postData();" class="btn btn-success mb-2">Submit Order</button>
+                                    <button type="button" onclick="cart.postData();" class="btn btn-success mb-2 gbr-btn">Submit Order</button>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +156,7 @@
                 </form>
 
                 <!-- Products -->
-                <div class="card align-self-center mt-2 mb-3">
+                <div class="card align-self-center mt-2 mb-3" id="productsCard">
                     <div class="card-body">
                         <h5 class="card-title text-center py-2">Products</h5>
 
@@ -189,52 +197,20 @@
                                                 <tr>
                                                     <td colspan="2" class="text-center align-middle"><?= $sproduct->get_mod_name(); ?></td>
                                                     <td class="align-middle">
+
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text" id="basic-addon1"><strong>$</strong></span>
+                                                                <span class="input-group-text align-middle" id="basic-addon1">$</span>
                                                             </div>
                                                             <input type="text" class="form-control" id="shippingCost<?= $counter; ?>"  value="<?= $sproduct->get_mod_cost(); ?>" aria-label="Price" aria-describedby="basic-addon1">
                                                         </div>
+
                                                     </td>
                                                     <td class="align-middle">
                                                         <input type="text" class="form-control" id="shippingQty<?= $counter ?>" name="quantity" value="1" size="2">
                                                     </td>
                                                     <td class="text-center align-middle">
-                                                        <button type="button" onclick="cart.addItem(new Product(<?= $sproduct->get_id(); ?>, '<?= $sproduct->get_mod_name(); ?>', '<?= $sproduct->get_mod_short_name(); ?>', document.getElementById('shippingCost<?= $counter; ?>').value, '<?= $sproduct->get_rental_type(); ?>', document.getElementById('shippingQty<?= $counter; ?>').value);" class="btn btn-success">Add To Order</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2" class="text-center align-middle"><?= $sproduct->get_mod_name(); ?></td>
-                                                    <td class="align-middle">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text" id="basic-addon1"><strong>$</strong></span>
-                                                            </div>
-                                                            <input type="text" class="form-control" id="shippingCost<?= $counter; ?>"  value="<?= $sproduct->get_mod_cost(); ?>" aria-label="Price" aria-describedby="basic-addon1">
-                                                        </div>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <input type="text" class="form-control" id="shippingQty<?= $counter ?>" name="quantity" value="1" size="2">
-                                                    </td>
-                                                    <td class="text-center align-middle">
-                                                        <button type="button" onclick="cart.addItem(new Product(<?= $sproduct->get_id(); ?>, '<?= $sproduct->get_mod_name(); ?>', '<?= $sproduct->get_mod_short_name(); ?>', document.getElementById('shippingCost<?= $counter; ?>').value, '<?= $sproduct->get_rental_type(); ?>', document.getElementById('shippingQty<?= $counter; ?>').value);" class="btn btn-success">Add To Order</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2" class="text-center align-middle"><?= $sproduct->get_mod_name(); ?></td>
-                                                    <td class="align-middle">
-                                                        <div class="input-group">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text" id="basic-addon1"><strong>$</strong></span>
-                                                            </div>
-                                                            <input type="text" class="form-control" id="shippingCost<?= $counter; ?>"  value="<?= $sproduct->get_mod_cost(); ?>" aria-label="Price" aria-describedby="basic-addon1">
-                                                        </div>
-                                                    </td>
-                                                    <td class="align-middle">
-                                                        <input type="text" class="form-control" id="shippingQty<?= $counter ?>" name="quantity" value="1" size="2">
-                                                    </td>
-                                                    <td class="text-center align-middle">
-                                                        <button type="button" onclick="cart.addItem(new Product(<?= $sproduct->get_id(); ?>, '<?= $sproduct->get_mod_name(); ?>', '<?= $sproduct->get_mod_short_name(); ?>', document.getElementById('shippingCost<?= $counter; ?>').value, '<?= $sproduct->get_rental_type(); ?>', document.getElementById('shippingQty<?= $counter; ?>').value);" class="btn btn-success">Add To Order</button>
+                                                        <button type="button" onclick="cart.addItem(new Product(<?= $sproduct->get_id(); ?>, '<?= $sproduct->get_mod_name(); ?>', '<?= $sproduct->get_mod_short_name(); ?>', document.getElementById('shippingCost<?= $counter; ?>').value, '<?= $sproduct->get_rental_type(); ?>'), document.getElementById('shippingQty<?= $counter; ?>').value);" class="btn btn-success gbr-btn">Add To Order</button>
                                                     </td>
                                                 </tr>
 
@@ -274,14 +250,18 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="basic-addon1"><strong>$</strong></span>
                                                             </div>
+                                                            <?php if($type == 'sales'): ?>
                                                             <input type="text" class="form-control" id="containerCost<?= $counter; ?>"  value="<?= $cproduct->get_mod_cost(); ?>" aria-label="Price" aria-describedby="basic-addon1">
+                                                            <?php else: ?>
+                                                            <input type="text" class="form-control" id="containerCost<?= $counter; ?>"  value="<?= $cproduct->get_monthly(); ?>" aria-label="Price" aria-describedby="basic-addon1">
+                                                            <?php endif; ?>
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">
                                                         <input type="text" class="form-control" id="containerQty<?= $counter ?>" name="quantity" value="1" size="2">
                                                     </td>
                                                     <td class="text-center align-middle">
-                                                        <button type="button" onclick="cart.addItem(new Product(<?= $cproduct->get_id(); ?>, '<?= $cproduct->get_mod_name(); ?>', '<?= $cproduct->get_mod_short_name(); ?>', document.getElementById('containerCost<?= $counter; ?>').value, '<?= $cproduct->get_rental_type(); ?>', document.getElementById('containerQty<?= $counter; ?>').value);" class="btn btn-success">Add To Order</button>
+                                                        <button type="button" onclick="cart.addItem(new Product(<?= $cproduct->get_id(); ?>, '<?= $cproduct->get_mod_name(); ?>', '<?= $cproduct->get_mod_short_name(); ?>', document.getElementById('containerCost<?= $counter; ?>').value, '<?= $cproduct->get_rental_type(); ?>'), document.getElementById('containerQty<?= $counter; ?>').value);" class="btn btn-success gbr-btn">Add To Order</button>
                                                     </td>
                                                 </tr>
 
@@ -320,14 +300,18 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text" id="basic-addon1"><strong>$</strong></span>
                                                             </div>
+                                                            <?php if($type == 'sales'): ?>
                                                             <input type="text" class="form-control" id="modCost<?= $counter; ?>"  value="<?= $mproduct->get_mod_cost(); ?>" aria-label="Price" aria-describedby="basic-addon1">
+                                                            <?php else: ?>
+                                                            <input type="text" class="form-control" id="modCost<?= $counter; ?>"  value="<?= $mproduct->get_monthly(); ?>" aria-label="Price" aria-describedby="basic-addon1">
+                                                            <?php endif; ?>
                                                         </div>
                                                     </td>
                                                     <td class="align-middle">
                                                         <input type="text" class="form-control" id="modQty<?= $counter ?>" name="quantity" value="1" size="2">
                                                     </td>
                                                     <td class="text-center align-middle">
-                                                        <button type="button" onclick="cart.addItem(new Product(<?= $mproduct->get_id(); ?>, '<?= $mproduct->get_mod_name(); ?>', '<?= $mproduct->get_mod_short_name(); ?>', document.getElementById('modCost<?= $counter; ?>').value, '<?= $mproduct->get_rental_type(); ?>', document.getElementById('modQty<?= $counter; ?>').value);" class="btn btn-success">Add To Order</button>
+                                                        <button type="button" onclick="cart.addItem(new Product(<?= $mproduct->get_id(); ?>, '<?= $mproduct->get_mod_name(); ?>', '<?= $mproduct->get_mod_short_name(); ?>', document.getElementById('modCost<?= $counter; ?>').value, '<?= $mproduct->get_rental_type(); ?>'), document.getElementById('modQty<?= $counter; ?>').value);" class="btn btn-success gbr-btn">Add To Order</button>
                                                     </td>
                                                 </tr>
 

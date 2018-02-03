@@ -59,7 +59,7 @@
                             <div class="form-row pt-3">
                                 <div class="col">
                                     <select class="form-control" name="rental_resale" id="rental_resale">
-                                        <option selected>Rental or Resale?</option>
+                                        <option selected>Choose One</option>
                                         <option value="Rental">Rental</option>
                                         <option value="Resale">Resale</option>
                                     </select>

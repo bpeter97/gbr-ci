@@ -43,30 +43,18 @@ class Orders extends CI_Controller
             {
                 $this->customer->set_customer_data($customer);
             }
-            else
-            {
-                $this->customer = NULL;
-            }
 
-            $shipping_products = $this->product->get_products(['item_type'=>'pickup', 'item_type'=>'delivery'], NULL, NULL, TRUE);
+            $shipping_products = $this->product->get_products([['item_type ='=>'pickup'],['item_type'=>'delivery']], NULL, NULL, TRUE);
 
-            if( $type == 'rental')
+            if( $type == 'rental' )
             {
-                $container_products = $this->product->get_products(['item_type' => 'container', 'monthly <>' => 0]);
-                $modification_products = $this->product->get_products([
-                                    'item_type <>' => 'container', 
-                                    'item_type <>' => 'pickup', 
-                                    'item_type <>' => 'delivery', 
-                                    'monthly <>' => 0]);
+                $container_products = $this->product->get_products(['item_type =' => 'container', 'rental_type =' => 'Rental']);
+                $modification_products = $this->product->get_products("item_type <> 'container' AND item_type <> 'pickup' AND item_type <> 'delivery' AND rental_type = 'Rental'");
             }
             elseif( $type == 'sales' )
             {
-                $container_products = $this->product->get_products(['item_type' => 'container', 'monthly' => 0]);
-                $modification_products = $this->product->get_products([
-                                    'item_type <>' => 'container', 
-                                    'item_type <>' => 'pickup', 
-                                    'item_type <>' => 'delivery', 
-                                    'monthly' => 0]);
+                $container_products = $this->product->get_products(['item_type' => 'container', 'rental_type =' => 'Nonrental']);
+                $modification_products = $this->product->get_products("item_type <> 'container' AND item_type <> 'pickup' AND item_type <> 'delivery' AND rental_type = 'Nonrental'");
             }
 
             $data = array(

@@ -26,6 +26,8 @@
     <!-- main_view -->
     <?php $this->load->view($main_view); ?>
 
+    <div class="mt-5"></div>
+
     <!-- copyright -->
     <?php $this->load->view('footer/copyright'); ?>
 

@@ -150,7 +150,7 @@ class Customer extends CI_Model
     }
 
     // $where must be an array.
-    public function get_customers($where, $limit, $start)
+    public function get_customers($where = NULL, $limit = NULL, $start = NULL)
     {
         // If limit is not null then check where
         if( $limit !== NULL )
