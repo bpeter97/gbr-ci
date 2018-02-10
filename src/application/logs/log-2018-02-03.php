@@ -285,3 +285,8 @@ ERROR - 2018-02-03 08:34:19 --> Severity: Notice --> Undefined variable: id C:\x
 ERROR - 2018-02-03 08:34:19 --> Severity: error --> Exception: The variable passed in is not an object or an array. C:\xampp\htdocs\app\gbr_ci\src\application\models\User.php 97
 ERROR - 2018-02-03 08:34:23 --> Severity: Notice --> Undefined variable: id C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Products.php 37
 ERROR - 2018-02-03 08:34:23 --> Severity: error --> Exception: The variable passed in is not an object or an array. C:\xampp\htdocs\app\gbr_ci\src\application\models\User.php 97
+ERROR - 2018-02-03 08:38:44 --> Severity: error --> Exception: There was no quotes returned. C:\xampp\htdocs\app\gbr_ci\src\application\models\Quote.php 204
+ERROR - 2018-02-03 08:38:48 --> Severity: Notice --> Undefined property: Orders::$orders C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 22
+ERROR - 2018-02-03 08:38:48 --> Severity: error --> Exception: Call to a member function count_orders() on null C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 22
+ERROR - 2018-02-03 08:38:53 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\app\gbr_ci\src\application\models\Product.php 180
+ERROR - 2018-02-03 08:38:53 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\app\gbr_ci\src\application\models\Product.php 180

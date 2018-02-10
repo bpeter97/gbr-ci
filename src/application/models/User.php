@@ -274,7 +274,8 @@ class User extends CI_Model
      */
     public function check_user_type($id, $type)
     {
-        $this->set_user_data($id);
+        $this->set_user_data((int)$id);
+
         if($this->get_type() == $type)
         {
             return TRUE;

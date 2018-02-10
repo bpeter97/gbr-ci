@@ -130,6 +130,7 @@ class Product extends CI_Model
             // If where is not null do limit with where
             if( $where !== NULL )
             {
+                
                 if( $or == TRUE )
                 {
                     // WHERE something OR something OR something
@@ -161,7 +162,7 @@ class Product extends CI_Model
             // else do limit with no where
             else
             {
-                $product_array = $this->db->get_where('modifications', $limit, $start)->result_array();
+                $product_array = $this->db->get_where('modifications', $where, $limit, $start)->result_array();
             }
         }
         // else if where is not null do where

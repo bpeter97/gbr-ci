@@ -116,7 +116,7 @@
                     <div class="dropdown-menu" aria-labelledby="ordersDropdownMenu">
                         <a class="dropdown-item" href="<?= $orders_array['create_sales']; ?>">Create Sale Orders</a>
                         <a class="dropdown-item" href="<?= $orders_array['create_rental']; ?>">Create Rental Orders</a>
-                        <a class="dropdown-item" href="<?= $orders_array['index']; ?>">View All Orderss</a>
+                        <a class="dropdown-item" href="<?= $orders_array['index']; ?>">View All Orders</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

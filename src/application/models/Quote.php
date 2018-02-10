@@ -68,7 +68,7 @@ class Quote extends CI_Model
 
         if( $id !== NULL )
         {
-            $this->set_quote_data($id);
+            $this->set_quote_data((int)$id);
         }
     }
 
@@ -76,11 +76,11 @@ class Quote extends CI_Model
     {
         if( $id !== NULL )
         {
-            return $this->db->get_where('quotes', ['id'=>$id])->result();
+            return $this->db->get_where('quotes', ['id'=>$id])->row();
         }
         else
         {
-            return $this->db->get_where('quotes', ['id'=>$this->get_id()])->result();
+            return $this->db->get_where('quotes', ['id'=>$this->get_id()])->row();
         }
     }
 
@@ -97,12 +97,12 @@ class Quote extends CI_Model
 
         if( is_array($data) )
         {
-            $this->set_id($data['id'])
-                 ->set_customer($data['quote_customer'])
-                 ->set_customer_id($data['quote_customer_id'])
-                 ->set_type($data['quote_type'])
-                 ->set_date($data['quote_date'])
-                 ->set_status($data['quote_status'])
+            $this->set_id((int)$data['id'])
+                 ->set_customer($data['customer'])
+                 ->set_customer_id($data['customer_id'])
+                 ->set_type($data['type'])
+                 ->set_date($data['date'])
+                 ->set_status($data['status'])
                  ->set_job_name($data['job_name'])
                  ->set_job_address($data['job_address'])
                  ->set_job_city($data['job_city'])
@@ -119,11 +119,11 @@ class Quote extends CI_Model
         elseif( is_object($data) )
         {
             $this->set_id($data->id)
-                 ->set_customer($data->quote_customer)
-                 ->set_customer_id($data->quote_customer_id)
-                 ->set_type($data->quote_type)
-                 ->set_date($data->quote_date)
-                 ->set_status($data->quote_status)
+                 ->set_customer($data->customer)
+                 ->set_customer_id($data->customer_id)
+                 ->set_type($data->type)
+                 ->set_date($data->date)
+                 ->set_status($data->status)
                  ->set_job_name($data->job_name)
                  ->set_job_address($data->job_address)
                  ->set_job_city($data->job_city)
@@ -165,16 +165,7 @@ class Quote extends CI_Model
         // If limit is not null then check where
         if( $limit !== NULL )
         {
-            // If where is not null do limit with where
-            if( $where !== NULL )
-            {
-                $quote_array = $this->db->get_where('quotes', $where, $limit, $start)->result_array();
-            }
-            // else do limit with no where
-            else
-            {
-                $quote_array = $this->db->get_where('quotes', $limit, $start)->result_array();
-            }
+            $quote_array = $this->db->get_where('quotes', $where, $limit, $start)->result_array();
         }
         // else if where is not null do where
         elseif( $where !== NULL )    
@@ -193,7 +184,7 @@ class Quote extends CI_Model
 
             foreach($quote_array as $q)
             {
-                $quote = new Quote($q['id']);
+                $quote = new Quote((int)$q['id']);
                 array_push($quotes, $quote);
             }
 
@@ -212,7 +203,7 @@ class Quote extends CI_Model
 
         foreach($quoted_products as $prod)
         {
-            $product = new Product($prod['id']);
+            $product = new Product((int)$prod['product_id']);
             $product->set_product_cost($prod['product_cost'])->set_product_quantity($prod['product_qty'])->set_product_type($prod['product_type']);
 
             array_push($this->products, $product);

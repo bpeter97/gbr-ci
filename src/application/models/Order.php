@@ -92,7 +92,7 @@ class Order extends CI_Model
 
         if( $id !== NULL )
         {
-            $this->set_order_data($id);
+            $this->set_order_data((int)$id);
         }
     }
 
@@ -100,17 +100,17 @@ class Order extends CI_Model
     {
         if( $id !== NULL )
         {
-            return $this->db->get_where('orders', ['id'=>$id])->result();
+            return $this->db->get_where('orders', ['id'=>$id])->row();
         }
         else
         {
-            return $this->db->get_where('orders', ['id'=>$this->get_id()])->result();
+            return $this->db->get_where('orders', ['id'=>$this->get_id()])->row();
         }
     }
 
     public function set_order_data($mixed = NULL)
     {
-        if( ! is_int($mixed) )
+        if( is_int($mixed) )
         {
             $data = $this->get_order_data($mixed);
         }
@@ -122,7 +122,7 @@ class Order extends CI_Model
         if( is_array($data) )
         {
             // Set data using an array.
-            $this->set_id($data['id'])
+            $this->set_id((int)$data['id'])
                  ->set_quote_id($data['quote_id'])
                  ->set_customer($data['customer'])
                  ->set_customer_id($data['customer_id'])
@@ -153,7 +153,7 @@ class Order extends CI_Model
         elseif( is_object($data) )
         {
             // set data using an object.
-            $this->set_id($data->id)
+            $this->set_id((int)$data->id)
                  ->set_quote_id($data->quote_id)
                  ->set_customer($data->customer)
                  ->set_customer_id($data->customer_id)
@@ -204,16 +204,7 @@ class Order extends CI_Model
         // If limit is not null then check where
         if( $limit !== NULL )
         {
-            // If where is not null do limit with where
-            if( $where !== NULL )
-            {
-                $order_array = $this->db->get_where('orders', $where, $limit, $start)->result_array();
-            }
-            // else do limit with no where
-            else
-            {
-                $order_array = $this->db->get_where('orders', $limit, $start)->result_array();
-            }
+            $order_array = $this->db->get_where('orders', $where, $limit, $start)->result_array();
         }
         // else if where is not null do where
         elseif( $where !== NULL )    
@@ -232,7 +223,7 @@ class Order extends CI_Model
 
             foreach($order_array as $o)
             {
-                $order = new Order($o['id']);
+                $order = new Order((int)$o['id']);
                 array_push($orders, $order);
             }
 
@@ -250,7 +241,7 @@ class Order extends CI_Model
 
         foreach($ordered_products as $prod)
         {
-            $product = new Product($prod['id']);
+            $product = new Product((int)$prod['product_id']);
             $product->set_product_cost($prod['product_cost'])->set_product_quantity($prod['product_qty'])->set_product_type($prod['product_type']);
 
             array_push($this->products, $product);
