@@ -34,7 +34,7 @@ class Event extends CI_Model
         
         if( $id !== NULL )
         {
-            $this->set_event_data($id);
+            $this->set_event_data((int)$id);
             if( $this->get_order_id() !== NULL )
             {
                 $this->get_event_order_info();
@@ -48,12 +48,12 @@ class Event extends CI_Model
         if( $id !== NULL )
         {
             // Return user info based on supplied ID.
-            return $this->db->get_where('events', ['id' => $id])->result();
+            return $this->db->get_where('events', ['id' => $id])->row();
         }
         else
         {
             // Return user info based on user model ID.
-            return $this->db->get_where('events', ['id' => $this->get_id()])->result();
+            return $this->db->get_where('events', ['id' => $this->get_id()])->row();
         }
     }
 
@@ -75,7 +75,7 @@ class Event extends CI_Model
     {
         if( $this->get_order_id() !== NULL )
         {
-            $this->set_order(new Order($this->get_order_id()));
+            $this->set_order(new Order((int)$this->get_order_id()));
         }
     }
 
@@ -96,8 +96,8 @@ class Event extends CI_Model
             $this->set_id($event['id'])
                  ->set_title($event['title'])
                  ->set_color($event['color'])
-                 ->set_start($event['datetime'])
-                 ->set_end($event['datetime'])
+                 ->set_start($event['start'])
+                 ->set_end($event['end'])
                  ->set_order_id($event['order_id'])
                  ->get_event_order_info();
         } 
@@ -106,8 +106,8 @@ class Event extends CI_Model
             $this->set_id($event->id)
                 ->set_title($event->title)
                 ->set_color($event->color)
-                ->set_start($event->datetime)
-                ->set_end($event->datetime)
+                ->set_start($event->start)
+                ->set_end($event->end)
                 ->set_order_id($event->order_id)
                 ->get_event_order_info();
         }

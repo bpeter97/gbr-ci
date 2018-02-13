@@ -14,7 +14,8 @@
     <!-- CSS -->
     <link type="text/css" href="<?= base_url() . 'assets/css/bootstrap.css'; ?>" rel="stylesheet">
     <link type="text/css" href="<?= base_url() . 'assets/css/style.css'; ?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url() . 'assets/css/font-awesome.min.css'; ?>" />
+    <link type="text/css" href="<?= base_url() . 'assets/css/font-awesome.min.css'; ?>" rel="stylesheet">
+    <link type="text/css" href="<?= base_url() . 'assets/css/fullcalendar.css'; ?>" rel="stylesheet">
 
 </head>
 
@@ -35,6 +36,34 @@
     <script src="<?= base_url() . 'assets/js/jquery.min.js'; ?>"></script>
     <script src="<?= base_url() . 'assets/js/popper.min.js'; ?>"></script>
     <script src="<?= base_url() . 'assets/js/bootstrap.min.js'; ?>"></script>
+    <script src="<?= base_url() . 'assets/js/moment.min.js'; ?>"></script>
+    <script src="<?= base_url() . 'assets/js/fullcalendar.js'; ?>"></script>
+
+    <!-- Load the bottom JS for the page. -->
+    <?php 
+        if($externaljs)
+        {
+            foreach($externaljs as $js)
+            {
+                echo '<script src="' . $js . '" type="text/javascript"></script>';
+            }
+        }
+    ?>
+
+    <br/>
+
+    <?php
+        if($botjs)
+        {
+            foreach($botjs as $js)
+            {
+                $this->load->view($js);
+            }
+        }
+
+    ?>
+
+    <br/>
 
     <!-- Date Picker / Time Picker -->
     <script src="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.8.0/dist/combined/js/gijgo.min.js" type="text/javascript"></script>
@@ -49,6 +78,12 @@
         $('#time').timepicker({
             showOtherMonths: true
         });
+    </script>
+
+    <script>
+    $('#calendar2').fullCalendar({
+        weekends: false // will hide Saturdays and Sundays
+    });
     </script>
 
 </body>

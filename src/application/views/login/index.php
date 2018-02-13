@@ -56,11 +56,11 @@
                         <?php endif; ?>
                         <?= form_open('home/login'); ?>
                         <div class="input-group pb-3">
-                            <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-lock px-3 align-middle mt-2" aria-hidden="true"></i></span>
                             <input id="username" type="username" class="form-control" name="username" placeholder="username">
                         </div>
                         <div class="input-group pb-3">
-                            <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i class="fa fa-lock px-3 align-middle mt-2" aria-hidden="true"></i></span>
                             <input id="password" type="password" class="form-control" name="password" placeholder="password">
                         </div>
                         <div class="form-group">

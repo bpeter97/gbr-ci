@@ -27,6 +27,35 @@ class Home extends CI_Controller
         }
         else
         {
+            $data['events'] = $this->calendar->get_events();
+            
+            $data['months'] = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+			// TODO: Need to come up with a better way to create this array.
+			$data['con_list'] = [
+			            "10' Containers",
+			            "20' Containers",
+			            "20' Combos",
+			            "20' Full Offices",
+			            "20' Double Door",
+			            "20' Containers w/ Shelves",
+			            "20' High Cube",
+			            "22' DD/HC",
+			            "22' High Cube",
+			            "24' Containers",
+			            "24' High Cube",
+			            "40' Containers",
+			            "40' Combos",
+			            "40' Double Doors",
+			            "40' Full Offices",
+			            "40' High Cubes"
+                        ];
+            $data['externaljs'] = ['https://maps.googleapis.com/maps/api/js?key=AIzaSyDmAJNXfLD_-32yOSheQ-xo4gySGStag9U&v=3.exp&libraries=places'];
+            $data['botjs'] = ['home/map_js', 'home/calendar_js'];
+            // echo '<pre>';
+            // var_dump($data['events']);
+            // echo '</pre>';
+
             // Load the main view.
             $data['main_view'] = 'home/index';
             $this->load->view('layout/main', $data);

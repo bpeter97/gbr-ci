@@ -237,7 +237,7 @@ class Order extends CI_Model
 
     public function get_order_products()
     {
-        $ordered_products = $this->db->get_where('product_orders', ['order_id'=>$this->get_id()])->result_array();
+        $ordered_products = $this->db->get_where('product_orders', ['order_id'=>(int)$this->get_id()])->result_array();
 
         foreach($ordered_products as $prod)
         {
