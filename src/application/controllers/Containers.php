@@ -101,7 +101,11 @@ class Containers extends CI_Controller
 
     public function create()
     {
-        // TODO: create validation for the form.
+        // validation for the form.
+        $this->form_validation->set_rules('container_number', 'Number', 'required');
+        $this->form_validation->set_rules('container_serial_number', 'Serial Number', 'required');
+        $this->form_validation->set_rules('container_size', 'Size', 'required');
+        $this->form_validation->set_rules('rental_resale', 'Rental Type', 'required');
 
         if( ! $this->form_validation->run() )
         {
@@ -112,39 +116,34 @@ class Containers extends CI_Controller
         {
             $this->container->set_address('6988 Ave 304, Visalia, CA 93291');
             $this->container->get_lat_lon($this->container->get_address());
-            $this->container->set_size($this->input->post('frmcontainersize'));
+            $this->container->set_size($this->input->post('container_size'));
             $this->container->find_size_and_short_name();
 
-            $data = array(
-                'rental_resale'     => $this->input->post('frmrental_resale'),
-                'size'              => $this->container->get_size(),
-                'release_number'    => $this->input->post('frmcontainer_release'),
-                'shelves'           => $this->container->check_boxes($this->input->post('container_shelves')),
-                'paint'             => $this->container->check_boxes($this->input->post('container_painted')),
-                'onbox_numbers'     => $this->container->check_boxes($this->input->post('container_gbrnumbers')),
-                'signs'             => $this->container->check_boxes($this->input->post('container_signs')),
-                'serial_number'     => $this->input->post('frmcontainer_serial'),
-                'number'            => $this->input->post('frmcontainer_number'),
-                'is_rented'         => FALSE,
-                'address'           => $this->container->get_address(),
-                'latitude'          => $this->container->get_lat(),
-                'longitutde'        => $this->container->get_lon(),
-                'size_code'         => $this->container->get_size_code(),
-                'short_name'        => $this->container->get_short_name(),
-            );
+            $this->container->set_rental_resale($this->input->post('rental_resale'))
+                            ->set_release_number($this->input->post('release_number'))
+                            ->set_shelves($this->container->check_boxes($this->input->post('container_shelves')))
+                            ->set_paint($this->container->check_boxes($this->input->post('container_painted')))
+                            ->set_onbox_numbers($this->container->check_boxes($this->input->post('container_onbox_numbers')))
+                            ->set_signs($this->container->check_boxes($this->input->post('container_signs')))
+                            ->set_serial_number($this->input->post('container_serial_number'))
+                            ->set_number($this->input->post('container_number'))
+                            ->set_is_rented(FALSE);
 
-            if( $new_id = $this->container->set_container_data($data)->create() )
-            {
-                $this->session->set_flashdata('success_msg', 'The container was successfully created.');
-                redirect('containers/view/'. $new_id);
-            }
-            else
-            {
-                $this->session->set_flashdata('error_msg', 'There was an error creating the new container, the error was logged.');
-                redirect('containers/index');
-            }
-            
-			
+            $new_id = $this->container->create();
+
+            echo $new_id;
+
+            // if( $new_id = $this->container->create() )
+            // {
+            //     $this->session->set_flashdata('success_msg', 'The container was successfully created.');
+            //     redirect('containers/view/'. $new_id);
+            // }
+            // else
+            // {
+            //     $this->session->set_flashdata('error_msg', 'There was an error creating the new container, the error was logged.');
+            //     redirect('containers/index');
+            // }
+
         }
     }
     

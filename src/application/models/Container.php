@@ -201,6 +201,7 @@ class Container extends CI_Model
 
     public function create()
     {
+        
         if( $this->db->insert('containers', array(
                     'release_number' => $this->get_release_number(), 
                     'size'           => $this->get_size(),
@@ -378,13 +379,14 @@ class Container extends CI_Model
 
     public function find_size_and_short_name()
     {
-        
-        if( $res = $this->db->distinct()->select('size, size_code, container_short_name')->from('containers')->get()->result_array() )
+        if( $res = $this->db->select('size, size_code, short_name')->from('containers')->distinct()->get()->result_array() )
         {       
-            foreach ($res as $r){
-                if($this->get_size() == $r['container_size']){
+            foreach ($res as $r) 
+            {
+                if($this->get_size() == $r['size']) 
+                {
                     $this->set_size_code($r['size_code']);
-                    $this->set_short_name($r['container_short_name']);
+                    $this->set_short_name($r['short_name']);
                 }
             }
         }
