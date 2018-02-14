@@ -133,3 +133,6 @@ ERROR - 2018-02-14 16:17:36 --> Query error: Column 'flag_reason' cannot be null
 ERROR - 2018-02-14 16:18:51 --> Query error: Column 'flag_reason' cannot be null - Invalid query: INSERT INTO `containers` (`release_number`, `size`, `serial_number`, `number`, `shelves`, `paint`, `onbox_numbers`, `signs`, `rental_resale`, `is_rented`, `address`, `latitude`, `longitude`, `type`, `flag`, `flag_reason`, `size_code`, `short_name`) VALUES ('', '20', '1234567', '66-6666', 'No', 'No', 'No', 'No', 'Rental', 'FALSE', '6988 Ave 304, Visalia, CA 93291', NULL, NULL, 'container', 'No', NULL, 2, '20CONRENT')
 ERROR - 2018-02-14 16:38:45 --> Severity: Notice --> Undefined index: error_msg C:\xampp\htdocs\app\gbr_ci\src\application\views\containers\index.php 2
 ERROR - 2018-02-14 17:09:33 --> 404 Page Not Found: Users/logout
+ERROR - 2018-02-14 17:14:27 --> 404 Page Not Found: Users/logout
+ERROR - 2018-02-14 17:14:49 --> Severity: Notice --> Undefined variable: id C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Users.php 41
+ERROR - 2018-02-14 17:14:49 --> Severity: error --> Exception: The variable passed in is not an object or an array. C:\xampp\htdocs\app\gbr_ci\src\application\models\User.php 97

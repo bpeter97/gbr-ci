@@ -37,8 +37,11 @@ class Users extends CI_Controller
         }
         else
         {
-            // TODO Check to see what the user types are in the database.
-            if( ! check_perm($id, 'Admin') )
+            if( check_perm((int)$this->session->user_id, 'Admin') || check_perm((int)$this->session->user_id, 'Web Developer') )
+            {
+                return;
+            }
+            else
             {
                 $this->session->set_flashdata('error_msg','You do not have proper access to access this page.');
                 redirect('home/index');
@@ -178,6 +181,12 @@ class Users extends CI_Controller
             }
             
         }
+    }
+
+    public function logout()
+    {
+        $this->user->destroy_user_session();
+        redirect('home/login');
     }
 
 }
