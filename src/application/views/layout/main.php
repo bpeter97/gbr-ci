@@ -17,6 +17,11 @@
     <link type="text/css" href="<?= base_url() . 'assets/css/font-awesome.min.css'; ?>" rel="stylesheet">
     <link type="text/css" href="<?= base_url() . 'assets/css/fullcalendar.css'; ?>" rel="stylesheet">
 
+    <!-- Required for the charts to work -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="<?= base_url() . 'assets/js/modules/data.js'; ?>"></script>
+    <!-- End of chart js requirements. -->
+
 </head>
 
 <body>
@@ -41,7 +46,7 @@
 
     <!-- Load the bottom JS for the page. -->
     <?php 
-        if($externaljs)
+        if(isset($externaljs))
         {
             foreach($externaljs as $js)
             {
@@ -53,11 +58,12 @@
     <br/>
 
     <?php
-        if($botjs)
+        if(isset($botjs))
         {
             foreach($botjs as $js)
             {
                 $this->load->view($js);
+                echo '<br/>';
             }
         }
 

@@ -23,38 +23,38 @@ class Chart extends CI_Model
     {
         parent::__construct();
 
-        // $this->get_all_quotes();
-        // $this->get_all_orders();
+        $this->get_all_quotes();
+        $this->get_all_orders();
         $this->get_rental_containers();
         $this->get_resale_containers();
     }
 
-    // public function get_all_quotes()
-    // {
-    //     for($i = 1; $i != 13; $i++)
-    //     {
-    //         $num = $this->db->get_where('quotes',['MONTH(date)' => $i , 'YEAR(date)'=> date('Y')] )->num_rows();
+    public function get_all_quotes()
+    {
+        for($i = 1; $i != 13; $i++)
+        {
+            $num = $this->db->get_where('quotes',['MONTH(date)' => $i , 'YEAR(date)'=> date('Y')] )->num_rows();
             
-    //         array_push($this->quotes, $num);
-    //     }
-    // }
+            array_push($this->quotes, $num);
+        }
+    }
 
-    // public function get_all_orders()
-    // {
-    //     for($i = 1; $i != 13; $i++)
-    //     {
-    //         $num = $this->db->get_where('orders',['MONTH(date)' => $i, ['YEAR(date)'=> date('Y')]])->num_rows();
+    public function get_all_orders()
+    {
+        for($i = 1; $i != 13; $i++)
+        {
+            $num = $this->db->get_where('orders',['MONTH(date)' => $i, 'YEAR(date)'=> date('Y')] )->num_rows();
             
-    //         array_push($this->orders, $num);
-    //     }
-    // }
+            array_push($this->orders, $num);
+        }
+    }
 
     public function get_rental_containers()
     {
         for($x = 0; $x < 16; $x++)
         {
             // If this does not work, put quotes around FALSE.
-            $num = $this->db->get_where('containers', ['size_code' => $this->con_array[$x], 'rental_resale'=> 'Rental', 'is_rented' => 'FALSE']);
+            $num = $this->db->get_where('containers', ['size_code' => $this->con_array[$x], 'rental_resale'=> 'Rental', 'is_rented' => 'FALSE'])->num_rows();
 
             array_push($this->rentals, $num);
         }
@@ -65,9 +65,9 @@ class Chart extends CI_Model
         for($x = 0; $x < 16; $x++)
         {
             // If this does not work, put quotes around FALSE.
-            $num = $this->db->get_where('containers', ['size_code' => $this->con_array[$x], 'rental_resale'=> 'Resale', 'is_rented' => 'FALSE']);
+            $num = $this->db->get_where('containers', ['size_code' => $this->con_array[$x], 'rental_resale'=> 'Resale', 'is_rented' => 'FALSE'])->num_rows();
 
-            array_push($this->rentals, $num);
+            array_push($this->resales, $num);
         }
     }
 

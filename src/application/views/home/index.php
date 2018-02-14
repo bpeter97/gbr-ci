@@ -1,52 +1,101 @@
 <section id="list">
     <div class="container-fluid">
-        <div class="d-flex flex-row justify-content-center pb-4">
-            <div class="card mr-3">
-                <div class="card-body">
-                    <h5 class="card-title text-center py-2">Container Map</h5>  
-                    <div class="d-flex flex-row justify-content-center">
-                        <div class="container">
-                            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-                            <div id="map" style="width:100%;height:450px;"></div>
+
+        <!-- Medium to large screens -->
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-8 pb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center py-2">Container Map</h5>  
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="container h-100">
+                                <input id="pac-input" class="form-control mt-2 w-25" type="text" placeholder="Search Box">
+                                <div id="map" class="mb-3" style="width:100%;min-height:450px;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card ml-2 w-75">
-                <div class="card-body">
-                    <h5 class="card-title text-center py-2">Calendar</h5>  
-                    <div class="d-flex flex-row justify-content-center">
-                        <div class="container">
-                            <div id="calendar" class="pb-3"></div>
-                        </div>
-                    </div> 
+            <div class="col-sm-12 col-md-4 pb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center py-2">Calendar</h5>  
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="container">
+                                <div id="calendar" class="pb-3"></div>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="d-flex flex-row justify-content-center">
-            <div class="card mr-3 w-75">
-                <div class="card-body">
-                    <h5 class="card-title text-center py-2">Orders / Quotes in 2018</h5>  
-                    <div class="d-flex flex-row justify-content-center">
-                        <div class="table-responsive">
-                            
+            
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-4 pb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center py-2">Orders / Quotes in 2018</h5>  
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="container">
+                                <div id="total_orders" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card ml-2">
-                <div class="card-body">
-                    <h5 class="card-title text-center py-2">Containers In Stock</h5>  
-                    <div class="d-flex flex-row justify-content-center">
-                        <div class="table-responsive">
-                            
-                        </div>
-                    </div> 
+            <div class="col-sm-12 col-md-8 pb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-center py-2">Containers In Stock</h5>  
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="container">
+                                <div id="stock_container" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+                            </div>
+                        </div> 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<table id="ordertable" style="display:none;">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Quotes</th>
+            <th>Orders</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php for($i=0;$i<12;$i++): ?>
+        <tr>
+            <th><?= $months[$i]; ?></th>
+            <td><?= $quotes[$i]; ?></td>
+            <td><?= $orders[$i]; ?></td>
+        </tr>
+        <?php endfor; ?>
+    </tbody>
+</table>
+
+<table id="datatable" style="display:none;">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Rentals</th>
+            <th>Sales</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php for($i=0;$i<16;$i++): ?>
+        <tr>
+            <th><?= $con_list[$i]; ?></th>
+            <td><?= $rentals[$i]; ?></td>
+            <td><?= $resales[$i]; ?></td>
+        </tr>
+        <?php endfor; ?>
+    </tbody>
+</table>
 
 <!-- Modals -->
 <?php $this->load->view('home/modals'); ?>

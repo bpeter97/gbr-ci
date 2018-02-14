@@ -80,3 +80,147 @@ WHERE `container_address` != ''
 ERROR - 2018-02-13 19:28:06 --> Severity: error --> Exception: Call to a member function result_array() on boolean C:\xampp\htdocs\app\gbr_ci\src\application\helpers\create_map_xml_helper.php 17
 ERROR - 2018-02-13 19:53:29 --> Severity: Warning --> fopen(http://gbrci.dev/assets/xml/test.php): failed to open stream: HTTP wrapper does not support writeable connections C:\xampp\htdocs\app\gbr_ci\src\application\helpers\create_map_xml_helper.php 41
 ERROR - 2018-02-13 19:54:54 --> Severity: Warning --> file_put_contents(http://gbrci.dev/assets/xml/test.php): failed to open stream: HTTP wrapper does not support writeable connections C:\xampp\htdocs\app\gbr_ci\src\application\helpers\create_map_xml_helper.php 42
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:51:31 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$rentals C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:53:38 --> Severity: Notice --> Undefined property: Home::$resales C:\xampp\htdocs\app\gbr_ci\src\system\core\Model.php 77
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 1 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 5 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 6 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 7 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 8 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 9 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 10 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 11 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 12 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 13 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 14 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:55:16 --> Severity: 4096 --> Object of class CI_DB_mysqli_result could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 57
+ERROR - 2018-02-13 23:55:16 --> Severity: Notice --> Undefined offset: 15 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 1 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 5 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 6 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 7 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 8 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 9 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 10 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 11 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 12 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 13 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 14 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:57:48 --> Severity: Notice --> Undefined offset: 15 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 1 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 5 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 6 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 7 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 8 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 9 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 10 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 11 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 12 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 13 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 14 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:03 --> Severity: Notice --> Undefined offset: 15 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 1 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 2 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 3 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 4 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 5 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 6 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 7 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 8 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 9 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 10 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 11 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 12 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 13 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 14 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58
+ERROR - 2018-02-13 23:59:32 --> Severity: Notice --> Undefined offset: 15 C:\xampp\htdocs\app\gbr_ci\src\application\views\home\index.php 58

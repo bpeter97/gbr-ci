@@ -50,37 +50,28 @@ class Home extends CI_Controller
 			            "40' Full Offices",
 			            "40' High Cubes"
                         ];
-            $data['externaljs'] = ['https://maps.googleapis.com/maps/api/js?key=AIzaSyDmAJNXfLD_-32yOSheQ-xo4gySGStag9U&v=3.exp&libraries=places'];
-            $data['botjs'] = ['home/map_js', 'home/calendar_js'];
-            // echo '<pre>';
-            // var_dump($data['events']);
-            // echo '</pre>';
+
+            // Get chart data - Containers in stock.
+            $data['rentals'] = $this->chart->get_rentals();
+            $data['resales'] = $this->chart->get_resales();
+
+            // Get chart data - orders/quotes in current year.
+            $data['quotes'] = $this->chart->get_quotes();
+            $data['orders'] = $this->chart->get_orders();
+
+            // bottom js includes specific to home page.
+            $data['externaljs'] = [
+                'https://maps.googleapis.com/maps/api/js?key=AIzaSyDmAJNXfLD_-32yOSheQ-xo4gySGStag9U&v=3.exp&libraries=places'
+            ];
+
+            // JS includes (these are php pages that have JS written inside of it, loaded as views).
+            $data['botjs'] = ['home/map_js', 'home/calendar_js', 'home/charts_js'];
 
             // Load the main view.
             $data['main_view'] = 'home/index';
             $this->load->view('layout/main', $data);
         }
     }
-
-    public function create()
-    {
-        $data = array(
-            'id'            =>   NULL,
-            'username'      =>  'blpeter',
-            'password'      =>  'password',
-            'first_name'    =>  'Brian',
-            'last_name'     =>  'Peter',
-            'phone'         =>  '555-555-5555',
-            'title'         =>  'Web Developer',
-            'type'          =>  'Admin'
-        );
-
-        $this->user->set_user_data($data);
-        $this->user->create();
-
-        redirect('home/index');
-    }
-
 
     /**
      * login function
