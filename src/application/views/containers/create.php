@@ -69,8 +69,8 @@
                         </div>
                     </div>
                     <div class="modal-footer mt-3">
-                        <button type="submit" class="btn btn-default form-button">Create</button>
-                        <button type="button" onclick="history.go(-1);" class="btn btn-default form-button">Cancel</button>
+                        <button type="submit" class="btn btn-success gbr-btn">Create</button>
+                        <button type="button" onclick="history.go(-1);" class="btn btn-success gbr-btn">Cancel</button>
                     </div>
                     <?= form_close(); ?>
                 </div>

@@ -3,20 +3,20 @@
 
         <!-- Medium to large screens -->
         <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-8 pb-4">
+            <div class="col-sm-12 col-md-8 pb-4 pr-0">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title text-center py-2">Container Map</h5>  
                         <div class="d-flex flex-row justify-content-center">
-                            <div class="container h-100">
+                            <div class="container-fluid">
                                 <input id="pac-input" class="form-control mt-2 w-25" type="text" placeholder="Search Box">
-                                <div id="map" class="mb-3" style="width:100%;min-height:450px;"></div>
+                                <div id="map" class="mb-3" style="min-height:450px;"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4 pb-4">
+            <div class="col-sm-12 col-md-4 pb-4 pl-0">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title text-center py-2">Calendar</h5>  
@@ -37,14 +37,14 @@
                         <h5 class="card-title text-center py-2">Orders / Quotes in 2018</h5>  
                         <div class="d-flex flex-row justify-content-center">
                             <div class="container">
-                                <div id="total_orders" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+                                <div id="total_orders" style="min-width: 300px; height: 300px; margin: 0 auto"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12 col-md-8 pb-4">
-                <div class="card">
+                <div class="card" style="width:99%;">
                     <div class="card-body">
                         <h5 class="card-title text-center py-2">Containers In Stock</h5>  
                         <div class="d-flex flex-row justify-content-center">

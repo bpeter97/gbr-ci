@@ -55,9 +55,8 @@
                 echo '<script src="' . $js . '" type="text/javascript"></script>';
             }
         }
-    ?>
 
-    <br/>
+    ?>
 
     <?php
         if(isset($botjs))
@@ -65,13 +64,10 @@
             foreach($botjs as $js)
             {
                 $this->load->view($js);
-                echo '<br/>';
             }
         }
 
     ?>
-
-    <br/>
 
     <!-- Date Picker / Time Picker -->
     <script src="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.8.0/dist/combined/js/gijgo.min.js" type="text/javascript"></script>
