@@ -115,35 +115,32 @@ class Containers extends CI_Controller
         else
         {
             $this->container->set_address('6988 Ave 304, Visalia, CA 93291');
-            $this->container->get_lat_lon($this->container->get_address());
+            $this->container->set_latitude('36.3419904');
+            $this->container->set_longitude('-119.4177963');
             $this->container->set_size($this->input->post('container_size'));
             $this->container->find_size_and_short_name();
+            $this->container->set_rental_resale($this->input->post('rental_resale'));
+            $this->container->set_release_number($this->input->post('release_number'));
+            $this->container->set_shelves($this->container->check_boxes($this->input->post('container_shelves')));
+            $this->container->set_paint($this->container->check_boxes($this->input->post('container_painted')));
+            $this->container->set_onbox_numbers($this->container->check_boxes($this->input->post('container_onbox_numbers')));
+            $this->container->set_signs($this->container->check_boxes($this->input->post('container_signs')));
+            $this->container->set_serial_number($this->input->post('container_serial_number'));
+            $this->container->set_number($this->input->post('container_number'));
+            $this->container->set_is_rented('FALSE');
+            $this->container->set_type('container');
+            $this->container->set_flag('No');
 
-            $this->container->set_rental_resale($this->input->post('rental_resale'))
-                            ->set_release_number($this->input->post('release_number'))
-                            ->set_shelves($this->container->check_boxes($this->input->post('container_shelves')))
-                            ->set_paint($this->container->check_boxes($this->input->post('container_painted')))
-                            ->set_onbox_numbers($this->container->check_boxes($this->input->post('container_onbox_numbers')))
-                            ->set_signs($this->container->check_boxes($this->input->post('container_signs')))
-                            ->set_serial_number($this->input->post('container_serial_number'))
-                            ->set_number($this->input->post('container_number'))
-                            ->set_is_rented(FALSE);
+            if( $new_id = $this->container->create() )
+            {
+                $_SESSION['success_msg'] = 'The container was successfully created.';
+            }
+            else
+            {
+                $_SESSION['error_msg'] = 'There was an error creating the new container, the error was logged.';
+            }
 
-            $new_id = $this->container->create();
-
-            echo $new_id;
-
-            // if( $new_id = $this->container->create() )
-            // {
-            //     $this->session->set_flashdata('success_msg', 'The container was successfully created.');
-            //     redirect('containers/view/'. $new_id);
-            // }
-            // else
-            // {
-            //     $this->session->set_flashdata('error_msg', 'There was an error creating the new container, the error was logged.');
-            //     redirect('containers/index');
-            // }
-
+            redirect('containers/index');
         }
     }
     

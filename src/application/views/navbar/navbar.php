@@ -65,7 +65,7 @@
 
 ?>
 
-    <nav class="navbar navbar-expand-lg navbar-light mb-3 fixed-top">
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light mb-3 fixed-top">
         <a class="navbar-brand" href="#">
             <img class="gbr_logo_image d-none d-md-block" height="25" src="<?= base_url().'assets/img/logo.png'; ?>">
             <img class="small_gbr_logo_image d-block d-md-none" height="25" src="<?= base_url().'assets/img/logosmall.png'; ?>">

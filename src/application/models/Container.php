@@ -201,7 +201,34 @@ class Container extends CI_Model
 
     public function create()
     {
-        
+        echo 'Made it to container create(). <br/>';
+
+        // $data = array(
+        //     'release_number' => $this->get_release_number(), 
+        //     'size'           => $this->get_size(),
+        //     'serial_number'  => $this->get_serial_number(),
+        //     'number'         => $this->get_number(),
+        //     'shelves'        => $this->get_shelves(),
+        //     'paint'          => $this->get_paint(),
+        //     'onbox_numbers'  => $this->get_onbox_numbers(),
+        //     'signs'          => $this->get_signs(),
+        //     'rental_resale'  => $this->get_rental_resale(),
+        //     'is_rented'      => $this->get_is_rented(),
+        //     'address'        => $this->get_address(),
+        //     'latitude'       => $this->get_latitude(),
+        //     'longitude'      => $this->get_longitude(),
+        //     'type'           => $this->get_type(),
+        //     'flag'           => $this->get_flag(),
+        //     'flag_reason'    => $this->get_flag_reason(),
+        //     'size_code'      => (int)$this->get_size_code(),
+        //     'short_name'     => $this->get_short_name()
+        // );
+
+        // $sql = $this->db->set($data)->get_compiled_insert('containers');
+
+        // echo $sql;
+
+
         if( $this->db->insert('containers', array(
                     'release_number' => $this->get_release_number(), 
                     'size'           => $this->get_size(),
@@ -313,10 +340,6 @@ class Container extends CI_Model
         {
             $container_array = $this->db->get('containers')->result_array();
         }
-
-        // echo '<pre>';
-        // var_dump($container_array);
-        // echo '</pre>';
 
         if($container_array)
         {

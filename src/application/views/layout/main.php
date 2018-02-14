@@ -29,6 +29,8 @@
     <!-- navbar -->
     <?php $this->load->view('navbar/navbar'); ?>
 
+    <div id="layout-spacer"></div>
+
     <!-- main_view -->
     <?php $this->load->view($main_view); ?>
 
