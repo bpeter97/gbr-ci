@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url', 'form', 'check_perm', 'html', 'create_map_xml');
+$autoload['helper'] = array('url', 'form', 'check_perm', 'html', 'create_map_xml', 'date_difference');
 
 /*
 | -------------------------------------------------------------------

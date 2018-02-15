@@ -149,21 +149,28 @@ class Containers extends CI_Controller
     // previously called id($id)
     public function view($id)
     {
-        $this->container->set_container_data($id);
-
-        // TODO: create validation for the form.
+        // validation for the form.
+        $this->form_validation->set_rules('container_number', 'Number', 'required');
+        $this->form_validation->set_rules('container_serial_number', 'Serial Number', 'required');
+        $this->form_validation->set_rules('container_size', 'Size', 'required');
+        $this->form_validation->set_rules('rental_resale', 'Rental Type', 'required');
 
         if( ! $this->form_validation->run() )
         {
-            $data['container'] = $this->container;
+            $data['container'] = $this->container->set_container_data((int)$id);
             $data['container_sizes'] = $this->container->get_sizes();
             $data['order_history'] = $this->container->get_order_history();
+
+            if( $this->container->get_flag() == 'Yes') {
+                $data['botjs'] = ['containers/alert_js'];
+            }
 
             $data['main_view'] = 'containers/view';
             $this->load->view('layout/main', $data);
         }
         else
         {
+            $this->container->set_container_data((int)$id);
             $this->container->get_lat_lon($this->input->post('container_address'));
             $this->container->set_size($this->input->post('container_size'));
             $this->container->find_size_and_short_name($this->container->get_size());
@@ -173,19 +180,19 @@ class Containers extends CI_Controller
                 'release_number'            => $this->input->post('release_number'),
                 'size'                      => $this->container->get_size(),
                 'serial_number'             => $this->input->post('container_serial_number'),
-                'container_number'          => $this->input->post('container_number'),
+                'number'                    => $this->input->post('container_number'),
                 'rental_resale'             => $this->input->post('rental_resale'),
                 'is_rented'                 => $this->input->post('is_rented'),
-                'container_address'         => $this->input->post('container_address'),
+                'address'                   => $this->input->post('address'),
                 'type'                      => $this->input->post('container'),
                 'flag'                      => $this->input->post('flag'),
                 'flag_reason'               => $this->input->post('flag_reason'),
-                'container_shelves'         => $this->input->post('container_shelves'),
-                'container_paint'           => $this->input->post('container_paint'),
-                'container_onbox_numbers'   => $this->input->post('container_onbox_numbers'),
-                'container_signs'           => $this->input->post('container_signs'),
-                'latitude'                  => $this->container->get_lat(),
-                'longitude'                 => $this->container->get_lon(),
+                'shelves'                   => $this->container->check_boxes($this->input->post('container_shelves')),
+                'paint'                     => $this->container->check_boxes($this->input->post('container_painted')),
+                'onbox_numbers'             => $this->container->check_boxes($this->input->post('container_onbox_numbers')),
+                'signs'                     => $this->container->check_boxes($this->input->post('container_signs')),
+                'latitude'                  => $this->container->get_latitude(),
+                'longitude'                 => $this->container->get_longitude(),
                 'id'                        => $this->container->get_id(),
                 'size_code'                 => $this->container->get_size_code(),
                 'short_name'                => $this->container->get_short_name()
@@ -193,7 +200,7 @@ class Containers extends CI_Controller
 
             if( $this->container->set_container_data($data)->update() )
             {
-                $this->session->set_flashdata('success_msg', 'The container has been successfully updated.');
+                $_SESSION['success_msg'] = 'The container has been successfully updated.';
                 
                 $data['container'] = $this->container;
                 $data['container_sizes'] = $this->container->get_sizes();
@@ -204,7 +211,7 @@ class Containers extends CI_Controller
             }
             else
             {
-                $this->session->set_flashdata('error_msg', 'The container has failed to update.');
+                $_SESSION['error_msg'] = 'The container has failed to update.';
                 
                 $data['container'] = $this->container;
                 $data['container_sizes'] = $this->container->get_sizes();
@@ -219,7 +226,7 @@ class Containers extends CI_Controller
     public function delete($id)
     {
         // delete the container.
-        if( $this->container->delete($id) )
+        if( $this->container->delete((int)$id) )
         {
             $this->session->set_flashdata('success_msg', 'The container was successfully deleted.');
         }

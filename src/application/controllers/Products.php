@@ -10,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Products extends CI_Controller 
 {
 
+    // Options for pagination.
     private $pagination_config = array(
         'per_page'      => 49,
         'num_links'     => 1,
@@ -48,7 +49,6 @@ class Products extends CI_Controller
 
     public function index()
     {
-
         $this->pagination_config['base_url'] = '/products/index/';
         $this->pagination_config['total_rows'] = $this->product->count_products();
 

@@ -1,7 +1,5 @@
 <section id="list">
     <div class="container-fluid">
-
-        <!-- Medium to large screens -->
         <div class="row justify-content-center">
             <div class="col-sm-12 col-lg-8 pb-4 lg-pr-0">
                 <div class="card">

@@ -28,3 +28,13 @@ ERROR - 2018-02-15 06:41:01 --> 404 Page Not Found: Assets/js
 ERROR - 2018-02-15 06:41:05 --> 404 Page Not Found: Assets/js
 ERROR - 2018-02-15 06:41:05 --> 404 Page Not Found: Assets/js
 ERROR - 2018-02-15 06:57:15 --> Severity: error --> Exception: There was no users returned. C:\xampp\htdocs\app\gbr_ci\src\application\models\User.php 144
+ERROR - 2018-02-15 16:37:54 --> Severity: error --> Exception: The data passed in was not an array, integer, or object. Therefore the data could not be set. C:\xampp\htdocs\app\gbr_ci\src\application\models\Container.php 149
+ERROR - 2018-02-15 16:56:51 --> Severity: error --> Exception: Call to undefined method Container::get_painted() C:\xampp\htdocs\app\gbr_ci\src\application\views\containers\view.php 39
+ERROR - 2018-02-15 18:29:47 --> Severity: 4096 --> Object of class DateInterval could not be converted to string C:\xampp\htdocs\app\gbr_ci\src\application\views\containers\view.php 151
+ERROR - 2018-02-15 18:40:58 --> Severity: error --> Exception: Call to undefined method Container::get_lat() C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Containers.php 194
+ERROR - 2018-02-15 18:41:15 --> Severity: Notice --> Undefined index: number C:\xampp\htdocs\app\gbr_ci\src\application\models\Container.php 109
+ERROR - 2018-02-15 18:41:15 --> Severity: Notice --> Undefined index: shelves C:\xampp\htdocs\app\gbr_ci\src\application\models\Container.php 110
+ERROR - 2018-02-15 18:41:15 --> Severity: Notice --> Undefined index: paint C:\xampp\htdocs\app\gbr_ci\src\application\models\Container.php 111
+ERROR - 2018-02-15 18:41:15 --> Severity: Notice --> Undefined index: onbox_numbers C:\xampp\htdocs\app\gbr_ci\src\application\models\Container.php 112
+ERROR - 2018-02-15 18:41:15 --> Severity: Notice --> Undefined index: signs C:\xampp\htdocs\app\gbr_ci\src\application\models\Container.php 113
+ERROR - 2018-02-15 18:41:15 --> Severity: Notice --> Undefined index: address C:\xampp\htdocs\app\gbr_ci\src\application\models\Container.php 116

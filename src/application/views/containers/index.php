@@ -46,9 +46,9 @@
                                 <tbody>
                                     <?php foreach($containers as $container): ?>
                                         <?php if($container->get_flag() == "Yes"): ?>
-                                            <tr class="danger">
+                                            <tr class="danger clickable-row" data-href="<?= base_url() . 'containers/view/' . $container->get_id(); ?>">
                                         <?php else: ?>
-                                            <tr>
+                                            <tr class="clickable-row" data-href="<?= base_url() . 'containers/view/' . $container->get_id(); ?>">
                                         <?php endif; ?>
                                             <td><?= $container->get_number(); ?></td>
                                             <td><?= $container->get_serial_number(); ?></td>
