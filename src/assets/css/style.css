@@ -95,6 +95,11 @@ nav {
   box-shadow: 0px 0px 5px #888888; }
   #list .card .card-body {
     padding: 0px; }
+    #list .card .card-body .alert {
+      padding-top: 0.75rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      padding-bottom: 0rem; }
     #list .card .card-body .card-title {
       background-color: darkgreen;
       color: white; }

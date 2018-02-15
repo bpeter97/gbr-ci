@@ -134,13 +134,15 @@ class Containers extends CI_Controller
             if( $new_id = $this->container->create() )
             {
                 $_SESSION['success_msg'] = 'The container was successfully created.';
+                // TODO: Redirect to the container view after the page is created.
+                redirect('containers/index');
             }
             else
             {
                 $_SESSION['error_msg'] = 'There was an error creating the new container, the error was logged.';
+                redirect('containers/index');
             }
-
-            redirect('containers/index');
+            
         }
     }
     

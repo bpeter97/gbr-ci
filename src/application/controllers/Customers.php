@@ -46,12 +46,12 @@ class Customers extends CI_Controller
     public function create()
     {
         // Form validation for the create customer form.
-        $this->form_validation->set_rules('name', 'Name', 'required|greater_than[2]');
-        $this->form_validation->set_rules('address1', 'Address', 'required|greater_than[2]');
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('address1', 'Address', 'required');
         $this->form_validation->set_rules('address2', 'Address2', 'differs[address1]');
-        $this->form_validation->set_rules('city', 'City', 'required|greater_than[2]');
+        $this->form_validation->set_rules('city', 'City', 'required');
         $this->form_validation->set_rules('zipcode', 'Zipcode', 'required|numeric');
-        $this->form_validation->set_rules('state', 'State', 'required|greater_than[1]|');
+        $this->form_validation->set_rules('state', 'State', 'required');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
         $this->form_validation->set_rules('email', 'Email', 'valid_email');
 
@@ -64,33 +64,35 @@ class Customers extends CI_Controller
         }
         else
         {
-            // Post the form data to an array.
-            $data = array(
-                'name'      =>  $this->input->post('name'),
-                'address1'  =>  $this->input->post('address1'),
-                'address2'  =>  $this->input->post('address2'),
-                'city'      =>  $this->input->post('city'),
-                'zipcode'   =>  $this->input->post('zipcode'),
-                'state'     =>  $this->input->post('state'),
-                'phone'     =>  $this->input->post('phone'),
-                'ext'       =>  $this->input->post('ext'),
-                'fax'       =>  $this->input->post('fax'),
-                'email'     =>  $this->input->post('email'),
-                'rdp'       =>  $this->input->post('rdp'),
-                'notes'     =>  $this->input->post('notes')
-            );
+            // Set the data in the customer object.
+            $this->customer->set_name($this->input->post('name'))
+                           ->set_address1($this->input->post('address1'))
+                           ->set_address2($this->input->post('address2'))
+                           ->set_city($this->input->post('city'))
+                           ->set_zipcode($this->input->post('zipcode'))
+                           ->set_state($this->input->post('state'))
+                           ->set_phone($this->input->post('phone'))
+                           ->set_ext($this->input->post('ext'))
+                           ->set_fax($this->input->post('fax'))
+                           ->set_email($this->input->post('email'))
+                           ->set_rdp($this->input->post('rdp'))
+                           ->set_notes($this->input->post('notes'))
+                           ->set_flag($this->input->post('flag'))
+                           ->set_flag_reason($this->input->post('flag_reason'));
 
             // check if customer was successfully created in database.
-            if( $new_id = $this->customer->set_customer_data($data)->create() )
+            if( $new_id = $this->customer->create() )
             {
                 // send a success message.
-                $this->session->set_flashdata('success_msg', 'The customer was successfully created.');
-                redirect('customers/view/'. $new_id);
+                $_SESSION['success_msg'] = 'The customer was successfully created.';
+
+                // TODO: Set the redirect to the customer view page of the new ID once the view page is made.
+                redirect('customers/index');
             }
             else
             {
                 // else send an error message.
-                $this->session->set_flashdata('error_msg', 'There was an error creating the new customer, the error was logged.');
+                $_SESSION['error_msg'] = 'There was an error creating the new customer, the error was logged.';
                 redirect('customers/index');
             }
         }
@@ -98,6 +100,7 @@ class Customers extends CI_Controller
 
     public function view($id)
     {
+        // Get the customer's data.
         $this->customer->set_customer_data($id);
      
         // Form validation for the customer form.

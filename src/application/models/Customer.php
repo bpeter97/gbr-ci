@@ -220,18 +220,20 @@ class Customer extends CI_Model
     public function create()
     {
         if( $this->db->insert('customers', array(
-                    'name'      => $this->get_name(), 
-                    'address1'  => $this->get_address1(),
-                    'address2'  => $this->get_address2(),
-                    'city'      => $this->get_city(),
-                    'zipcode'   => $this->get_zipcode(),
-                    'state'     => $this->get_state(),
-                    'phone'     => $this->get_phone(),
-                    'ext'       => $this->get_ext(),
-                    'fax'       => $this->get_fax(),
-                    'email'     => $this->get_email(),
-                    'rdp'       => $this->get_rdp(),
-                    'notes'     => $this->get_notes()
+                    'name'          => $this->get_name(), 
+                    'address1'      => $this->get_address1(),
+                    'address2'      => $this->get_address2(),
+                    'city'          => $this->get_city(),
+                    'zipcode'       => $this->get_zipcode(),
+                    'state'         => $this->get_state(),
+                    'phone'         => $this->get_phone(),
+                    'ext'           => $this->get_ext(),
+                    'fax'           => $this->get_fax(),
+                    'email'         => $this->get_email(),
+                    'rdp'           => $this->get_rdp(),
+                    'notes'         => $this->get_notes(),
+                    'flag'          => $this->get_notes(),
+                    'flag_reason'   => $this->get_notes()
         )))
         {
             return $this->db->insert_id();
