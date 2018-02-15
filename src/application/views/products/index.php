@@ -41,7 +41,7 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach($products as $product): ?>
-                                        <tr>
+                                        <tr class="clickable-row" data-href="<?= base_url() . 'products/edit/' . $product->get_id(); ?>">
                                             <td><?= $product->get_mod_name(); ?></td>
                                             <td><?= $product->get_mod_short_name(); ?></td>
                                             <td><?= $product->get_mod_cost(); ?></td>
@@ -63,6 +63,3 @@
         </div>
     </div>
 </section>
-
-
-

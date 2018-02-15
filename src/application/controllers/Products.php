@@ -64,12 +64,19 @@ class Products extends CI_Controller
 
     public function edit($id)
     {
-        //TODO: create some form validation here!
+        // validation rules
+        $this->form_validation->set_rules('mod_name', 'Mod Name', 'required');
+        $this->form_validation->set_rules('mod_short_name', 'Mod Short Name', 'required');
+        $this->form_validation->set_rules('item_type', 'Item Type', 'required');
+        $this->form_validation->set_rules('rental_type', 'Rental Status', 'required');
 
         // If the form fails to validate or doesn't validate, send to edit page.
         if( ! $this->form_validation->run() )
         {
-            $data['product'] = $this->product->set_product_data($id);
+            // Set the product object to pass to the view.
+            $data['product'] = $this->product->set_product_data((int)$id);
+
+            // set the view
             $data['main_view'] = 'products/edit';
             $this->load->view('layout/main', $data);
         }
@@ -88,12 +95,12 @@ class Products extends CI_Controller
 
             if( $this->product->set_product_data($data)->update() )
             {
-                $this->session->set_flashdata('success_msg', 'You successfully edited a the product!');
-                redirect('products/index/');
+                $_SESSION['success_msg'] = 'You successfully edited a the product!';
+                redirect('products/index');
             }
             else
             {
-                $this->session->set_flashdata('error_msg', 'There was an error creating the product, the error has been logged.');
+                $_SESSION['error_msg'] = 'There was an error creating the product, the error has been logged.';
                 redirect('products/index');
             }
         }
@@ -101,14 +108,14 @@ class Products extends CI_Controller
 
     public function delete($id)
     {
-        if( $this->product->set_product_data($id)->delete() )
+        if( $this->product->set_product_data((int)$id)->delete() )
         {
-            $this->session->set_flashdata('success_msg', 'You successfully deleted a the product!');
-            redirect('products/index/');
+            $_SESSION['success_msg'] = 'You successfully deleted a the product!';
+            redirect('products/index');
         }
         else
         {
-            $this->session->set_flashdata('error_msg', 'There was an error deleting the product, the error has been logged.');
+            $_SESSION['error_msg'] = 'There was an error deleting the product, the error has been logged.';
             redirect('products/index');
         }
     }

@@ -16,6 +16,7 @@
     <link type="text/css" href="<?= base_url() . 'assets/css/style.css'; ?>" rel="stylesheet">
     <link type="text/css" href="<?= base_url() . 'assets/css/font-awesome.min.css'; ?>" rel="stylesheet">
     <link type="text/css" href="<?= base_url() . 'assets/css/fullcalendar.css'; ?>" rel="stylesheet">
+    <link type="text/css" href="<?= base_url() . 'assets/css/less-space.css'; ?>" rel="stylesheet">
 
     <!-- Required for the charts to work -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -84,10 +85,19 @@
         });
     </script>
 
+    <!-- Clickable rows on tables. -->
+    <script type="text/javascript">
+        $(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
+
     <script>
-    $('#calendar2').fullCalendar({
-        weekends: false // will hide Saturdays and Sundays
-    });
+        $('#calendar2').fullCalendar({
+            weekends: false // will hide Saturdays and Sundays
+        });
     </script>
 
 </body>
