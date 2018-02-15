@@ -8,10 +8,20 @@
                     <div class="container"> 
                         <div class="form-row pt-3">
                             <div class="col">
+                                <?php if( form_error('container_number') ): ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo form_error('container_number'); ?>
+                                </div>
+                                <?php endif; ?>
                                 <input type="text" name="container_number" class="form-control" placeholder="Type container number">
                                 <small class="form-text text-muted pl-1">This field is the GBR number (##-####).</small>
                             </div>
                             <div class="col">
+                                <?php if( form_error('container_serial_number') ): ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo form_error('container_serial_number'); ?>
+                                </div>
+                                <?php endif; ?>
                                 <input type="text" name="container_serial_number" class="form-control" placeholder="Type container serial number">
                                 <small class="form-text text-muted pl-1">This field is the serial number of the container.</small>
                             </div>
@@ -48,6 +58,11 @@
                         </div>
                         <div class="form-row pt-3">
                             <div class="col">
+                                <?php if( form_error('container_size') ): ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo form_error('container_size'); ?>
+                                </div>
+                                <?php endif; ?>
                                 <input type="text" name="container_size" class="form-control" placeholder="Type container's size.">
                                 <small class="form-text text-muted pl-1">Type the container's size using numbers only. (20 for 20 foot container)</small>
                             </div>
@@ -58,6 +73,11 @@
                         </div>
                         <div class="form-row pt-3">
                             <div class="col">
+                                <?php if( form_error('rental_resale') ): ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo form_error('rental_resale'); ?>
+                                </div>
+                                <?php endif; ?>
                                 <select class="form-control" name="rental_resale" id="rental_resale">
                                     <option selected>Choose One</option>
                                     <option value="Rental">Rental</option>

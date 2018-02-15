@@ -115,7 +115,11 @@ class Products extends CI_Controller
 
     public function create()
     {
-        //TODO: create some form validation here!
+        // validation rules
+        $this->form_validation->set_rules('mod_name', 'Mod Name', 'required');
+        $this->form_validation->set_rules('mod_short_name', 'Mod Short Name', 'required');
+        $this->form_validation->set_rules('item_type', 'Item Type', 'required');
+        $this->form_validation->set_rules('rental_type', 'Rental Status', 'required');
 
         // If the form fails to validate or doesn't validate, send to create page.
         if( ! $this->form_validation->run() )
@@ -125,21 +129,23 @@ class Products extends CI_Controller
         }
         else
         {
+            // set the object properties
+            $this->product->set_mod_name($this->input->post('mod_name'))
+                          ->set_mod_cost($this->input->post('mod_cost'))
+                          ->set_mod_short_name($this->input->post('mod_short_name'))
+                          ->set_monthly($this->input->post('monthly'))
+                          ->set_item_type($this->input->post('item_type'))
+                          ->set_rental_type($this->input->post('rental_type'));
+
             // else if the form does validate, process the creation.
-            if( $this->product->set_mod_name($this->input->post('mod_name'))
-                              ->set_mod_short_name($this->input->post('mod_short_name'))
-                              ->set_mod_cost($this->input->post('mod_cost'))
-                              ->set_monthly($this->input->post('monthly'))
-                              ->set_item_type($this->input->post('item_type'))
-                              ->set_rental_type($this->input->post('rental_type'))
-                              ->create() )
+            if( $new_id = $this->product->create() )
             {
-                $this->session->set_flashdata('success_msg', 'You successfully created a the product!');
+                $_SESSION['success_msg'] = 'You successfully created the product!';
                 redirect('products/index');
             }
             else
             {
-                $this->session->set_flashdata('error_msg', 'There was an error creating the product, the error has been logged.');
+                $_SESSION['error_msg'] = 'There was an error creating the product, the error has been logged.';
                 redirect('products/index');
             }
         }
