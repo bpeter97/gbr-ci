@@ -27,3 +27,4 @@ ERROR - 2018-02-15 06:41:01 --> 404 Page Not Found: Assets/js
 ERROR - 2018-02-15 06:41:01 --> 404 Page Not Found: Assets/js
 ERROR - 2018-02-15 06:41:05 --> 404 Page Not Found: Assets/js
 ERROR - 2018-02-15 06:41:05 --> 404 Page Not Found: Assets/js
+ERROR - 2018-02-15 06:57:15 --> Severity: error --> Exception: There was no users returned. C:\xampp\htdocs\app\gbr_ci\src\application\models\User.php 144

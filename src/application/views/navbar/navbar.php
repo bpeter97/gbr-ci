@@ -66,9 +66,9 @@
 ?>
 
     <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light mb-3 fixed-top">
-        <a class="navbar-brand" href="#">
-            <img class="gbr_logo_image d-none d-md-block" height="25" src="<?= base_url().'assets/img/logo.png'; ?>">
-            <img class="small_gbr_logo_image d-block d-md-none" height="25" src="<?= base_url().'assets/img/logosmall.png'; ?>">
+        <a class="navbar-brand" href="<?= base_url(); ?>">
+            <img class="gbr_logo_image d-none d-xl-block" height="25" src="<?= base_url().'assets/img/logo.png'; ?>">
+            <img class="small_gbr_logo_image d-block d-xl-none" height="25" src="<?= base_url().'assets/img/logosmall.png'; ?>">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
