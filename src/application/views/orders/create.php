@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="d-flex flex-row justify-content-center">
             <div class="card">
-                <form>
+                <?= form_open(); ?>
                     <div class="card-body mb-3">
                         <h5 class="card-title text-center py-3">Create Order</h5>
                         <div class="container">
@@ -19,10 +19,10 @@
                                     <label class="font-weight-bold" for="date">Order Date / Time</label>
                                 </div>
                                 <div class="col-4">
-                                    <input id="date" name="date" class="form-control" placeholder="MM/DD/YYYY">
+                                    <input id="date" name="date" class="form-control" placeholder="MM/DD/YYYY" value="<?= date('d/m/Y'); ?>">
                                 </div>
                                 <div class="col-2">
-                                    <input name="time" id="time" class="form-control"  placeholder="00:00">
+                                    <input name="time" id="time" class="form-control"  placeholder="00:00" value="<?= date('H:m'); ?>">
                                 </div>
                                 <div class="col-2"></div>
                             </div>
@@ -37,9 +37,9 @@
                                 </div>
                                 <div class="col-6">
                                     <select class="custom-select" id="customer">
-                                        <option selected>Select a Customer</option>
-                                        <?php foreach($customers as $customer): ?>
-                                        <option value="<?= $customer->get_name(); ?>"><?= $customer->get_name(); ?></option>
+                                        <option selected><?= ( ! is_null($customer->get_name())) ? $customer->get_name() : 'Select a Customer'; ?></option>
+                                        <?php foreach($customers as $list_customer): ?>
+                                        <option value="<?= $list_customer->get_name(); ?>"><?= $list_customer->get_name(); ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                     <small class="form-text text-muted pl-1">Select a customer or create a new one.</small>
@@ -53,7 +53,7 @@
                                     <label class="font-weight-bold" for="ordered_by">Ordered By</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="ordered_by" id="ordered_by" class="form-control"  placeholder="">
+                                    <input type="text" name="ordered_by" id="ordered_by" class="form-control"  placeholder="" value="<?= ( ! is_null($customer->get_name())) ? $customer->get_name() : 'Select a Customer'; ?>">
                                     <small class="form-text text-muted pl-1">This field is the name of the person who requested the order.</small>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@
                                     <label class="font-weight-bold" for="job_address">Job Address</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="job_address" id="job_address" class="form-control"  placeholder="">
+                                    <input type="text" name="job_address" id="job_address" class="form-control"  placeholder="" value="<?= ( ! is_null($customer->get_address1())) ? $customer->get_address1() : ''; ?>">
                                     <small class="form-text text-muted pl-1">Fill out just the <strong>STREET</strong> address.</small>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                                     <label class="font-weight-bold" for="job_city">Job City</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="job_city" id="job_city" class="form-control"  placeholder="">
+                                    <input type="text" name="job_city" id="job_city" class="form-control"  placeholder="" value="<?= ( ! is_null($customer->get_city())) ? $customer->get_city() : ''; ?>">
                                     <small class="form-text text-muted pl-1">Fill out the city of the job location.</small>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                     <label class="font-weight-bold" for="job_zipcode">Job Zipcode</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="job_zipcode" id="job_zipcode" class="form-control"  placeholder="">
+                                    <input type="text" name="job_zipcode" id="job_zipcode" class="form-control"  placeholder="" value="<?= ( ! is_null($customer->get_zipcode())) ? $customer->get_zipcode() : ''; ?>">
                                     <small class="form-text text-muted pl-1">Fill out the zipcode of the job location.</small>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                     <label class="font-weight-bold" for="onsite_contact_phone">On-Site Contact Phone Number</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="text" name="onsite_contact_phone" id="onsite_contact_phone" class="form-control"  placeholder="">
+                                    <input type="text" name="onsite_contact_phone" id="onsite_contact_phone" class="form-control"  placeholder="" value="<?= ( ! is_null($customer->get_phone())) ? $customer->get_phone() : ''; ?>">
                                     <small class="form-text text-muted pl-1">Fill out the on-site contact's phone number.</small>
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                     </div>
                     <div id="insertCartData"></div>
                     
-                </form>
+                <?= form_close(); ?>
 
                 <!-- Products -->
                 <div class="card align-self-center mt-2 mb-3" id="productsCard">
@@ -192,7 +192,7 @@
 
                                                 <?php $counter = 0; ?>
 
-                                                <?php   foreach ($shipping_products as $sproduct):   ?>
+                                                <?php foreach ($shipping_products as $sproduct): ?>
 
                                                 <tr>
                                                     <td colspan="2" class="text-center align-middle"><?= $sproduct->get_mod_name(); ?></td>

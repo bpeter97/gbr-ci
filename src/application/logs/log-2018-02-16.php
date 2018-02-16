@@ -14,3 +14,13 @@ ERROR - 2018-02-16 01:21:32 --> Severity: Warning --> Invalid argument supplied 
 ERROR - 2018-02-16 02:34:17 --> Severity: Notice --> Undefined property: CI_Loader::$view C:\xampp\htdocs\app\gbr_ci\src\application\views\customers\view.php 179
 ERROR - 2018-02-16 02:34:17 --> Severity: error --> Exception: Call to a member function load() on null C:\xampp\htdocs\app\gbr_ci\src\application\views\customers\view.php 179
 ERROR - 2018-02-16 02:40:06 --> 404 Page Not Found: Users/login
+ERROR - 2018-02-16 04:31:14 --> Severity: Notice --> Undefined variable: customer_preset C:\xampp\htdocs\app\gbr_ci\src\application\views\orders\create.php 40
+ERROR - 2018-02-16 04:31:28 --> Severity: Notice --> Undefined variable: customer_present C:\xampp\htdocs\app\gbr_ci\src\application\views\orders\create.php 40
+ERROR - 2018-02-16 04:32:11 --> Severity: Notice --> Undefined variable: customer_present C:\xampp\htdocs\app\gbr_ci\src\application\views\orders\create.php 40
+ERROR - 2018-02-16 04:32:46 --> Severity: Notice --> Undefined variable: customer_present C:\xampp\htdocs\app\gbr_ci\src\application\views\orders\create.php 40
+ERROR - 2018-02-16 04:34:02 --> Severity: Notice --> Undefined variable: customer_present C:\xampp\htdocs\app\gbr_ci\src\application\views\orders\create.php 40
+ERROR - 2018-02-16 04:34:27 --> Severity: Notice --> Undefined variable: customer_present C:\xampp\htdocs\app\gbr_ci\src\application\views\orders\create.php 40
+ERROR - 2018-02-16 04:47:15 --> Severity: error --> Exception: Call to a member function get_name() on integer C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 62
+ERROR - 2018-02-16 04:47:40 --> Severity: error --> Exception: Call to a member function get_name() on integer C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 62
+ERROR - 2018-02-16 04:48:20 --> Severity: Notice --> Undefined variable: customer_present C:\xampp\htdocs\app\gbr_ci\src\application\views\orders\create.php 40
+ERROR - 2018-02-16 04:50:03 --> Severity: error --> Exception: Call to undefined method Customer::get_address() C:\xampp\htdocs\app\gbr_ci\src\application\views\orders\create.php 90

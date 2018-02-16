@@ -48,9 +48,9 @@ class Orders extends CI_Controller
 
         if( ! $this->form_validation->run() )
         {
-            if( is_int($customer) )
+            if( ! is_null($customer) )
             {
-                $this->customer->set_customer_data($customer);
+                $this->customer->set_customer_data((int)$customer);
             }
 
             $shipping_products = $this->product->get_products([['item_type ='=>'pickup'],['item_type'=>'delivery']], NULL, NULL, TRUE);
@@ -88,7 +88,7 @@ class Orders extends CI_Controller
                 $this->quote->set_quote_date($this->input->post('quote_id'))->get_quote_products();
             }
 
-            $this->customer->set_customer_object($this->input->post('customer_id'));
+            $this->customer->set_customer_object((int)$this->input->post('customer_id'));
 
             $data = array(
                 'customer'          => $this->customer->get_customer_name(),
