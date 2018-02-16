@@ -171,6 +171,27 @@ nav {
 
     .card {
 
+        &.blank-card {
+
+            border: 1px solid rgba(0, 0, 0, 0.404);
+            box-shadow: 0px 0px 0px black;
+
+            .card-header {
+
+                h5 {
+
+                    button {
+
+                        color: green;
+
+                    }
+
+                }
+
+            }
+        
+        }
+
         width:98%;
         background-color: white;
         border: 1px solid black;

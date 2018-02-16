@@ -177,7 +177,7 @@
         </div>
 
         <!-- History -->
-        <div class="d-flex flex-row justify-content-center pt-3">
+        <div class="d-none d-md-flex flex-row justify-content-center pt-3">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title text-center py-2">History</h5>  
@@ -457,6 +457,318 @@
                                                 
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History SM -->
+        <div class="d-xs-flex d-md-none flex-row justify-content-center pt-3">
+            <div class="card" style="width:100%;">
+                <div class="card-body">
+                    <h5 class="card-title text-center py-2">History</h5>  
+                    <div class="d-flex flex-row justify-content-center">
+                        <div class="col-sm-12">
+                            <div id="accordion" class="xs-mb-10">
+                                <div class="card blank-card" style="width:100%;">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Quote History
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div class="table-responsive" style="width:99%;">
+                                                <table class="table table-striped table-hover align-self-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Quote #</th>
+                                                            <th scope="col">Sales or Rental</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Total Cost</th>
+                                                            <th scope="col">View Details</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <?php 
+                                                        
+                                                            if(!empty($quote_history)) 
+                                                            {
+
+                                                                // set variables
+                                                                $quote_count = 0;
+                                                                $total_amount = 0;
+
+                                                                // list out each quote
+                                                                foreach($quote_history as $quote) 
+                                                                {
+                                                                    $quote_count += 1;
+                                                                    $total_amount += $quote->get_total_cost();
+
+                                                                    echo '
+
+                                                                    <tr>
+                                                                        <td>' . $quote_count . '</td>
+                                                                        <td>' . $quote->get_date() . '</td>
+                                                                        <td>' . $quote->get_id() . '</td>
+                                                                        <td>' . $quote->get_type() . '</td>
+                                                                        <td>' . $quote->get_status() . '</td>
+                                                                        <td>$' . $quote->get_total_cost() . '</td>
+                                                                        <td><a class="gbr-link" href="'. base_url() . 'quotes/view/' . $quote->get_id() . '">View Details</a></td>
+                                                                    </tr>
+
+                                                                    ';
+
+                                                                }
+
+                                                                echo '
+
+                                                                <tr>
+                                                                    <td><strong>Total:</strong></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td><strong>$' . $total_amount . '</strong></td>
+                                                                    <td></td>
+                                                                </tr>
+
+                                                                ';
+
+                                                            } else {
+
+                                                                echo '
+                                                                
+                                                                <tr>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                </tr>
+                                                                
+                                                                ';
+
+                                                            }
+                                                            
+                                                        ?>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card blank-card" style="width:100%;">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Purchase History
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div class="table-responsive" style="width:99%;">
+                                                <table class="table table-striped table-hover align-self-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Order #</th>
+                                                            <th scope="col">Total Cost</th>
+                                                            <th scope="col">View Details</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <?php 
+                                                        
+                                                            if(!empty($purchase_history)) 
+                                                            {
+
+                                                                // set variables
+                                                                $order_count = 0;
+                                                                $total_amount = 0;
+
+                                                                // list out each quote
+                                                                foreach($purchase_history as $order) 
+                                                                {
+                                                                    $order_count += 1;
+                                                                    $total_amount += $order->get_total_cost();
+
+                                                                    echo '
+
+                                                                    <tr>
+                                                                        <td>' . $order_count . '</td>
+                                                                        <td>' . $order->get_date() . '</td>
+                                                                        <td>' . $order->get_id() . '</td>
+                                                                        <td>$' . $order->get_total_cost() . '</td>
+                                                                        <td><a class="gbr-link" href="'. base_url() . 'orders/view/' . $order->get_id() . '">View Details</a></td>
+                                                                    </tr>
+
+                                                                    ';
+
+                                                                }
+
+                                                                echo '
+
+                                                                <tr>
+                                                                    <td><strong>Total:</strong></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td><strong>$' . $total_amount . '</strong></td>
+                                                                    <td></td>
+                                                                </tr>
+
+                                                                ';
+
+                                                            } else {
+
+                                                                echo '
+                                                                
+                                                                <tr>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                </tr>
+                                                                
+                                                                ';
+
+                                                            }
+                                                            
+                                                        ?>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card blank-card" style="width:100%;">
+                                    <div class="card-header" id="headingThree">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Rental History
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div class="table-responsive" style="width:99%;">
+                                                <table class="table table-striped table-hover align-self-center">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Order #</th>
+                                                            <th scope="col">Total Cost</th>
+                                                            <th scope="col">View Details</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <?php 
+                                                        
+                                                            if(!empty($rental_history)) 
+                                                            {
+
+                                                                // set variables
+                                                                $rental_count = 0;
+                                                                $total_amount = 0;
+                                                                $total_rental_amount = 0;
+
+                                                                // list out each quote
+                                                                foreach($rental_history as $rental) 
+                                                                {
+                                                                    
+                                                                    $start_date = $rental->get_date();
+                                                                    $now = new DateTime();
+                                                                    $now->format('Y-m-d H:i:s');
+                                                                    $now->setTimezone(new DateTimeZone('America/Los_Angeles'));
+                                                                    $now->getTimestamp();
+                                                                    $monthCount = nb_mois($start_date, $now);
+                                                                    $monthCounter = 1;
+                                                                    $rental_amount = $rental->get_total_cost();
+
+                                                                    while ($monthCounter <= $monthCount) {
+
+                                                                        $rental_amount += $rental->get_monthly_total();
+                                                                        $monthCounter++;
+
+                                                                    }
+
+                                                                    if($monthCount == 0) {
+
+                                                                        $rental_amount = $rental->get_total_cost();
+
+                                                                    }
+
+                                                                    $rental_count += 1;
+                                                                    $total_rental_amount += $rental_amount;
+
+                                                                    echo '
+
+                                                                    <tr>
+                                                                        <td>' . $rental_count . '</td>
+                                                                        <td>' . $rental->get_date() . '</td>
+                                                                        <td>' . $rental->get_id() . '</td>
+                                                                        <td>$' . $rental_amount . '</td>
+                                                                        <td><a class="gbr-link" href="'. base_url() . 'orders/view/' . $rental->get_id() . '">View Details</a></td>
+                                                                    </tr>
+
+                                                                    ';
+
+                                                                }
+
+                                                                echo '
+
+                                                                <tr>
+                                                                    <td><strong>Total:</strong></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td><strong>$' . $total_rental_amount . '</strong></td>
+                                                                    <td></td>
+                                                                </tr>
+
+                                                                ';
+
+                                                            } else {
+
+                                                                echo '
+                                                                
+                                                                <tr>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                    <td>N/A</td>
+                                                                </tr>
+                                                                
+                                                                ';
+
+                                                            }
+                                                            
+                                                        ?>
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -93,6 +93,11 @@ nav {
   background-color: white;
   border: 1px solid black;
   box-shadow: 0px 0px 5px #888888; }
+  #list .card.blank-card {
+    border: 1px solid rgba(0, 0, 0, 0.404);
+    box-shadow: 0px 0px 0px black; }
+    #list .card.blank-card .card-header h5 button {
+      color: green; }
   #list .card .card-body {
     padding: 0px; }
     #list .card .card-body .alert {
