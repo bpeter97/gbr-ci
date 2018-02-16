@@ -42,15 +42,19 @@ class Orders extends CI_Controller
         $this->load->view('layout/main', $data);
     }
 
-    public function create($type, $customer = NULL)
+    public function create($type, $customer_id = NULL)
     {
         // TODO: create validation for the create form.
+        $this->form_validation->set_rules('tax_rate', 'Tax Rate', 'required');
 
         if( ! $this->form_validation->run() )
         {
-            if( ! is_null($customer) )
+            $return_id = '';
+
+            if( ! is_null($customer_id) )
             {
-                $this->customer->set_customer_data((int)$customer);
+                $this->customer->set_customer_data((int)$customer_id);
+                $return_id = $customer_id;
             }
 
             $shipping_products = $this->product->get_products([['item_type ='=>'pickup'],['item_type'=>'delivery']], NULL, NULL, TRUE);
@@ -85,69 +89,79 @@ class Orders extends CI_Controller
             if( $this->input->post('quote_id') )
             {
                 // if quote_id is posted, we are converting a quote to an order
-                $this->quote->set_quote_date($this->input->post('quote_id'))->get_quote_products();
+                $this->order->set_quote_id((int)$this->input->post('quote_id'))->get_quote_products();
             }
 
-            $this->customer->set_customer_object((int)$this->input->post('customer_id'));
+            $this->customer->set_customer_data((int)$this->input->post('customer_id'));
 
-            $data = array(
-                'customer'          => $this->customer->get_customer_name(),
-                'customer_id'       => $this->input->post('customer_id'),
-                'date'              => $this->input->post('date'),
-                'time'              => $this->input->post('time'),
-                'type'              => $this->input->post('type'),
-                'job_name'          => $this->input->post('job_name'),
-                'job_city'          => $this->input->post('job_city'),
-                'job_address'       => $this->input->post('job_address'),
-                'job_zipcode'       => $this->input->post('job_zipcode'),
-                'ordered_by'        => $this->input->post('ordered_by'),
-                'tax_rate'          => (float)$this->input->post('tax_rate'),
-                'cost_before_tax'   => $this->input->post('cost_before_tax'),
-                'total_cost'        => $this->input->post('total_cost'),
-                'sales_tax'         => $this->input->post('sales_tax'),
-                'monthly_total'     => $this->input->post('monthly_total'),
-                'delivery_total'    => $this->input->post('delivery_total'),
-                'stage'             => 1
-            );
+            $this->order->set_customer($this->customer->get_name())
+                        ->set_customer_id((int)$this->customer->get_id())
+                        ->set_date($this->input->post('date'))
+                        ->set_time($this->input->post('time'))
+                        ->set_type($this->input->post('type'))
+                        ->set_job_name($this->input->post('job_name'))
+                        ->set_job_city($this->input->post('job_city'))
+                        ->set_job_address($this->input->post('job_address'))
+                        ->set_job_zipcode($this->input->post('job_zipcode'))
+                        ->set_ordered_by($this->input->post('ordered_by'))
+                        ->set_onsite_contact($this->input->post('onsite_contact'))
+                        ->set_onsite_contact_phone($this->input->post('onsite_contact_phone'))
+                        ->set_tax_rate((float)$this->input->post('tax_rate'))
+                        ->set_cost_before_tax($this->input->post('cost_before_tax'))
+                        ->set_total_cost($this->input->post('total_cost'))
+                        ->set_sales_tax($this->input->post('sales_tax'))
+                        ->set_monthly_total($this->input->post('monthly_total'))
+                        ->set_delivery_total($this->input->post('delivery_total'))
+                        ->set_stage(1);
 
-            if( $new_id = $this->order->set_order_data($data)->create() )
+            if( $new_id = $this->order->create() )
             {
-                $item_count = $this->input->post('item_count');
+                $item_count = (int)$this->input->post('itemCount');
 
-                // converting a quoted products to ordered products
-                if( $this->input->post('quote_id') )
+                // create an event
+                if( $this->event->create( (int)$new_id ) )
                 {
-                    if( $this->order->insert_ordered_products($item_count, $quote_id) )
+                    // converting a quoted products to ordered products
+                    if( $this->input->post('quote_id') )
                     {
-                        $this->session->set_flashdata('success_msg', 'The order was created successfully.');
-                        redirect('orders/view/'. $new_id);
+                        if( $this->order->insert_ordered_products($item_count, $new_id, $quote_id) )
+                        {
+                            $_SESSION['success_msg'] = 'The order was created successfully.';
+                            redirect('orders/view/'. $new_id);
+                        }
+                        else
+                        {
+                            $_SESSION['error_msg'] = 'The ordered products were not inserted properly.';
+                            redirect('orders/create/'.$order->get_type() .'/'. $return_id);
+                        }
                     }
+                    // otherwise create new ordered products.
                     else
                     {
-                        $this->session->set_flashdata('error_msg', 'The ordered products were not inserted properly.');
-                        redirect('orders/view/'. $new_id);
+                        if( $this->order->insert_ordered_products($item_count, $new_id) )
+
+                        {
+                            $_SESSION['success_msg'] = 'The order was created successfully.';
+                            redirect('orders/view/'. $new_id);
+                        }
+                        else
+                        {
+                            $_SESSION['error_msg'] = 'The ordered products were not inserted properly.';
+                            redirect('orders/create/'.$this->order->get_type() .'/'. $return_id);
+                        }
                     }
                 }
-                // otherwise create new ordered products.
                 else
                 {
-                    if( $this->order->insert_ordered_products($item_count) )
-
-                    {
-                        $this->session->set_flashdata('success_msg', 'The order was created successfully.');
-                        redirect('orders/view/'. $new_id);
-                    }
-                    else
-                    {
-                        $this->session->set_flashdata('error_msg', 'The ordered products were not inserted properly.');
-                        redirect('orders/view/'. $new_id);
-                    }
+                    $_SESSION['error_msg'] = 'The order was created, but the event couldnt be created, the ordered products were not recorded either.';
+                    redirect('orders/create/'.$order->get_type() .'/'. $return_id);
                 }
+                
             }
             else
             {
-                $this->session->set_flashdata('error_msg', 'The order was not created properly.');
-                redirect('orders/view/'. $new_id);
+                $_SESSION['error_msg'] = 'The order was not created properly.';
+                redirect('orders/create/'.$order->get_type() .'/'. $return_id);
             }
         }
     }
@@ -160,13 +174,13 @@ class Orders extends CI_Controller
 
         if( ! $this->form_validation->run() )
         {
-            $this->order->set_order_data($id)->get_order_products();
+            $this->order->set_order_data((int)$id)->get_order_products();
         
-            $this->customer->set_customer_data($order->get_customer());
+            $this->customer->set_customer_data($this->order->get_customer());
 
-            if( $order->get_delivered() )
+            if( $this->order->get_delivered() )
             {
-                $driver = $this->user->set_user_data($order->get_driver());
+                $driver = $this->user->set_user_data($this->order->get_driver());
             }
             else
             {
@@ -303,10 +317,10 @@ class Orders extends CI_Controller
                         if( in_array($product->get_mod_short_name(), $product->get_container_array()) )
                         {
                             $con_array = $this->container->get_containers([
-                                                                           'is_rented' => "FALSE", 
-                                                                           'rental_resale' => 'Rental', 
-                                                                           'container_short_name'=> $product->get_mod_short_name()
-                                                                         ]);
+                                                            'is_rented' => "FALSE", 
+                                                            'rental_resale' => 'Rental', 
+                                                            'container_short_name'=> $product->get_mod_short_name()
+                                                            ]);
                             
                             foreach($con_array as $con)
                             {

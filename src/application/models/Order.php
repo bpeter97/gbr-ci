@@ -282,7 +282,7 @@ class Order extends CI_Model
         }
     }
 
-    public function insert_ordered_products($item_count, $quote_id = NULL)
+    public function insert_ordered_products($item_count, $new_order_id, $quote_id = NULL)
     {
         if( $quote_id !== NULL )
         {
@@ -294,17 +294,17 @@ class Order extends CI_Model
                  * product orders database.
                  */
                 $posted_product = json_decode($this->input->post('product'.$i), true);
-                $product = new Product($posted_product['id']);
+                $product = new Product((int)$posted_product['id']);
                 $product->set_product_quantity($posted_product['qty']);
                 $product->set_product_cost($posted_product['cost']);
-                
+
                 $i++;
     
                 // Insert the data into the database.
                 
                 $data = array(
                     'quote_id' => $quote_id,
-                    'order_id' => $this->get_id(),
+                    'order_id' => $new_order_id,
                     'product_type'=>$product->get_item_type(),
                     'product_msn'=>$product->get_mod_short_name(),
                     'product_cost'=>$product->get_product_cost(),
@@ -326,29 +326,29 @@ class Order extends CI_Model
         else
         {
             $i = 0;
-            while ($i < $this->input->post('item_count'))
+            while ($i < $item_count)
             {
                 /*
                  * Here we will decode the json and create each product and insert it into the
                  * product orders database.
                  */
                 $posted_product = json_decode($this->input->post('product'.$i), true);
-                $product = new Product($posted_product['id']);
+                $product = new Product((int)$posted_product['id']);
                 $product->set_product_quantity($posted_product['qty']);
                 $product->set_product_cost($posted_product['cost']);
-                
+
                 $i++;
     
                 // Insert the data into the database.
                 
                 $data = array(
-                    'order_id' => $this->get_id(),
+                    'order_id' => (int)$new_order_id,
                     'product_type'=>$product->get_item_type(),
                     'product_msn'=>$product->get_mod_short_name(),
-                    'product_cost'=>$product->get_product_cost(),
-                    'product_qty'=>$product->get_product_quantity(),
-                    'product_name'=>$product->get_product_name(),
-                    'product_id'=>$product->get_id()
+                    'product_cost'=>(float)$product->get_product_cost(),
+                    'product_qty'=>(int)$product->get_product_quantity(),
+                    'product_name'=>$product->get_mod_name(),
+                    'product_id'=>(int)$product->get_id()
                 );
     
                 if( ! $this->db->insert('product_orders', $data) )

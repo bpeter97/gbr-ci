@@ -168,18 +168,20 @@ class Event extends CI_Model
     {
         if( $id !== NULL )
         {
-            $this->set_order_id($id);
+            $this->set_order_id((int)$id);
         }
 
         $this->get_event_order_info();
 
-        $start_time = $this->order->order_date.' '.$this->order->order_time;
+        $start_time = $this->order->get_date().' '.$this->order->get_time();
 
         $data = array(
-            'title' => $this->order->order_customer,
-            'color' => '#FF1493',
-            'start' => $start_time,
-            'end'   => date('Y/m/d H:i:s', strtotime($start_time) + 60*60)
+            'id'       => NULL,
+            'title'    => $this->order->get_customer(),
+            'color'    => '#FF1493',
+            'start'    => $start_time,
+            'end'      => date('Y/m/d H:i:s', strtotime($start_time) + 60*60),
+            'order_id' => $this->get_order_id()
         );
 
         $this->set_event_data($data);
@@ -198,9 +200,6 @@ class Event extends CI_Model
         } 
         else 
         {
-            // log error
-            db_elogger($this->db->error());   
-
             // return FALSE
             return FALSE;
         }
