@@ -5,7 +5,7 @@
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= $_SESSION['success_msg']; ?>
             <?php unset($_SESSION['success_msg']); ?>
-        <?php else: ?>
+        <?php elseif( isset($_SESSION['error_msg']) ): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <?= $_SESSION['error_msg']; ?>
             <?php unset($_SESSION['error_msg']); ?>

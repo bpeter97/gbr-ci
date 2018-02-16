@@ -121,6 +121,14 @@ nav {
       #list .card .card-body .btn-gbr:focus, #list .card .card-body .btn-gbr:hover, #list .card .card-body .btn-gbr.active {
         color: white;
         background-color: #017e01; }
+    #list .card .card-body #historyTab li a {
+      color: darkgreen; }
+      #list .card .card-body #historyTab li a:hover {
+        color: white;
+        background-color: green; }
+      #list .card .card-body #historyTab li a.active {
+        background-color: green;
+        color: white; }
     #list .card .card-body .table-responsive {
       width: 96%; }
       #list .card .card-body .table-responsive table {
@@ -154,3 +162,8 @@ nav {
   #productsCard #ProductsTabContent table tbody tr:hover {
     color: white;
     background-color: #32aa32; }
+
+.gbr-link {
+  color: darkgreen; }
+  .gbr-link:hover {
+    color: white; }

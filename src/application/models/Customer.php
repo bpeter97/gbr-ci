@@ -70,17 +70,20 @@ class Customer extends CI_Model
         {
             if( is_int($id) )
             {
-                return $this->db->get_where('customers',['id'=>$id])->row();
+                $result = $this->db->get_where('customers',['id'=>$id])->row();
             }
             elseif( is_string($id) )
             {
-                return $this->db->get_where('customers',['name'=>$id])->row();
+                $result = $this->db->get_where('customers',['name'=>$id])->row();
             }
         }
         else
         {
-            return $this->db->get_where('customers',['id'=>$this->get_id()])->row();
+            $result = $this->db->get_where('customers',['id'=>$this->get_id()])->row();
         }
+
+        return $result;
+
     }
 
     public function set_customer_data($mixed = NULL)
@@ -114,7 +117,7 @@ class Customer extends CI_Model
         }
         elseif( is_object($data) )
         {
-            $this->set_id($data->id)
+            $this->set_id((int)$data->id)
                  ->set_name($data->name)
                  ->set_address1($data->address1)
                  ->set_address2($data->address2)
@@ -134,6 +137,8 @@ class Customer extends CI_Model
         {
             throw new Exception('The parameter passed in is not a name, id, object, or array.');
         }
+
+        return $this;
     }
 
     public function count_customers($where = NULL)
@@ -251,15 +256,16 @@ class Customer extends CI_Model
 
         switch ($type) {
 
-            case 'quote':
+            case 'quotes':
 
-                if( $quote_array = $this->db->get_where('quotes',['quote_customer' => $this->get_name()])->result_array() )
+                if( $quote_array = $this->db->get_where('quotes',['customer_id' => $this->get_id()])->result_array() )
                 {
+                    
                     $quotes = array();
         
                     foreach($quote_array as $q)
                     {
-                        $quote = new Quote($q);
+                        $quote = new Quote((int)$q['id']);
                         array_push($quotes, $quote);
                     }
         
@@ -272,18 +278,20 @@ class Customer extends CI_Model
 
                 break;
 
-            case 'order':
+            case 'orders':
 
                 // SELECT * FROM orders WHERE order_customer = name AND order_type = Sales OR order_customer = name AND order_type = Resale.
-                if( $order_array = $this->db->get_where('orders',['order_customer' => $this->get_name(), 'order_type'=>'Sales'])
-                                            ->or_where(['order_customer' => $this->get_name(), 'order_type'=>'Resale'])
+                if( $order_array = $this->db->select('*')->from('orders')
+                                            ->where(['customer_id' => $this->get_id(), 'type'=>'Sales'])
+                                            ->or_where(['customer_id' => $this->get_id(), 'type'=>'Resale'])
+                                            ->get()
                                             ->result_array() )
                 {
                     $orders = array();
         
                     foreach($order_array as $o)
                     {
-                        $order = new Order($o);
+                        $order = new Order($o['id']);
                         array_push($orders, $order);
                     }
         
@@ -296,15 +304,15 @@ class Customer extends CI_Model
 
                 break;
 
-            case 'rental':
+            case 'rentals':
 
-                if( $order_array = $this->db->get_where('orders',['order_customer' => $this->get_name(), 'order_type'=>'Rental'])->result_array() )
+                if( $order_array = $this->db->get_where('orders',['customer_id' => $this->get_id(), 'type'=>'Rental'])->result_array() )
                 {
                     $orders = array();
 
                     foreach($order_array as $o)
                     {
-                        $order = new Order($o);
+                        $order = new Order($o['id']);
                         array_push($orders, $order);
                     }
 
@@ -348,13 +356,13 @@ class Customer extends CI_Model
 
     public function delete($id = NULL)
     {
-        if( $id !== NULL )
+        if( is_null($id) )
         {
-            return $this->db->delete('customers',['id'=>$id]);
+            return $this->db->delete('customers',['id'=>$this->get_id()]);
         }
         else
         {
-            return $this->db->delete('customers',['id'=>$this->get_id()]);
+            return $this->db->delete('customers',['id'=>$id]);
         }
     }
 }

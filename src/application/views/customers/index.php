@@ -41,9 +41,9 @@
                                 <tbody>
                                     <?php foreach($customers as $customer): ?>
                                         <?php if($customer->get_flag() == "Yes"): ?>
-                                            <tr class="danger">
+                                            <tr class="danger clickable-row" data-href="<?= base_url() . 'customers/view/' . $customer->get_id(); ?>" >
                                         <?php else: ?>
-                                            <tr>
+                                            <tr class="clickable-row" data-href="<?= base_url() . 'customers/view/' . $customer->get_id(); ?>" >
                                         <?php endif; ?>
                                             <td><?= $customer->get_name(); ?></td>
                                             <td><?= $customer->get_phone(); ?></td>

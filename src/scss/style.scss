@@ -227,6 +227,35 @@ nav {
                 }
 
              }
+
+            #historyTab {
+
+                li {
+
+                    a {
+
+                        color: darkgreen;
+
+                        &:hover {
+
+                            color: white;
+                            background-color: green;
+
+
+                        }
+
+                        &.active {
+
+                            background-color:green;
+                            color: white;
+
+                        }
+
+                    }
+
+                }
+
+            }
             
 
             .table-responsive {
@@ -321,4 +350,15 @@ nav {
 
     }
 
+}
+
+.gbr-link {
+
+    color: darkgreen;
+
+    &:hover {
+
+        color: white;
+    
+    }
 }

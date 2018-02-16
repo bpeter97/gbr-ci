@@ -99,17 +99,14 @@ class Customers extends CI_Controller
     }
 
     public function view($id)
-    {
-        // Get the customer's data.
-        $this->customer->set_customer_data($id);
-     
+    {     
         // Form validation for the customer form.
-        $this->form_validation->set_rules('name', 'Name', 'required|greater_than[2]');
-        $this->form_validation->set_rules('address1', 'Address', 'required|greater_than[2]');
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('address1', 'Address', 'required');
         $this->form_validation->set_rules('address2', 'Address2', 'differs[address1]');
-        $this->form_validation->set_rules('city', 'City', 'required|greater_than[2]');
+        $this->form_validation->set_rules('city', 'City', 'required');
         $this->form_validation->set_rules('zipcode', 'Zipcode', 'required|numeric');
-        $this->form_validation->set_rules('state', 'State', 'required|greater_than[1]|');
+        $this->form_validation->set_rules('state', 'State', 'required');
         $this->form_validation->set_rules('phone', 'Phone', 'required');
         $this->form_validation->set_rules('email', 'Email', 'valid_email');
 
@@ -117,13 +114,24 @@ class Customers extends CI_Controller
         if( ! $this->form_validation->run() )
         {
             // If not, send user to view page with validation errors (if any).
-            $data['customer'] = $this->customer;
-            $data['main_view'] = 'customers/view';
+            $data['customer'] = $this->customer->set_customer_data((int)$id);            
+            
+            $data['quote_history'] = $this->customer->get_history('quotes');
+            $data['purchase_history'] = $this->customer->get_history('orders');
+            $data['rental_history'] = $this->customer->get_history('rentals');
 
+            if( $this->customer->get_flag() == 'Yes') {
+                $data['botjs'] = ['customers/alert_js'];
+            }
+
+            $data['main_view'] = 'customers/view';
             $this->load->view('layout/main', $data);
         }
         else
         {
+            // Set customer object
+            $this->customer->set_customer_data((int)$id);
+
             // Else, set the data array
             $data = array(
                 'id'          => $this->customer->get_id(),
@@ -143,29 +151,31 @@ class Customers extends CI_Controller
                 'flag_reason' => $this->input->post('flag_reason')
             );
 
+            $this->customer->set_customer_data($data);
+
             // Update the customer in the database.
-            if( $this->customer->set_customer_data($data)->update() )
+            if( $this->customer->update() )
             {
-                $this->session->set_flashdata('success_msg', 'The customer was successfully updated.');
+                $_SESSION['success_msg'] = 'The customer was successfully updated.';
                 redirect('customers/view/'. $this->customer->get_id());
             }
             else
             {
-                $this->session->set_flashdata('error_msg', 'There was an error updating the customer, the error was logged.');
-                redirect('customers/view/'. $this->customer->get_id());
+                $_SESSION['error_msg'] = 'There was an error updating the customer, the error was logged.';
+                redirect('customers/index');
             }
         }
     }
 
     public function delete($id)
     {
-        if( $this->customer->delete($id) )
+        if( $this->customer->delete((int)$id) )
         {
-            $this->session->set_flashdata('success_msg', 'The customer was successfully deleted.');
+            $_SESSION['success_msg'] = 'The customer was successfully deleted.';
         }
         else
         {
-            $this->session->set_flashdata('error_msg', 'There was an issue deleting the customer, the error has been logged.');
+            $_SESSION['error_msg'] = 'There was an issue deleting the customer, the error has been logged.';
         }
 
         redirect('customers/index');
