@@ -5,7 +5,6 @@
     pudArray = <?= json_encode($pud_array); ?>;
 </script>
 <script src="<?= base_url() . 'assets/js/shoppingCart.js'; ?>"></script>
-
 <!-- ALERT SECTION -->
 <?php if( isset($_SESSION['error_msg']) || isset($_SESSION['success_msg']) ): ?>
     <section id="alert-section">
@@ -40,7 +39,7 @@
                                     <label class="font-weight-bold" for="date">Order Date / Time</label>
                                 </div>
                                 <div class="col-4">
-                                    <input id="date" name="date" class="form-control" placeholder="MM/DD/YYYY" value="<?= date('d/m/Y'); ?>">
+                                    <input id="date" name="date" class="form-control" placeholder="MM-DD-YYYY" value="<?= date('m-d-Y'); ?>">
                                 </div>
                                 <div class="col-2">
                                     <input name="time" id="time" class="form-control"  placeholder="00:00" value="<?= date('H:m'); ?>">

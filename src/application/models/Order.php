@@ -317,10 +317,6 @@ class Order extends CI_Model
                 {
                     throw new Exception('The quoted products were not inserted into the database correctly.');
                 }
-                else
-                {
-                    return TRUE;
-                }
             }
         }
         else
@@ -333,9 +329,9 @@ class Order extends CI_Model
                  * product orders database.
                  */
                 $posted_product = json_decode($this->input->post('product'.$i), true);
-                $product = new Product((int)$posted_product['id']);
-                $product->set_product_quantity($posted_product['qty']);
-                $product->set_product_cost($posted_product['cost']);
+                $new_product = new Product((int)$posted_product['id']);
+                $new_product->set_product_quantity((int)$posted_product['qty']);
+                $new_product->set_product_cost((float)$posted_product['cost']);
 
                 $i++;
     
@@ -343,23 +339,26 @@ class Order extends CI_Model
                 
                 $data = array(
                     'order_id' => (int)$new_order_id,
-                    'product_type'=>$product->get_item_type(),
-                    'product_msn'=>$product->get_mod_short_name(),
-                    'product_cost'=>(float)$product->get_product_cost(),
-                    'product_qty'=>(int)$product->get_product_quantity(),
-                    'product_name'=>$product->get_mod_name(),
-                    'product_id'=>(int)$product->get_id()
+                    'product_type'=>$new_product->get_item_type(),
+                    'product_msn'=>$new_product->get_mod_short_name(),
+                    'product_cost'=>(float)$new_product->get_product_cost(),
+                    'product_qty'=>(int)$new_product->get_product_quantity(),
+                    'product_name'=>$new_product->get_mod_name(),
+                    'product_id'=>(int)$new_product->get_id()
                 );
     
                 if( ! $this->db->insert('product_orders', $data) )
                 {
+                    $result = FALSE;
                     throw new Exception('The quoted products were not inserted into the database correctly.');
                 }
                 else
                 {
-                    return TRUE;
+                    $result = TRUE;
                 }
             }
+
+            return $result;
         }
     }
 

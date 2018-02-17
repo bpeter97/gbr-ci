@@ -90,3 +90,16 @@ ERROR - 2018-02-16 08:01:21 --> Severity: Notice --> Undefined variable: type C:
 ERROR - 2018-02-16 08:01:21 --> Severity: Notice --> Undefined variable: type C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 201
 ERROR - 2018-02-16 08:01:21 --> Severity: Notice --> Undefined variable: container_products C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 218
 ERROR - 2018-02-16 08:01:22 --> Severity: Notice --> Undefined variable: modification_products C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 219
+ERROR - 2018-02-16 23:07:31 --> Severity: Notice --> Undefined variable: config C:\xampp\htdocs\app\gbr_ci\src\application\views\layout\main.php 1
+ERROR - 2018-02-16 23:07:31 --> Severity: Notice --> date_default_timezone_set(): Timezone ID '' is invalid C:\xampp\htdocs\app\gbr_ci\src\application\views\layout\main.php 1
+ERROR - 2018-02-16 23:08:00 --> Severity: error --> Exception: Cannot use object of type CI_Config as array C:\xampp\htdocs\app\gbr_ci\src\application\views\layout\main.php 1
+ERROR - 2018-02-16 23:14:36 --> Severity: error --> Exception: Call to undefined function local_to_gmt() C:\xampp\htdocs\app\gbr_ci\src\application\views\orders\create.php 46
+ERROR - 2018-02-16 23:16:33 --> Severity: error --> Exception: DateTimeZone::__construct(): Unknown or bad timezone (UM8) C:\xampp\htdocs\app\gbr_ci\src\system\helpers\date_helper.php 75
+ERROR - 2018-02-16 23:22:46 --> Severity: error --> Exception: DateTime::__construct(): Failed to parse time string (16/02/2016) at position 0 (1): Unexpected character C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 463
+ERROR - 2018-02-16 23:26:56 --> Severity: error --> Exception: DateTime::__construct(): Failed to parse time string (02-16-2018) at position 0 (0): Unexpected character C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 99
+ERROR - 2018-02-16 23:31:10 --> Severity: Notice --> Undefined offset: 0 C:\xampp\htdocs\app\gbr_ci\src\application\models\Product.php 181
+ERROR - 2018-02-16 23:31:10 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp\htdocs\app\gbr_ci\src\application\models\Product.php 181
+ERROR - 2018-02-16 23:31:10 --> Severity: Notice --> Undefined variable: type C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 197
+ERROR - 2018-02-16 23:31:10 --> Severity: Notice --> Undefined variable: type C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 206
+ERROR - 2018-02-16 23:31:10 --> Severity: Notice --> Undefined variable: container_products C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 223
+ERROR - 2018-02-16 23:31:10 --> Severity: Notice --> Undefined variable: modification_products C:\xampp\htdocs\app\gbr_ci\src\application\controllers\Orders.php 224

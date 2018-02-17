@@ -94,9 +94,14 @@ class Orders extends CI_Controller
 
             $this->customer->set_customer_data((int)$this->input->post('customer_id'));
 
+            $post_date = $this->input->post('date');
+            $date_exploded = explode('-',$post_date);
+            $temp_date = new DateTime($date_exploded[1] . '-' . $date_exploded[0] . '-' . $date_exploded[2]);
+            $date = date_format($temp_date, 'Y-m-d');
+
             $this->order->set_customer($this->customer->get_name())
                         ->set_customer_id((int)$this->customer->get_id())
-                        ->set_date($this->input->post('date'))
+                        ->set_date($date)
                         ->set_time($this->input->post('time'))
                         ->set_type($this->input->post('type'))
                         ->set_job_name($this->input->post('job_name'))
@@ -124,7 +129,7 @@ class Orders extends CI_Controller
                     // converting a quoted products to ordered products
                     if( $this->input->post('quote_id') )
                     {
-                        if( $this->order->insert_ordered_products($item_count, $new_id, $quote_id) )
+                        if( $this->order->insert_ordered_products((int)$item_count, (int)$new_id, (int)$quote_id) )
                         {
                             $_SESSION['success_msg'] = 'The order was created successfully.';
                             redirect('orders/view/'. $new_id);
@@ -138,7 +143,7 @@ class Orders extends CI_Controller
                     // otherwise create new ordered products.
                     else
                     {
-                        if( $this->order->insert_ordered_products($item_count, $new_id) )
+                        if( $this->order->insert_ordered_products((int)$item_count, (int)$new_id) )
 
                         {
                             $_SESSION['success_msg'] = 'The order was created successfully.';
@@ -456,5 +461,13 @@ class Orders extends CI_Controller
         );
 
         $this->load->view('layout/main', $data);
+    }
+
+    public function test()
+    {
+        $post_date = '02-23-2016';
+        $date_exploded = explode('-',$post_date);
+        $date = new DateTime($date_exploded[1] . '-' . $date_exploded[0] . '-' . $date_exploded[2]);
+        echo date_format($date, 'Y-m-d');
     }
 }

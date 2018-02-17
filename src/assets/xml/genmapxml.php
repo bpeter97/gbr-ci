@@ -1,6 +1,6 @@
 <?php header("Content-type: text/xml") ?><markers>
-<marker name="00-0047" address="1733 S. Casablanca St" lat="36.3153074" lng="-119.2464594" type=""/>
-<marker name="00-0065" address="2298 E paradise Avenue" lat="" lng="" type=""/>
+<marker name="00-0047" address="1733 S. Casablanca St" lat="36.3153074" lng="-119.2464594" type="container"/>
+<marker name="00-0065" address="2298 E paradise Avenue" lat="" lng="" type="container"/>
 <marker name="01-0087" address="5658 Ave 378, Dinuba" lat="36.4771419" lng="-119.4465299" type="container"/>
 <marker name="01-0093" address="1508 N Katy Ln, Fresno" lat="36.759294" lng="-119.874001" type="container"/>
 <marker name="01-0095" address="1733 S. Casablanca St" lat="36.3153074" lng="-119.2464594" type="container"/>
