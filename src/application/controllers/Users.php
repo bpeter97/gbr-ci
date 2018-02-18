@@ -147,39 +147,43 @@ class Users extends CI_Controller
     public function create()
     {
         //TODO: Need to add validation here for the create form.
+        $this->form_validation->set_rules('username', 'Username', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('password_verify', 'Password Verification', 'trim|required|min_length[3]|matches[password]', array('matches' => 'The passwords do not match!'));
+        $this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
+        $this->form_validation->set_rules('title', 'Title', 'trim|required');
+        $this->form_validation->set_rules('type', 'Type', 'trim|required');
 
         if( ! $this->form_validation->run() )
         {
-            // Redirect with errors.
-            $this->session->set_flashdata('error_msg', $this->form_validation->error_array());
-            
+            $data['botjs'] = ['users/check_password'];
+
             // Go back to home page and display errors.
             $data['main_view'] = 'users/create';
             $this->load->view('layout/main', $data);
         }
         else
         {
-            $user_data = array(
-                'username'  =>  $this->input->post('username'),
-                'password'  =>  $this->input->post('password'),
-                'firstname' =>  $this->input->post('firstname'),
-                'lastname'  =>  $this->input->post('lastname'),
-                'phone'     =>  $this->input->post('phone'),
-                'title'     =>  $this->input->post('title'),
-                'type'      =>  $this->input->post('type')
-            );
+            $this->user->set_username($this->input->post('username'))
+                       ->set_password($this->input->post('password'))
+                       ->set_first_name($this->input->post('firstname'))
+                       ->set_last_name($this->input->post('lastname'))
+                       ->set_phone($this->input->post('phone'))
+                       ->set_title($this->input->post('title'))
+                       ->set_type($this->input->post('type'));
 
-            if( $this->user->set_user_data($user_data)->create() )
+            if( $this->user->create() )
             {
-                $this->session->set_flashdata('success_msg', 'You successfully created a new user!');
+                $_SESSION['success_msg'] = 'You successfully created a new user!';
                 redirect('users/index');
             }
             else
             {
-                $this->session->set_flashdata('error_msg', 'There was an error creating the user, the error has been logged.');
+                $_SESSION['error_msg'] = 'There was an error creating the user, the error has been logged.';
                 redirect('users/index');
             }
-            
         }
     }
 

@@ -105,16 +105,7 @@ class User extends CI_Model
         // If limit is not null then check where
         if( $limit !== NULL )
         {
-            // If where is not null do limit with where
-            if( $where !== NULL )
-            {
-                $user_array = $this->db->get_where('users', $where, $limit, $start)->result_array();
-            }
-            // else do limit with no where
-            else
-            {
-                $user_array = $this->db->get_where('users', $limit, $start)->result_array();
-            }
+            $user_array = $this->db->get_where('users', $where, $limit, $start)->result_array();
         }
         // else if where is not null do where
         elseif( $where !== NULL )    
@@ -133,7 +124,7 @@ class User extends CI_Model
 
             foreach($user_array as $u)
             {
-                $user = new User($u['id']);
+                $user = new User((int)$u['id']);
                 array_push($users, $user);
             }
 
@@ -315,9 +306,6 @@ class User extends CI_Model
         }
         else
         {
-            // Log the error
-            log_message('error', $this->db->error());
-
             // Return false
             return FALSE;
         }
