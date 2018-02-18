@@ -214,7 +214,7 @@ class Quote extends CI_Model
     public function create()
     {
 
-        if( $this->db->insert('quotes', array(
+        $data = array(
             'customer'          => $this->get_customer(),
             'customer_id'       => $this->get_customer_id(),
             'date'              => $this->get_date(),
@@ -232,7 +232,9 @@ class Quote extends CI_Model
             'monthly_total'     => $this->get_monthly_total(),
             'delivery_total'    => $this->get_delivery_total(),
             'hidden'            => NULL
-        )))
+        );
+
+        if( $this->db->insert('quotes', $data) )
         {
             return $this->db->insert_id();    
         }
@@ -243,8 +245,7 @@ class Quote extends CI_Model
 
     }
 
-    // $posted_products = json_decode($_post['product'.$i], true)
-    public function insert_quoted_products($item_count, $posted_products)
+    public function insert_quoted_products($item_count, $new_quote_id)
     {
         $i = 0;
 		while ($i < $item_count)
@@ -253,34 +254,37 @@ class Quote extends CI_Model
 			 * Here we will decode the json and create each product and insert it into the
 			 * product orders database.
 			 */
-            $posted_product = json_decode($_post['product'.$i], true);
-            $product = new Product($posted_product['id']);
-			$product->set_product_quantity($posted_product['qty']);
-            $product->set_product_cost($posted_product['cost']);
+            $posted_product = json_decode($this->input->post('product'.$i), true);
+            $new_product = new Product((int)$posted_product['id']);
+			$new_product->set_product_quantity((int)$posted_product['qty']);
+            $new_product->set_product_cost((float)$posted_product['cost']);
             
 			$i++;
 
             // Insert the data into the database.
-            
             $data = array(
-                'quote_id' => $this->get_id(),
-                'product_type'=>$product->get_item_type(),
-                'product_msn'=>$product->get_mod_short_name(),
-                'product_cost'=>$product->get_product_cost(),
-                'product_qty'=>$product->get_product_quantity(),
-                'product_name'=>$product->get_product_name(),
-                'product_id'=>$product->get_id()
+                'quote_id' => (int)$new_quote_id,
+                'order_id' => NULL,
+                'product_type'=>$new_product->get_item_type(),
+                'product_msn'=>$new_product->get_mod_short_name(),
+                'product_cost'=>(float)$new_product->get_product_cost(),
+                'product_qty'=>(int)$new_product->get_product_quantity(),
+                'product_name'=>$new_product->get_mod_name(),
+                'product_id'=>(int)$new_product->get_id()
             );
 
             if( ! $this->db->insert('product_orders', $data) )
             {
+                $result = FALSE;
                 throw new Exception('The quoted products were not inserted into the database correctly.');
             }
             else
             {
-                return TRUE;
+                $result = TRUE;
             }
-		}
+        }
+        
+        return $result;
     }
 
     public function update()

@@ -103,57 +103,50 @@ class Quotes extends CI_Controller
 
     }
 
-    public function create($type, $customer = NULL) // url/type/customer
+    public function create($type, $customer_id = NULL) // url/type/customer
     {
 
         // TODO: create data validation
+        $this->form_validation->set_rules('customer_id', 'Customer', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');
+        $this->form_validation->set_rules('tax_rate', 'Tax Rate', 'required');
+        $this->form_validation->set_rules('job_name', 'Job Name', 'required');
+        $this->form_validation->set_rules('job_city', 'Job City', 'required');
+        $this->form_validation->set_rules('job_address', 'Job Address', 'required');
+        $this->form_validation->set_rules('job_zipcode', 'Job Zipcode', 'required');
 
         if( ! $this->form_validation->run() )
         {
-            $customers = $this->customer->get_customers();
+            $return_id = '';
 
-            if( ! $customer === NULL )
+            if( ! is_null($customer_id) )
             {
-                $this->customer->set_customer_data($customer);
-            }
-            else
-            {
-                $this->customer = NULL;
+                $this->customer->set_customer_data((int)$customer_id);
+                $return_id = $customer_id;
             }
 
-            $rental_array = $this->product->get_rental_array();
-            $pud_array = $this->product->get_pud_array();
+            $shipping_products = $this->product->get_products([['item_type ='=>'pickup'],['item_type'=>'delivery']], NULL, NULL, TRUE);
 
-            $shipping_products = $this->product->get_products(['item_type'=>'pickup', 'item_type'=>'delivery'], NULL, NULL, TRUE);
-
-            if( $type == 'rental')
+            if( $type == 'rental' )
             {
-                $container_products = $this->product->get_products(['item_type' => 'container', 'monthly <>' => 0]);
-                $modification_products = $this->product->get_products([
-                                    'item_type <>' => 'container', 
-                                    'item_type <>' => 'pickup', 
-                                    'item_type <>' => 'delivery', 
-                                    'monthly <>' => 0]);
+                $container_products = $this->product->get_products(['item_type =' => 'container', 'rental_type =' => 'Rental']);
+                $modification_products = $this->product->get_products("item_type <> 'container' AND item_type <> 'pickup' AND item_type <> 'delivery' AND rental_type = 'Rental'");
             }
             elseif( $type == 'sales' )
             {
-                $container_products = $this->product->get_products(['item_type' => 'container', 'monthly' => 0]);
-                $modification_products = $this->product->get_products([
-                                    'item_type <>' => 'container', 
-                                    'item_type <>' => 'pickup', 
-                                    'item_type <>' => 'delivery', 
-                                    'monthly' => 0]);
+                $container_products = $this->product->get_products(['item_type' => 'container', 'rental_type =' => 'Nonrental']);
+                $modification_products = $this->product->get_products("item_type <> 'container' AND item_type <> 'pickup' AND item_type <> 'delivery' AND rental_type = 'Nonrental'");
             }
 
             $data = array(
-                'customers'             => $customers,
+                'customers'             => $this->customer->get_customers(),
                 'customer'              => $this->customer,
                 'shipping_products'     => $shipping_products,
                 'container_products'    => $container_products,
                 'modification_products' => $modification_products,
                 'type'                  => $type,
-                'rental_array'          => $rental_array,
-                'pud_array'             => $pud_array,
+                'rental_array'          => $this->product->get_rental_array(),
+                'pud_array'             => $this->product->get_pud_array(),
                 'main_view'             => 'quotes/create'
             );
 
@@ -161,48 +154,50 @@ class Quotes extends CI_Controller
         }
         else
         {
-            $this->customer->set_customer_object($this->input->post('customer_id'));
+            $this->customer->set_customer_data((int)$this->input->post('customer_id'));
 
-            $data = array(
-                'customer'          => $this->customer->get_customer_name(),
-                'customer_id'       => $this->customer->get_customer_id(),
-                'type'              => $this->input->post('type'),
-                'date'              => $this->input->post('date'),
-                'status'            => $this->input->post('status'),
-                'job_name'          => $this->input->post('job_name'),
-                'job_address'       => $this->input->post('job_address'),
-                'job_city'          => $this->input->post('job_city'),
-                'job_zipcode'       => $this->input->post('job_zipcode'),
-                'attn'              => $this->input->post('attn'),
-                'tax_rate'          => $this->input->post('tax_rate'),
-                'cost_before_tax'   => $this->input->post('cost_before_tax'),
-                'total_cost'        => $this->input->post('total_cost'),
-                'sales_tax'         => $this->input->post('sales_tax'),
-                'monthly_total'     => $this->input->post('monthly_total'),
-                'delivery_total'    => $this->input->post('delivery_total'),
-                'hidden'            => FALSE
-            );
+            $post_date = $this->input->post('date');
+            $date_exploded = explode('-',$post_date);
+            $temp_date = new DateTime($date_exploded[1] . '-' . $date_exploded[0] . '-' . $date_exploded[2]);
+            $date = date_format($temp_date, 'Y-m-d');
 
-            if( $new_id = $this->quote->set_quote_data($data)->create() )
+            $this->quote->set_customer($this->customer->get_name())
+                        ->set_customer_id((int)$this->customer->get_id())
+                        ->set_type($this->input->post('type'))
+                        ->set_date($date)
+                        ->set_status('Open')
+                        ->set_job_name($this->input->post('job_name'))
+                        ->set_job_address($this->input->post('job_address'))
+                        ->set_job_city($this->input->post('job_city'))
+                        ->set_job_zipcode($this->input->post('job_zipcode'))
+                        ->set_attn($this->input->post('attn'))
+                        ->set_tax_rate((float)$this->input->post('tax_rate'))
+                        ->set_cost_before_tax($this->input->post('cost_before_tax'))
+                        ->set_total_cost($this->input->post('total_cost'))
+                        ->set_sales_tax($this->input->post('sales_tax'))
+                        ->set_monthly_total($this->input->post('monthly_total'))
+                        ->set_delivery_total($this->input->post('delivery_total'))
+                        ->set_hidden(FALSE);
+            
+            if( $new_id = $this->quote->create() )
             {
-                $item_count = $this->input->post('item_count');
+                $item_count = (int)$this->input->post('itemCount');
 
-                if( $this->quote->insert_quoted_products($item_count) )
-
+                if( $this->quote->insert_quoted_products((int)$item_count, (int)$new_id) )
                 {
-                    $this->session->set_flashdata('success_msg', 'The quote was created successfully.');
+                    $_SESSION['success_msg'] = 'The quote was created successfully.';
                     redirect('quotes/view/'. $new_id);
                 }
                 else
                 {
-                    $this->session->set_flashdata('error_msg', 'The quoted products were not inserted properly.');
-                    redirect('quotes/view/'. $new_id);
+                    $_SESSION['error_msg'] = 'The quoted products were not inserted properly.';
+                    redirect('quotes/create/' . $this->quote->get_type() . '/' . $return_id);
                 }
             }
             else
             {
-                $this->session->set_flashdata('error_msg', 'The quote was not created properly.');
-                redirect('quotes/view/'. $new_id);
+                $_SESSION['error_msg'] = 'The quote was not created properly.';
+                redirect('quotes/create/' . $this->quote->get_type() . '/' . $return_id);
             }
         }
     }

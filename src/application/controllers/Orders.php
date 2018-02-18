@@ -45,7 +45,17 @@ class Orders extends CI_Controller
     public function create($type, $customer_id = NULL)
     {
         // TODO: create validation for the create form.
+        $this->form_validation->set_rules('customer_id', 'Customer', 'required');
+        $this->form_validation->set_rules('date', 'Date', 'required');
+        $this->form_validation->set_rules('time', 'Time', 'required');
         $this->form_validation->set_rules('tax_rate', 'Tax Rate', 'required');
+        $this->form_validation->set_rules('job_name', 'Job Name', 'required');
+        $this->form_validation->set_rules('job_city', 'Job City', 'required');
+        $this->form_validation->set_rules('job_address', 'Job Address', 'required');
+        $this->form_validation->set_rules('job_zipcode', 'Job Zipcode', 'required');
+        $this->form_validation->set_rules('ordered_by', 'Ordered By', 'required');
+        $this->form_validation->set_rules('onsite_contact', 'On-Site Contact', 'required');
+        $this->form_validation->set_rules('onsite_contact_phone', 'On-Site Contact Phone Number', 'required');
 
         if( ! $this->form_validation->run() )
         {
