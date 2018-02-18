@@ -25,17 +25,17 @@
                                 </div>
                                 <?php endif; ?>
                                 <input type="password" name="password" id="password" class="form-control is-invalid" placeholder="Type the password for the new user.">
-                                <small class="form-text text-muted pl-1">This field is the password the user will be using to log in with (minimum 3 characters).</small>
+                                <small class="form-text text-muted pl-1">This field is the password the user will be using to log in with (minimum 6 characters).</small>
                                 <small id="password_verify_req" class="form-text text-muted pl-1"></small>
                             </div>
-                            <div class="col-sm-12 col-md-6">
+                            <div class="col-sm-12 col-md-6 xs-pt-10 md-pt-0">
                                 <?php if( form_error('password_verify') ): ?>
                                 <div class="alert alert-danger" role="alert">
                                     <?php echo form_error('password_verify'); ?>
                                 </div>
                                 <?php endif; ?>
                                 <input type="password" name="password_verify" id="password_verify" class="form-control is-invalid" placeholder="Type the password again.">
-                                <small class="form-text text-muted pl-1">This field is the password the user will be using to log in with (minimum 3 characters).</small>
+                                <small class="form-text text-muted pl-1">This field is the password the user will be using to log in with (minimum 6 characters).</small>
                                 <small id="password_req" class="form-text text-muted pl-1"></small>
                             </div>
                         </div>

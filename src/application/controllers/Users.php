@@ -150,7 +150,7 @@ class Users extends CI_Controller
         //TODO: Need to add validation here for the create form.
         $this->form_validation->set_rules('username', 'Username', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
-        $this->form_validation->set_rules('password_verify', 'Password Verification', 'trim|required|min_length[3]|matches[password]', array('matches' => 'The passwords do not match!'));
+        $this->form_validation->set_rules('password_verify', 'Password Verification', 'trim|required|min_length[6]|matches[password]', array('matches' => 'The passwords do not match!'));
         $this->form_validation->set_rules('firstname', 'First Name', 'trim|required');
         $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required');
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
