@@ -187,7 +187,7 @@
                         <i class="fa fa-cog" aria-hidden="true"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="adminDropdownMenu">
-                        <a class="dropdown-item" href="<?= $admin_array['users']; ?>">Edit Users</a>
+                        <a class="dropdown-item" href="<?= $admin_array['users']; ?>">View Users</a>
                         <a class="dropdown-item" href="<?= $admin_array['users_create']; ?>">Create New User</a>
                     </div>
                 </li>

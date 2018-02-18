@@ -84,7 +84,8 @@ class Users extends CI_Controller
 
         if( ! $this->form_validation->run() )
         {
-            $this->user->set_user_data($id);
+            $this->user->set_user_data((int)$id);
+            $data['botjs'] = ['users/check_password'];
             $data['user'] = $this->user;
     
             $data['main_view'] = 'users/edit';

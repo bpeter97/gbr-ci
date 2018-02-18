@@ -64,6 +64,7 @@
     });
 
     $(document).ready(function () {
+        verify_password();
         check_inputs();
         verify_type();
 

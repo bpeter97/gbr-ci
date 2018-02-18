@@ -22,7 +22,7 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach($users as $user): ?>
-                                        <tr>
+                                        <tr class="clickable-row" data-href="<?= base_url() . 'users/edit/' . $user->get_id(); ?>">
                                             <td><?= $user->get_first_name() . ' ' . $user->get_last_name(); ?></td>
                                             <td><?= $user->get_title(); ?></td>
                                             <td><?= $user->get_username(); ?></td>

@@ -60,7 +60,7 @@ class User extends CI_Model
     {
         if(is_int($id))
         {
-            $user = $this->get_user_info($id);
+            $user = $this->get_user_info((int)$id);
         }
         else
         {
