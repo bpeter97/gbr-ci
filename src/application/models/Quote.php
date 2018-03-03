@@ -41,6 +41,7 @@ class Quote extends CI_Model
     public function get_sales_tax() { return $this->sales_tax; }
     public function get_monthly_total() { return $this->monthly_total; }
     public function get_delivery_total() { return $this->delivery_total; }
+    public function get_products() { return $this->products; }
     public function get_hidden() { return $this->hidden; }
 
     public function set_id($int) { $this->id = $int; return $this; }

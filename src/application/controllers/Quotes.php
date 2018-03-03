@@ -50,18 +50,20 @@ class Quotes extends CI_Controller
         if( ! $this->form_validation->run() )
         {
             // return the user to view form with validation errors
-            $this->quote->set_quote_data($id)->get_quote_products();
+            $this->quote->set_quote_data((int)$id)->get_quote_products();
 
-            $this->customer->set_customer_data($this->quote->get_customer_id());
+            $this->customer->set_customer_data((int)$this->quote->get_customer_id());
     
             $data = array(
                 'quote'           => $this->quote,
+                'products'        => $this->quote->get_products(),
+                'type'            => $this->quote->get_type(),
                 'customer'        => $this->customer,
                 'rental_products' => $this->product->get_rental_array(),
                 'main_view'       => 'quotes/view'
             );
     
-            $this->load->view('layout/main', $data);
+            $this->load->view('layout/printouts', $data);
         }
         else
         {
